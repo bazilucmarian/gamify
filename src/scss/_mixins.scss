@@ -1,0 +1,15 @@
+//buttons
+@mixin common-btn-properies($background, $color) {
+	padding: 1rem 3rem;
+	border-radius: 0.5rem;
+	background: $background;
+	color: $color;
+	border: 1px solid $color;
+}
+
+// transition
+@mixin transition($transition-value) {
+	-webkit-transition: $transition-value;
+	-moz-transition: $transition-value;
+	transition: $transition-value;
+}

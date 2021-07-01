@@ -172,4 +172,22 @@ body {
   color: #868686;
 }
 
+.rewardInfo {
+  display: flex;
+}
+.rewardInfo__xp {
+  color: #184fc4;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  letter-spacing: 0.01rem;
+  padding-right: 30px;
+}
+.rewardInfo__credits {
+  color: #fc5d27;
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -1,0 +1,21 @@
+@import '../variables';
+
+.creditsBadge {
+display: flex;
+
+  &__xp {
+    color: $color-blue;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    letter-spacing: 0.01rem;
+    padding-right: 30px;
+  }
+
+  &__credits {
+    color: $color-orange;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+  }
+}

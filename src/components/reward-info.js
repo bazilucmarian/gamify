@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 function RewardInfo({xp, credits}) {
   return (
-    <div className="creditsBadge">
-      {Boolean(xp) && <div className="creditsBadge__xp">{xp} XP</div>}
-      <div className="creditsBadge__credits">{credits} CREDITS</div>
+    <div className="rewardInfo">
+      {Boolean(xp) && <div className="rewardInfo__xp">{xp} XP</div>}
+      <div className="rewardInfo__credits">{credits} CREDITS</div>
     </div>
   );
 }

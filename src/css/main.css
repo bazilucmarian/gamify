@@ -172,10 +172,10 @@ body {
   color: #868686;
 }
 
-.creditsBadge {
+.rewardInfo {
   display: flex;
 }
-.creditsBadge__xp {
+.rewardInfo__xp {
   color: #184fc4;
   font-weight: 500;
   font-size: 1.4rem;
@@ -183,7 +183,7 @@ body {
   letter-spacing: 0.01rem;
   padding-right: 30px;
 }
-.creditsBadge__credits {
+.rewardInfo__credits {
   color: #fc5d27;
   font-weight: 700;
   font-size: 1.4rem;

@@ -1,18 +1,20 @@
 export default function calculateXp(xp) {
   let initialLevel = 1;
+  const multiplier = 15;
 
   function recurse() {
-    if (xp >= 15 * initialLevel) {
-      xp -= 15 * initialLevel;
+    if (xp >= multiplier * initialLevel) {
+      xp -= multiplier * initialLevel;
       initialLevel++;
       recurse(xp);
     }
   }
+
   recurse();
 
   return {
-    calcLevel: initialLevel,
-    calcCurrentExp: xp,
-    calcCurrentLevelMaxExp: 15 * initialLevel
+    level: initialLevel,
+    currentXp: xp,
+    currentLevelMaxXp: multiplier * initialLevel
   };
 }

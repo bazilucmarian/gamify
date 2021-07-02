@@ -190,4 +190,25 @@ body {
   line-height: 1.6rem;
 }
 
+.progressCard {
+  width: 100%;
+}
+.progressCard__xpContainer {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  color: #184fc4;
+  font-weight: bold;
+  font-size: 14px;
+}
+.progressCard__progress {
+  background-color: #c0cfea;
+  height: 4px;
+}
+.progressCard__progress .done {
+  height: 100%;
+  background-color: #184fc4;
+  transition: 1s ease 0.3s;
+}
+
 /*# sourceMappingURL=main.css.map */

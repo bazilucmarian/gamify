@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import calculateXp from '../utils';
+import {calculateXp} from '../utils';
 
 function ProgressCard({userXp}) {
   const {level, currentXp, currentLevelMaxXp} = calculateXp(userXp);

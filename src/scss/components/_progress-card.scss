@@ -6,7 +6,7 @@
   &__xpContainer {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
     color: $color-blue;
     font-weight: bold;
     font-size: 1.4rem;
@@ -14,12 +14,12 @@
 
   &__progress {
     background-color: $color-blue-light;
-    height: .4rem;
+    height: 0.4rem;
 
     .done {
       height: 100%;
       background-color: $color-blue;
-      transition: 1s ease .3s;
+      transition: 1s ease 0.3s;
     }
   }
 }

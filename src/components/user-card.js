@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from './avatar';
-import {getInitials} from '../utils';
 
 function UserCard({avatar, userName, jobTitle}) {
   return (
     <div className="card">
       <div className="card__avatar">
-        <Avatar imageSrc={avatar} initials={getInitials(userName)} />
+        <Avatar imageSrc={avatar} userName={userName} />
       </div>
       <div className="card__title">
         <div className="card__name">{userName}</div>

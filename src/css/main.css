@@ -299,4 +299,49 @@ body {
   position: absolute;
   left: 0;
 }
+
+.app-wrapper {
+  display: flex;
+}
+
+.home-page {
+  position: absolute;
+  height: 100vh;
+  margin-left: 30rem;
+  padding: 0 3rem 3rem 3rem;
+  width: 100%;
+  background-color: #e5e5e5;
+}
+
+.challenges-page {
+  height: 100vh;
+  margin-left: 30rem;
+  padding: 0 3rem 3rem 3rem;
+  width: 100%;
+  background-color: #e5e5e5;
+}
+
+.shop-page {
+  height: 100vh;
+  margin-left: 30rem;
+  padding: 0 3rem 3rem 3rem;
+  width: 100%;
+  background-color: #e5e5e5;
+}
+
+.admin-page {
+  height: 100vh;
+  margin-left: 30rem;
+  padding: 0 3rem 3rem 3rem;
+  width: 100%;
+  background-color: #e5e5e5;
+}
+
+.not-found-page {
+  height: 100vh;
+  margin-left: 30rem;
+  padding: 0 3rem 3rem 3rem;
+  width: 100%;
+  background-color: #e5e5e5;
+}
 /*# sourceMappingURL=main.css.map */

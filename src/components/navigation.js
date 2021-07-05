@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {navLinks} from '../utils/index';
 
 const Navigation = () => {
-  const [linkIndex, setLinkIndex] = useState(0);
+  const [linkIndex, setLinkIndex] = useState('');
 
   useEffect(() => {
     navLinks.forEach(route => {

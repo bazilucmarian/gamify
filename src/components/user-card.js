@@ -1,20 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import AvatarInitials from './avatar-initials';
+import Avatar from './avatar';
 import {getInitials} from '../utils';
 
 function UserCard({avatar, userName, jobTitle}) {
-  const [initials, setInitials] = useState('');
-
-  const {newInitials} = getInitials(userName);
-
-  useEffect(() => {
-    setInitials(newInitials);
-  }, [newInitials, userName]);
   return (
     <div className="card">
       <div className="card__avatar">
-        {avatar ? <img className="card__img" src={avatar} alt="Profile" /> : <AvatarInitials initials={initials} />}
+        <Avatar imageSrc={avatar} initials={getInitials(userName)} />
       </div>
       <div className="card__title">
         <div className="card__name">{userName}</div>
@@ -32,8 +25,8 @@ UserCard.propTypes = {
 
 UserCard.defaultProps = {
   avatar: '',
-  userName: 'Daniel Toma',
-  jobTitle: 'Programmer'
+  userName: 'Unknown',
+  jobTitle: 'Unknown'
 };
 
 export default UserCard;

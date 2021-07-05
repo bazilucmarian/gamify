@@ -154,13 +154,6 @@ body {
   display: flex;
 }
 
-.card__img {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .card__title {
   display: flex;
   flex-direction: column;
@@ -301,7 +294,7 @@ body {
   left: 0;
 }
 
-.initials {
+.avatar-initials {
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
@@ -311,6 +304,13 @@ body {
   align-items: center;
   font-size: 2rem;
   background: #fc5d27;
+}
+
+.avatar-img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .app-wrapper {

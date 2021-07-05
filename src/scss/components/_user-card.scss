@@ -3,13 +3,6 @@
 .card {
   display: flex;
 
-  &__img {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
   &__title {
     display: flex;
     flex-direction: column;

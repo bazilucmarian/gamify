@@ -3,14 +3,13 @@ import Navigation from './navigation';
 import UserCard from './user-card';
 import RewardInfo from './reward-info';
 import ProgressCard from './progress-card';
-import Avatar from '../assets/imgs/User.svg';
 
 function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar__content">
         <div className="sidebar__user-details">
-          <UserCard avatar={Avatar} />
+          <UserCard />
           <RewardInfo />
           <ProgressCard userXp={50} />
         </div>

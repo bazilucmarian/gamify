@@ -1,6 +1,6 @@
 @import '../variables';
 
-.initials {
+.avatar-initials {
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
@@ -10,4 +10,11 @@
   align-items: center;
   font-size: 2rem;
   background: $color-orange;
+}
+
+.avatar-img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
 }

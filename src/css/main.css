@@ -301,6 +301,18 @@ body {
   left: 0;
 }
 
+.initials {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  background: #fc5d27;
+}
+
 .app-wrapper {
   display: flex;
 }

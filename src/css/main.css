@@ -16,13 +16,13 @@ html {
 
 body {
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   width: 100%;
   height: 100%;
 }
 
 .btn {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background: none;
   outline: none;
   border: none;
@@ -31,8 +31,6 @@ body {
   font-weight: 500;
   letter-spacing: 0.05rem;
   width: 100%;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
 
@@ -62,6 +60,7 @@ body {
   color: #fc5d27;
   border: 1px solid #fc5d27;
 }
+
 .outlined-primary:hover {
   background-color: #fc5d27;
   color: #ffffff;
@@ -73,6 +72,7 @@ body {
   color: #184fc4;
   border: 1px solid #184fc4;
 }
+
 .outlined-secondary:hover {
   background-color: #184fc4;
   color: #ffffff;
@@ -84,6 +84,7 @@ body {
   color: #0e9260;
   border: 1px solid #0e9260;
 }
+
 .outlined-tertiary:hover {
   background-color: #0e9260;
   color: #ffffff;
@@ -95,6 +96,7 @@ body {
   color: #b73520;
   border: 1px solid #b73520;
 }
+
 .outlined-fourth:hover {
   background-color: #b73520;
   color: #ffffff;
@@ -107,6 +109,7 @@ body {
   color: #ffffff;
   border: 1px solid #ffffff;
 }
+
 .contained-primary:hover {
   background-color: #fd9672;
 }
@@ -118,6 +121,7 @@ body {
   color: #ffffff;
   border: 1px solid #ffffff;
 }
+
 .contained-secondary:hover {
   background-color: #4176e8;
 }
@@ -129,6 +133,7 @@ body {
   color: #ffffff;
   border: 1px solid #ffffff;
 }
+
 .contained-tertiary:hover {
   background-color: #15d88e;
 }
@@ -140,6 +145,7 @@ body {
   color: #ffffff;
   border: 1px solid #ffffff;
 }
+
 .contained-fourth:hover {
   background-color: #de5a45;
 }
@@ -147,12 +153,7 @@ body {
 .card {
   display: flex;
 }
-.card__img {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  object-fit: cover;
-}
+
 .card__title {
   display: flex;
   flex-direction: column;
@@ -160,21 +161,23 @@ body {
   align-items: flex-start;
   padding-left: 1.5rem;
 }
+
 .card__name {
   font-weight: 700;
   line-height: 1.9rem;
   font-size: 1.6rem;
 }
+
 .card__job {
-  font-weight: 400;
   font-size: 1.4rem;
-  line-height: 1.6rem;
+  line-height: 2.5rem;
   color: #868686;
 }
 
 .rewardInfo {
   display: flex;
 }
+
 .rewardInfo__xp {
   color: #184fc4;
   font-weight: 500;
@@ -183,32 +186,143 @@ body {
   letter-spacing: 0.01rem;
   padding-right: 30px;
 }
+
 .rewardInfo__credits {
   color: #fc5d27;
   font-weight: 700;
   font-size: 1.4rem;
   line-height: 1.6rem;
+  letter-spacing: 0.02rem;
 }
 
 .progressCard {
   width: 100%;
 }
+
 .progressCard__xpContainer {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem;
   color: #184fc4;
   font-weight: bold;
   font-size: 1.4rem;
 }
+
 .progressCard__progress {
   background-color: #c0cfea;
   height: 0.4rem;
 }
+
 .progressCard__progress .done {
   height: 100%;
   background-color: #184fc4;
   transition: 1s ease 0.3s;
 }
 
+.sidebar {
+  position: fixed;
+  width: 30rem;
+  height: 100vh;
+  background-color: #ffffff;
+  padding-bottom: 1rem;
+}
+
+.sidebar__content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar__user-details {
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 20rem;
+}
+
+.sidebar__navigation {
+  height: 100%;
+  min-height: 25rem;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  position: relative;
+}
+
+.navigation__link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  list-style: none;
+  height: 6rem;
+  width: 100%;
+}
+
+.navigation__link:last-child {
+  position: absolute;
+  bottom: 0;
+}
+
+.navigation__link a {
+  text-decoration: none;
+  color: #868686;
+  font-size: 1.6rem;
+  padding: 0 4rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.navigation__link a.active {
+  color: #171717;
+  font-weight: 700;
+  position: relative;
+}
+
+.navigation__link a.active:before {
+  content: '';
+  width: 0.5rem;
+  height: 100%;
+  background: #fc5d27;
+  border-radius: 0.5rem;
+  position: absolute;
+  left: 0;
+}
+
+.avatar-initials {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  background: #fc5d27;
+}
+
+.avatar-img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.app-wrapper {
+  display: flex;
+}
+
+.app-wrapper__screens {
+  padding: 3rem 3rem 3rem 34rem;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background-color: #f3f5f8;
+}
 /*# sourceMappingURL=main.css.map */

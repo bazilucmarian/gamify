@@ -1,0 +1,19 @@
+import {
+  HOME_PAGE_ROUTE_LINK,
+  CHALLENGES_PAGE_ROUTE_LINK,
+  SHOP_PAGE_ROUTE_LINK,
+  ADMIN_PAGE_ROUTE_LINK,
+  HOME_PAGE_ROUTE_NAME,
+  CHALLENGES_PAGE_ROUTE_NAME,
+  SHOP_PAGE_ROUTE_NAME,
+  ADMIN_PAGE_ROUTE_NAME
+} from '../constants/routes';
+
+const navLinks = [
+  {name: HOME_PAGE_ROUTE_NAME, link: HOME_PAGE_ROUTE_LINK, exact: true},
+  {name: CHALLENGES_PAGE_ROUTE_NAME, link: CHALLENGES_PAGE_ROUTE_LINK, exact: false},
+  {name: SHOP_PAGE_ROUTE_NAME, link: SHOP_PAGE_ROUTE_LINK, exact: false},
+  {name: ADMIN_PAGE_ROUTE_NAME, link: ADMIN_PAGE_ROUTE_LINK, exact: false}
+];
+
+export default navLinks;

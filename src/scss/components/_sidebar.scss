@@ -1,0 +1,27 @@
+@import '../variables';
+
+.sidebar {
+  position: fixed;
+  width: 30rem;
+  height: 100vh;
+  background-color: $color-white;
+  padding-bottom: 1rem;
+
+  &__content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__user-details {
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 20rem;
+  }
+  &__navigation {
+    height: 100%;
+    min-height: 25rem;
+  }
+}

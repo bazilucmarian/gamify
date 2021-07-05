@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Avatar from './avatar';
 
 function UserCard({avatar, userName, jobTitle}) {
   return (
     <div className="card">
       <div className="card__avatar">
-        <img className="card__img" src={avatar} alt="Profile" />
+        <Avatar imageSrc={avatar} userName={userName} />
       </div>
-
       <div className="card__title">
         <div className="card__name">{userName}</div>
         {jobTitle && <div className="card__job">{jobTitle}</div>}
@@ -24,8 +24,8 @@ UserCard.propTypes = {
 
 UserCard.defaultProps = {
   avatar: '',
-  userName: 'John Doe',
-  jobTitle: ''
+  userName: 'Unknown',
+  jobTitle: 'Unknown'
 };
 
 export default UserCard;

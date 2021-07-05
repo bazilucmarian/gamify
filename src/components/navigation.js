@@ -1,40 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import React from 'react';
+import {NavLink} from 'react-router-dom';
 import {navLinks} from '../utils/index';
 
-const Navigation = () => {
-  const [linkIndex, setLinkIndex] = useState('');
-
-  useEffect(() => {
-    navLinks.forEach(route => {
-      switch (window.location.pathname) {
-        case `${route.link}`:
-          if (linkIndex !== route.activeIndex) {
-            setLinkIndex(route.activeIndex);
-          }
-          break;
-
-        default:
-          break;
-      }
-    });
-  }, [linkIndex]);
-
-  return (
-    <nav className="navigation">
-      {navLinks.map(route => (
-        <li key={route.activeIndex} className="navigation__link">
-          <Link
-            to={route.link}
-            className={`${linkIndex === route.activeIndex ? 'active' : ''}`}
-            onClick={() => setLinkIndex(route.activeIndex)}
-          >
-            {route.name}
-          </Link>
-        </li>
-      ))}
-    </nav>
-  );
-};
+const Navigation = () => (
+  <nav className="navigation">
+    {navLinks.map(({name, exact, link}) => (
+      <li key={`route-${link}`} className="navigation__link">
+        <NavLink exact={exact} activeClassName="active" to={link}>
+          {name}
+        </NavLink>
+      </li>
+    ))}
+  </nav>
+);
 
 export default Navigation;

@@ -10,10 +10,10 @@ import {
 } from '../constants/routes';
 
 const navLinks = [
-  {name: HOME_PAGE_ROUTE_NAME, link: HOME_PAGE_ROUTE_LINK, activeIndex: 0},
-  {name: CHALLENGES_PAGE_ROUTE_NAME, link: CHALLENGES_PAGE_ROUTE_LINK, activeIndex: 1},
-  {name: SHOP_PAGE_ROUTE_NAME, link: SHOP_PAGE_ROUTE_LINK, activeIndex: 2},
-  {name: ADMIN_PAGE_ROUTE_NAME, link: ADMIN_PAGE_ROUTE_LINK, activeIndex: 3}
+  {name: HOME_PAGE_ROUTE_NAME, link: HOME_PAGE_ROUTE_LINK, exact: true},
+  {name: CHALLENGES_PAGE_ROUTE_NAME, link: CHALLENGES_PAGE_ROUTE_LINK, exact: false},
+  {name: SHOP_PAGE_ROUTE_NAME, link: SHOP_PAGE_ROUTE_LINK, exact: false},
+  {name: ADMIN_PAGE_ROUTE_NAME, link: ADMIN_PAGE_ROUTE_LINK, exact: false}
 ];
 
 export default navLinks;

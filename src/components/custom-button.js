@@ -1,21 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {variantOptions} from '../utils';
 
-const CustomButton = ({children, variant, handleClick, width}) => (
-  <button type="button" className={`btn ${variant}`} onClick={handleClick} style={{width}}>
-    {children || 'button'}
-  </button>
-);
+export default function CustomButton({children, variant, size, ...otherProps}) {
+  return (
+    <button type="button" className={`btn btn--${size} ${variant}`} {...otherProps}>
+      {children}
+    </button>
+  );
+}
 
 CustomButton.propTypes = {
   children: PropTypes.string.isRequired,
-  variant: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired,
-  width: PropTypes.string
+  variant: PropTypes.oneOf(variantOptions).isRequired,
+  size: PropTypes.oneOf(['lg', 'md', 'sm']).isRequired
 };
-
-CustomButton.defaultProps = {
-  width: '100%'
-};
-
-export default CustomButton;

@@ -1,0 +1,60 @@
+@import '../variables';
+
+.challenge-card {
+  position: relative;
+  width: 30rem;
+  min-height: 33rem;
+  padding: 3rem;
+  box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.06);
+  border-radius: 0.6rem;
+  background-color: $color-white;
+  margin-top: 5px;
+
+  &__title {
+    padding-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+  }
+
+  &__description {
+    padding-top: 2rem;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    color: $color-grey-dark;
+  }
+
+  &__buttons-card {
+    background-color: red;
+    display: flex;
+    position: absolute;
+    bottom: 3rem;
+  }
+}
+
+// TO BE REMOVED
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 3rem;
+}
+
+.btn-complete {
+  background-color: $color-blue;
+  color: $color-white;
+  border-radius: 0.5rem;
+  width: 50%;
+  padding: 1rem;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-quit {
+  font-weight: bold;
+  border: 0.1rem solid $color-blue;
+  color: $color-blue;
+  background-color: $color-white;
+  border-radius: 0.5rem;
+  width: 40%;
+  padding: 1rem;
+}

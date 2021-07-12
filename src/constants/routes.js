@@ -1,8 +1,25 @@
-export const HOME_PAGE_ROUTE_LINK = '/';
-export const CHALLENGES_PAGE_ROUTE_LINK = '/challenges';
-export const SHOP_PAGE_ROUTE_LINK = '/shop';
-export const ADMIN_PAGE_ROUTE_LINK = '/admin';
-export const HOME_PAGE_ROUTE_NAME = 'Overview';
-export const CHALLENGES_PAGE_ROUTE_NAME = 'Challenges';
-export const SHOP_PAGE_ROUTE_NAME = 'Shop';
-export const ADMIN_PAGE_ROUTE_NAME = 'Switch to Admin';
+// LINKS -USER
+export const USER_HOME_PAGE_ROUTE_LINK = '/';
+export const USER_CHALLENGES_PAGE_ROUTE_LINK = '/challenges';
+export const USER_SHOP_PAGE_ROUTE_LINK = '/shop';
+export const USER_SWITCH_ADMIN_PAGE_ROUTE_LINK = '/admin/challenges';
+
+// LINKS -ADMIN
+
+export const ADMIN_HOME_PAGE_ROUTE_LINK = '/admin/challenges';
+export const ADMIN_CHALLENGES_PAGE_ROUTE_LINK = '/admin/validation';
+export const ADMIN_SHOP_PAGE_ROUTE_LINK = '/admin/shop';
+export const ADMIN_SWITCH_USER_PAGE_ROUTE_LINK = '/';
+
+// ROUTES NAME -USER
+export const USER_HOME_ROUTE_NAME = 'Overview';
+export const USER_CHALLENGES_ROUTE_NAME = 'Challenges';
+export const USER_SHOP_ROUTE_NAME = 'Shop';
+export const USER_SWITCH_ADMIN_ROUTE_NAME = 'Switch to Admin';
+
+// ROUTES NAME -ADMIN
+
+export const ADMIN_HOME_ROUTE_NAME = 'Challenges';
+export const ADMIN_CHALLENGES_ROUTE_NAME = 'Validation';
+export const ADMIN_SHOP_ROUTE_NAME = 'Shop';
+export const ADMIN_SWITCH_USER_ROUTE_NAME = 'Switch to User';

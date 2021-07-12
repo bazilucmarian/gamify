@@ -25,7 +25,7 @@ Button.propTypes = {
   size: PropTypes.oneOf(['lg', 'md', 'sm'])
 };
 Button.defaultProps = {
-  variant: 'secondary',
+  variant: '',
   color: 'outlined-secondary',
   size: 'md'
 };

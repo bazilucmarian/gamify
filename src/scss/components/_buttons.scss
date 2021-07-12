@@ -1,6 +1,11 @@
 @import '../variables';
 @import '../mixins';
 
+button:disabled,
+button[disabled] {
+  cursor: default;
+}
+
 .btn {
   font-family: 'Roboto', sans-serif;
   background: none;
@@ -29,26 +34,22 @@
 
 .primary {
   color: $color-orange;
-  text-transform: uppercase;
 }
 
 .secondary {
   color: $color-blue;
-  text-transform: uppercase;
 }
 
 .tertiary {
   color: $color-green;
-  text-transform: uppercase;
 }
 
 .fourth {
   color: $color-red;
-  text-transform: uppercase;
 }
 
 .outlined-primary {
-  @include common-btn-properies(null, $color-orange);
+  @include common-btn-properties(null, $color-orange);
   &:hover {
     background-color: $color-orange;
     color: $color-white;
@@ -56,7 +57,7 @@
 }
 
 .outlined-secondary {
-  @include common-btn-properies(null, $color-blue);
+  @include common-btn-properties(null, $color-blue);
 
   &:hover {
     background-color: $color-blue;
@@ -65,7 +66,7 @@
 }
 
 .outlined-tertiary {
-  @include common-btn-properies(null, $color-green);
+  @include common-btn-properties(null, $color-green);
   &:hover {
     background-color: $color-green;
     color: $color-white;
@@ -73,7 +74,7 @@
 }
 
 .outlined-fourth {
-  @include common-btn-properies(null, $color-red);
+  @include common-btn-properties(null, $color-red);
   &:hover {
     background-color: $color-red;
     color: $color-white;
@@ -81,28 +82,28 @@
 }
 
 .contained-primary {
-  @include common-btn-properies($color-orange, $color-white);
+  @include common-btn-properties($color-orange, $color-white);
   &:hover {
     background-color: lighten($color-orange, 15%);
   }
 }
 
 .contained-secondary {
-  @include common-btn-properies($color-blue, $color-white);
+  @include common-btn-properties($color-blue, $color-white);
   &:hover {
     background-color: lighten($color-blue, 15%);
   }
 }
 
 .contained-tertiary {
-  @include common-btn-properies($color-green, $color-white);
+  @include common-btn-properties($color-green, $color-white);
   &:hover {
     background-color: lighten($color-green, 15%);
   }
 }
 
 .contained-fourth {
-  @include common-btn-properies($color-red, $color-white);
+  @include common-btn-properties($color-red, $color-white);
   &:hover {
     background-color: lighten($color-red, 15%);
   }

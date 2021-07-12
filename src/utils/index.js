@@ -1,5 +1,8 @@
+/* eslint-disable import/no-cycle */
 import calculateXp from './calculateXp';
-import navLinks from './nav-links';
+import {navLinksUser, navLinksAdmin} from './nav-links';
 import getInitials from './getInitials';
+import {statusDictionary} from './status-dictionary';
+import {camelCaseToKebabCase} from './utils-functions';
 
-export {calculateXp, navLinks, getInitials};
+export {calculateXp, getInitials, navLinksUser, navLinksAdmin, statusDictionary, camelCaseToKebabCase};

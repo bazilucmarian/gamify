@@ -1,11 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import ChallengesSection from '../components/challenges-section';
 
-function ChallengesPage() {
-  return (
-    <div className="challenges-page">
-      <h1>Challenges Page</h1>
-    </div>
-  );
+function ChallengesPage({availableChallenges}) {
+  return <ChallengesSection title="Available Challenges" filteredChallenges={availableChallenges} />;
 }
+
+ChallengesPage.propTypes = {
+  availableChallenges: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      xp: PropTypes.number,
+      credits: PropTypes.number,
+      id: PropTypes.number,
+      description: PropTypes.string
+    })
+  )
+};
+
+ChallengesPage.defaultProps = {
+  availableChallenges: []
+};
 
 export default ChallengesPage;

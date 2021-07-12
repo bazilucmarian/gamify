@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
 *,
 *::before,
 *::after {
@@ -225,6 +226,64 @@ body {
   transition: 1s ease 0.3s;
 }
 
+.challenge-card {
+  position: relative;
+  width: 30rem;
+  min-height: 33rem;
+  padding: 3rem;
+  box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.06);
+  border-radius: 0.6rem;
+  background-color: #ffffff;
+  margin-top: 5px;
+}
+
+.challenge-card__title {
+  padding-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+}
+
+.challenge-card__description {
+  padding-top: 2rem;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  color: #6a758d;
+}
+
+.challenge-card__buttons-card {
+  background-color: red;
+  display: flex;
+  position: absolute;
+  bottom: 3rem;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+}
+
+.btn-complete {
+  background-color: #184fc4;
+  color: #ffffff;
+  border-radius: 5px;
+  width: 50%;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-quit {
+  font-weight: bold;
+  border: 1px solid #184fc4;
+  color: #184fc4;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 40%;
+  padding: 10px;
+}
+
 .sidebar {
   position: fixed;
   width: 30rem;
@@ -332,4 +391,5 @@ body {
   z-index: 1;
   background-color: #f3f5f8;
 }
+
 /*# sourceMappingURL=main.css.map */

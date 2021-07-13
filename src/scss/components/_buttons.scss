@@ -2,96 +2,108 @@
 @import '../mixins';
 
 .btn {
-	font-family: 'Roboto', sans-serif;
-	background: none;
-	outline: none;
-	border: none;
-	font-size: 1.4rem;
-	cursor: pointer;
-	font-weight: 500;
-	letter-spacing: 0.05rem;
-	width: 100%;
+  font-family: 'Roboto', sans-serif;
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
 
-	@include transition(all 0.2s ease-in-out);
+  &--lg {
+    width: $button-large;
+    height: 3.6rem;
+  }
+  &--md {
+    width: $button-medium;
+    height: 3.6rem;
+  }
+  &--sm {
+    width: $button-small;
+    height: 3.6rem;
+  }
+
+  @include transition(all 0.2s ease-in-out);
 }
 
 .primary {
-	color: $color-orange;
-	text-transform: uppercase;
+  color: $color-orange;
+  text-transform: uppercase;
 }
 
 .secondary {
-	color: $color-blue;
-	text-transform: uppercase;
+  color: $color-blue;
+  text-transform: uppercase;
 }
 
 .tertiary {
-	color: $color-green;
-	text-transform: uppercase;
+  color: $color-green;
+  text-transform: uppercase;
 }
 
 .fourth {
-	color: $color-red;
-	text-transform: uppercase;
+  color: $color-red;
+  text-transform: uppercase;
 }
 
 .outlined-primary {
-	@include common-btn-properies(null, $color-orange);
-	&:hover {
-		background-color: $color-orange;
-		color: $color-white;
-	}
+  @include common-btn-properies(null, $color-orange);
+  &:hover {
+    background-color: $color-orange;
+    color: $color-white;
+  }
 }
 
 .outlined-secondary {
-	@include common-btn-properies(null, $color-blue);
+  @include common-btn-properies(null, $color-blue);
 
-	&:hover {
-		background-color: $color-blue;
-		color: $color-white;
-	}
+  &:hover {
+    background-color: $color-blue;
+    color: $color-white;
+  }
 }
 
 .outlined-tertiary {
-	@include common-btn-properies(null, $color-green);
-	&:hover {
-		background-color: $color-green;
-		color: $color-white;
-	}
+  @include common-btn-properies(null, $color-green);
+  &:hover {
+    background-color: $color-green;
+    color: $color-white;
+  }
 }
 
 .outlined-fourth {
-	@include common-btn-properies(null, $color-red);
-	&:hover {
-		background-color: $color-red;
-		color: $color-white;
-	}
+  @include common-btn-properies(null, $color-red);
+  &:hover {
+    background-color: $color-red;
+    color: $color-white;
+  }
 }
 
 .contained-primary {
-	@include common-btn-properies($color-orange, $color-white);
-	&:hover {
-		background-color: lighten($color-orange, 15%);
-	}
+  @include common-btn-properies($color-orange, $color-white);
+  &:hover {
+    background-color: lighten($color-orange, 15%);
+  }
 }
 
 .contained-secondary {
-	@include common-btn-properies($color-blue, $color-white);
-	&:hover {
-		background-color: lighten($color-blue, 15%);
-	}
+  @include common-btn-properies($color-blue, $color-white);
+  &:hover {
+    background-color: lighten($color-blue, 15%);
+  }
 }
 
 .contained-tertiary {
-	@include common-btn-properies($color-green, $color-white);
-	&:hover {
-		background-color: lighten($color-green, 15%);
-	}
+  @include common-btn-properies($color-green, $color-white);
+  &:hover {
+    background-color: lighten($color-green, 15%);
+  }
 }
 
 .contained-fourth {
-	@include common-btn-properies($color-red, $color-white);
-	&:hover {
-		background-color: lighten($color-red, 15%);
-	}
+  @include common-btn-properies($color-red, $color-white);
+  &:hover {
+    background-color: lighten($color-red, 15%);
+  }
 }

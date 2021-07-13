@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 *,
 *::before,
 *::after {
@@ -31,10 +30,22 @@ body {
   cursor: pointer;
   font-weight: 500;
   letter-spacing: 0.05rem;
-  width: 100%;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+}
+
+.btn--lg {
+  width: 24rem;
+  height: 3.6rem;
+}
+
+.btn--md {
+  width: 14rem;
+  height: 3.6rem;
+}
+
+.btn--sm {
+  width: 8rem;
+  height: 3.6rem;
 }
 
 .primary {
@@ -58,7 +69,6 @@ body {
 }
 
 .outlined-primary {
-  padding: 1rem 3rem;
   border-radius: 0.5rem;
   color: #fc5d27;
   border: 1px solid #fc5d27;
@@ -70,7 +80,6 @@ body {
 }
 
 .outlined-secondary {
-  padding: 1rem 3rem;
   border-radius: 0.5rem;
   color: #184fc4;
   border: 1px solid #184fc4;
@@ -82,7 +91,6 @@ body {
 }
 
 .outlined-tertiary {
-  padding: 1rem 3rem;
   border-radius: 0.5rem;
   color: #0e9260;
   border: 1px solid #0e9260;
@@ -94,7 +102,6 @@ body {
 }
 
 .outlined-fourth {
-  padding: 1rem 3rem;
   border-radius: 0.5rem;
   color: #b73520;
   border: 1px solid #b73520;
@@ -106,7 +113,6 @@ body {
 }
 
 .contained-primary {
-  padding: 1rem 3rem;
   border-radius: 0.5rem;
   background: #fc5d27;
   color: #ffffff;
@@ -118,7 +124,6 @@ body {
 }
 
 .contained-secondary {
-  padding: 1rem 3rem;
   border-radius: 0.5rem;
   background: #184fc4;
   color: #ffffff;
@@ -130,7 +135,6 @@ body {
 }
 
 .contained-tertiary {
-  padding: 1rem 3rem;
   border-radius: 0.5rem;
   background: #0e9260;
   color: #ffffff;
@@ -142,7 +146,6 @@ body {
 }
 
 .contained-fourth {
-  padding: 1rem 3rem;
   border-radius: 0.5rem;
   background: #b73520;
   color: #ffffff;
@@ -257,27 +260,27 @@ body {
 .btn-container {
   display: flex;
   justify-content: space-between;
-  padding-top: 30px;
+  padding-top: 3rem;
 }
 
 .btn-complete {
   background-color: #184fc4;
   color: #ffffff;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   width: 50%;
-  padding: 10px;
+  padding: 1rem;
   font-weight: bold;
   border: none;
 }
 
 .btn-quit {
   font-weight: bold;
-  border: 1px solid #184fc4;
+  border: 0.1rem solid #184fc4;
   color: #184fc4;
-  background-color: #fff;
-  border-radius: 5px;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
   width: 40%;
-  padding: 10px;
+  padding: 1rem;
 }
 
 .sidebar {
@@ -286,6 +289,7 @@ body {
   height: 100vh;
   background-color: #ffffff;
   padding-bottom: 1rem;
+  z-index: 2;
 }
 
 .sidebar__content {
@@ -383,8 +387,7 @@ body {
   position: absolute;
   height: 100%;
   width: 100%;
-  z-index: -1;
+  z-index: 1;
   background-color: #f3f5f8;
 }
-
 /*# sourceMappingURL=main.css.map */

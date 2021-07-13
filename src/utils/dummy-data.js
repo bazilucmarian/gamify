@@ -30,7 +30,7 @@ const challengesList = [
     title: 'workshop organization',
     xp: 45,
     credits: 75,
-    id: 3,
+    id: 4,
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
   }

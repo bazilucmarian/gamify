@@ -1,24 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Sidebar from './sidebar';
-import HomePage from '../pages/home-page';
-import ChallengesPage from '../pages/challenges-page';
-import ShopPage from '../pages/shop-page';
-import ValidationPageAdmin from '../pages/validation-page-admin';
-import ChallengesPageAdmin from '../pages/challenges-page-admin';
-import ShopPageAdmin from '../pages/shop-page-admin';
+import HomePage from '../pages/user-pages/home-page';
+import ChallengesPage from '../pages/user-pages/challenges-page';
+import ShopPage from '../pages/user-pages/shop-page';
+import ValidationPageAdmin from '../pages/admin-pages/validation-page-admin';
+import ChallengesPageAdmin from '../pages/admin-pages/challenges-page-admin';
+import ShopPageAdmin from '../pages/admin-pages/shop-page-admin';
 import NotFoundPage from '../pages/not-found-page';
-import {filteredChallengesWithStatus, getUser, getUserLoggedInChallenges, navLinksUser, navLinksAdmin} from '../utils';
+import {filteredChallengesWithStatus, getUser, getLoggedInUserChallenges, navLinksUser, navLinksAdmin} from '../utils';
 import {challengesList} from '../utils/dummy-data';
 
 // to be removed later
 const userData = getUser('user');
+const adminData = getUser('admin');
 
 const App = () => {
   // to be removed later
   const [challengesFromAdmin] = useState(challengesList);
   const [loggedInUser, setLoggedInUser] = useState(userData);
-  const [loggedInUserChallenges] = useState(getUserLoggedInChallenges(loggedInUser.id));
+  const [loggedInUserChallenges] = useState(getLoggedInUserChallenges(loggedInUser.id));
   const [routes, setRoutes] = useState(navLinksUser);
 
   const isAdmin = loggedInUser.role === 'admin';
@@ -29,17 +30,22 @@ const App = () => {
   );
 
   useEffect(() => {
-    if (loggedInUser.role === 'user') {
-      setRoutes(navLinksUser);
-    } else {
-      setRoutes(navLinksAdmin);
-    }
-  }, [loggedInUser.role]);
+    setRoutes(isAdmin ? navLinksAdmin : navLinksUser);
+  }, [isAdmin, loggedInUser.role]);
+
+  const handleSwitchUser = () => {
+    setLoggedInUser(isAdmin ? userData : adminData);
+  };
 
   return (
     <Router>
       <div className="app-wrapper">
-        <Sidebar routes={routes} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
+        <Sidebar
+          routes={routes}
+          loggedInUser={loggedInUser}
+          setLoggedInUser={setLoggedInUser}
+          handleSwitchUser={handleSwitchUser}
+        />
         <div className="app-wrapper__screens">
           <Switch>
             <Route

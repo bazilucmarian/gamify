@@ -6,7 +6,7 @@ import {statusDictionary} from './status-dictionary';
 import {
   camelCaseToKebabCase,
   getUser,
-  getUserLoggedInChallenges,
+  getLoggedInUserChallenges,
   filteredChallengesWithStatus
 } from './utils-functions';
 import {challengesList, users, userChallengesDummy} from './dummy-data';
@@ -18,7 +18,7 @@ export {
   navLinksAdmin,
   statusDictionary,
   getUser,
-  getUserLoggedInChallenges,
+  getLoggedInUserChallenges,
   filteredChallengesWithStatus,
   camelCaseToKebabCase,
   challengesList,

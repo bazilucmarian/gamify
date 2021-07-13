@@ -5,7 +5,7 @@ import ButtonsContainerUser from './button-container-user';
 import RewardInfo from './reward-info';
 import {camelCaseToKebabCase} from '../utils';
 
-function ChallengeCard({isAdmin, challenge, type}) {
+function ChallengeCard({isAdmin, challenge}) {
   const status = 'Available';
 
   return (
@@ -20,14 +20,13 @@ function ChallengeCard({isAdmin, challenge, type}) {
         </div>
 
         <div className="challenge-card__bottom">
-          {isAdmin ? <ButtonContainerAdmin type={type} /> : <ButtonsContainerUser status={status} />}
+          {isAdmin ? <ButtonContainerAdmin type="validation" /> : <ButtonsContainerUser status={status} />}
         </div>
       </div>
     </div>
   );
 }
 ChallengeCard.propTypes = {
-  type: PropTypes.string.isRequired,
   challenge: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,

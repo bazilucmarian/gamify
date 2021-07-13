@@ -12,7 +12,7 @@ const EmptyPlaceholder = () => {
         <img className="empty-placeholder__image" src={Empty} alt="placeholder-img" />
         <p className="empty-placeholder__message">Sorry... you have no challenge in progress or completed.</p>
         <Button color="secondary" variant="outlined-secondary" size="lg" onClick={() => history.push('/challenges')}>
-          Got to available challenges ➡
+          Go to available challenges ➡
         </Button>
       </div>
     </div>

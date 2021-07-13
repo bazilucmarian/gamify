@@ -4,51 +4,47 @@ import Button from './button';
 import {statusDictionary} from '../utils';
 
 function ButtonsContainerUser({status}) {
-  const renderUserButtons = statusType => {
-    switch (statusType) {
-      case statusDictionary.inProgress:
-        return (
-          <>
-            <Button color="secondary" variant="outlined-secondary" size="sm">
-              Quit
-            </Button>
-            <Button color="secondary" variant="contained-secondary" size="md">
-              Complete
-            </Button>
-          </>
-        );
-
-      case statusDictionary.inPending:
-        return (
-          <Button color="primary" size="lg" disabled>
-            Pending ...
+  switch (status) {
+    case statusDictionary.inProgress:
+      return (
+        <>
+          <Button color="secondary" variant="outlined-secondary" size="sm">
+            Quit
           </Button>
-        );
-
-      case statusDictionary.validated:
-        return (
-          <Button color="tertiary" size="lg" disabled>
-            Validated
+          <Button color="secondary" variant="contained-secondary" size="md">
+            Complete
           </Button>
-        );
+        </>
+      );
 
-      case statusDictionary.denied:
-        return (
-          <Button color="fourth" size="lg" disabled>
-            Denied
-          </Button>
-        );
+    case statusDictionary.inPending:
+      return (
+        <Button color="primary" size="lg" disabled>
+          Pending ...
+        </Button>
+      );
 
-      default:
-        return (
-          <Button color="secondary" variant="contained-secondary" size="lg">
-            Enroll
-          </Button>
-        );
-    }
-  };
+    case statusDictionary.validated:
+      return (
+        <Button color="tertiary" size="lg" disabled>
+          Validated
+        </Button>
+      );
 
-  return renderUserButtons(status);
+    case statusDictionary.denied:
+      return (
+        <Button color="fourth" size="lg" disabled>
+          Denied
+        </Button>
+      );
+
+    default:
+      return (
+        <Button color="secondary" variant="contained-secondary" size="lg">
+          Enroll
+        </Button>
+      );
+  }
 }
 
 ButtonsContainerUser.propTypes = {

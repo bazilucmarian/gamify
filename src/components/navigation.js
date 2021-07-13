@@ -1,15 +1,8 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
-import {getUser} from '../utils';
 
-// to be removed
-const userData = getUser('user');
-const adminData = getUser('admin');
-
-function Navigation({routes, setLoggedInUser}) {
+function Navigation({routes, handleSwitchUser}) {
   return (
     <nav className="navigation">
       {routes.map(({name, exact, link}) => (
@@ -18,13 +11,7 @@ function Navigation({routes, setLoggedInUser}) {
             exact={exact}
             activeClassName="active"
             to={link}
-            onClick={() => {
-              name === 'Switch to Admin'
-                ? setLoggedInUser(adminData)
-                : name === 'Switch to User'
-                ? setLoggedInUser(userData)
-                : undefined;
-            }}
+            onClick={name.includes('Switch to') ? handleSwitchUser : undefined}
           >
             {name}
           </NavLink>
@@ -35,7 +22,7 @@ function Navigation({routes, setLoggedInUser}) {
 }
 
 Navigation.propTypes = {
-  setLoggedInUser: PropTypes.func.isRequired,
+  handleSwitchUser: PropTypes.func.isRequired,
   routes: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

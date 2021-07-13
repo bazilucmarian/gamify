@@ -1,12 +1,11 @@
 import React from 'react';
 import Button from './button';
 
-export default function ButtonContainerAdmin({type}) {
+function ButtonContainerAdmin({type}) {
   const renderAdminButtons = actionType => {
-    let buttonGroup = null;
     switch (actionType) {
       case 'validation':
-        buttonGroup = (
+        return (
           <>
             <Button color="fourth" variant="outlined-fourth" size="sm">
               Deny
@@ -16,10 +15,9 @@ export default function ButtonContainerAdmin({type}) {
             </Button>
           </>
         );
-        break;
 
       default:
-        buttonGroup = (
+        return (
           <>
             <Button color="secondary" variant="outlined-secondary" size="sm">
               Edit
@@ -30,7 +28,7 @@ export default function ButtonContainerAdmin({type}) {
           </>
         );
     }
-    return buttonGroup;
   };
   return renderAdminButtons(type);
 }
+export default ButtonContainerAdmin;

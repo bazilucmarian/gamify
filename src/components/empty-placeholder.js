@@ -2,15 +2,15 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
 import Button from './button';
+import Empty from '../assets/imgs/Empty.svg';
 
-const RedirectMessage = () => {
+const EmptyPlaceholder = () => {
   const history = useHistory();
   return (
-    <div className="redirect-message">
-      <div className="redirect-message__content">
-        <div className="redirect-message__icon">😢</div>
-        <h2 className="redirect-message__title">No challenges</h2>
-        <p className="redirect-message__message">You have no challenge in progress or completed.</p>
+    <div className="empty-placeholder">
+      <div className="empty-placeholder__content">
+        <img className="empty-placeholder__image" src={Empty} alt="placeholder-img" />
+        <p className="empty-placeholder__message">Sorry... you have no challenge in progress or completed.</p>
         <Button color="secondary" variant="outlined-secondary" size="lg" onClick={() => history.push('/challenges')}>
           Got to available challenges ➡
         </Button>
@@ -19,4 +19,4 @@ const RedirectMessage = () => {
   );
 };
 
-export default RedirectMessage;
+export default EmptyPlaceholder;

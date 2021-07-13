@@ -1,6 +1,7 @@
+// eslint-disable-next-line import/no-cycle
 import {statusDictionary} from './index';
 
-export const challengesList = [
+const challengesList = [
   {
     title: 'Do a byte-sized learning talk',
     xp: 15,
@@ -35,7 +36,7 @@ export const challengesList = [
   }
 ];
 
-export const users = [
+const users = [
   {
     id: 123,
     name: 'Daniel Toma',
@@ -56,7 +57,7 @@ export const users = [
   }
 ];
 
-export const userChallengesDummy = [
+const userChallengesDummy = [
   {
     userId: 123,
     challenges: challengesList.map(challenge => ({
@@ -72,3 +73,5 @@ export const userChallengesDummy = [
     }))
   }
 ];
+
+export {challengesList, users, userChallengesDummy};

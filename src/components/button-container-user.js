@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import Button from './button';
 import {statusDictionary} from '../utils';
 
-export default function ButtonsContainerUser({status}) {
+function ButtonsContainerUser({status}) {
   const renderUserButtons = statusType => {
-    let buttonGroup = null;
     switch (statusType) {
       case statusDictionary.inProgress:
-        buttonGroup = (
+        return (
           <>
             <Button color="secondary" variant="outlined-secondary" size="sm">
               Quit
@@ -18,37 +17,35 @@ export default function ButtonsContainerUser({status}) {
             </Button>
           </>
         );
-        break;
+
       case statusDictionary.inPending:
-        buttonGroup = (
+        return (
           <Button color="primary" size="lg" disabled>
             Pending ...
           </Button>
         );
-        break;
+
       case statusDictionary.validated:
-        buttonGroup = (
+        return (
           <Button color="tertiary" size="lg" disabled>
             Validated
           </Button>
         );
-        break;
+
       case statusDictionary.denied:
-        buttonGroup = (
+        return (
           <Button color="fourth" size="lg" disabled>
             Denied
           </Button>
         );
-        break;
 
       default:
-        buttonGroup = (
+        return (
           <Button color="secondary" variant="contained-secondary" size="lg">
             Enroll
           </Button>
         );
     }
-    return buttonGroup;
   };
 
   return renderUserButtons(status);
@@ -57,3 +54,4 @@ export default function ButtonsContainerUser({status}) {
 ButtonsContainerUser.propTypes = {
   status: PropTypes.string.isRequired
 };
+export default ButtonsContainerUser;

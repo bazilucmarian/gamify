@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ChallengeCard from './challenge-card';
 
-export default function ChallengesSection({title, filteredChallenges, isAdmin}) {
-  if (filteredChallenges.length === 0) return null;
+function ChallengesSection({title, filteredChallenges, isAdmin, isScrollable}) {
   return (
     <section className="challenges-section">
       <h2 className="challenges-section__title">{title}</h2>
-      <div className="challenges-section__items">
+      <div className={`challenges-section__items challenges-section__items--${isScrollable && 'scrollable'}`}>
         {filteredChallenges?.map(challenge => (
           <ChallengeCard key={challenge.id} challenge={challenge} isAdmin={isAdmin} />
         ))}
@@ -27,10 +26,14 @@ ChallengesSection.propTypes = {
       id: PropTypes.number,
       description: PropTypes.string
     })
-  )
+  ),
+  isScrollable: PropTypes.bool
 };
 
 ChallengesSection.defaultProps = {
   filteredChallenges: [],
-  isAdmin: false
+  isAdmin: false,
+  isScrollable: false
 };
+
+export default ChallengesSection;

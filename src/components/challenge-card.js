@@ -5,7 +5,7 @@ import ButtonsContainerUser from './button-container-user';
 import RewardInfo from './reward-info';
 import {camelCaseToKebabCase} from '../utils';
 
-export default function ChallengeCard({isAdmin, challenge, type}) {
+function ChallengeCard({isAdmin, challenge, type}) {
   const status = 'Available';
 
   return (
@@ -39,3 +39,4 @@ ChallengeCard.propTypes = {
 ChallengeCard.defaultProps = {
   isAdmin: false
 };
+export default ChallengeCard;

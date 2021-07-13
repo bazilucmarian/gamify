@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Button({children, variant, color, size, ...otherProps}) {
+function Button({children, variant, color, size, ...otherProps}) {
   return (
     <button type="button" className={`btn btn--${size} ${color} ${variant}`} {...otherProps}>
       {children}
@@ -29,3 +29,4 @@ Button.defaultProps = {
   color: 'outlined-secondary',
   size: 'md'
 };
+export default Button;

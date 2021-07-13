@@ -16,21 +16,23 @@
     padding: 1.5rem 0;
     display: flex;
     gap: 2rem;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    &::-webkit-scrollbar {
-      height: 1rem;
-      border-radius: 1rem;
-      background: $color-grey-dark;
-    }
-    &::-webkit-scrollbar-thumb:horizontal {
-      background-color: $color-orange;
-      border-radius: 1rem;
-    }
+    flex-wrap: wrap;
 
-    // flex-wrap: wrap;
+    &--scrollable {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      &::-webkit-scrollbar {
+        height: 1rem;
+        border-radius: 1rem;
+        background: $color-grey-dark;
+      }
+      &::-webkit-scrollbar-thumb:horizontal {
+        background-color: $color-orange;
+        border-radius: 1rem;
+      }
+    }
   }
 
   &__message {

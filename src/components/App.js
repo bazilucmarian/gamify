@@ -1,41 +1,45 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Sidebar from './sidebar';
 import HomePage from '../pages/home-page';
 import ChallengesPage from '../pages/challenges-page';
 import ShopPage from '../pages/shop-page';
-import AdminPage from '../pages/admin-page';
+import ValidationPageAdmin from '../pages/validation-page-admin';
+import ChallengesPageAdmin from '../pages/challenges-page-admin';
+import ShopPageAdmin from '../pages/shop-page-admin';
 import NotFoundPage from '../pages/not-found-page';
-
-import {navLinksUser, navLinksAdmin} from '../utils/index';
-import {filteredChallengesWithStatus, generateUser, getUserLoggedInChallenges} from '../utils/utils-functions';
+import {filteredChallengesWithStatus, getUser, getUserLoggedInChallenges, navLinksUser, navLinksAdmin} from '../utils';
 import {challengesList} from '../utils/dummy-data';
 
-const App = () => {
-  const userData = generateUser('user');
-  const adminData = generateUser('admin');
+// to be removed later
+const userData = getUser('user');
 
-  const [challengesFromAdmin, setChallengesFromAdmin] = useState(challengesList);
-  const [userLoggedIn, setUserLoggedIn] = useState(userData);
-  const [userLoggedInChallenges, setUseLoggedInChallenges] = useState(getUserLoggedInChallenges(userLoggedIn.id));
+const App = () => {
+  // to be removed later
+  const [challengesFromAdmin] = useState(challengesList);
+  const [loggedInUser, setLoggedInUser] = useState(userData);
+  const [loggedInUserChallenges] = useState(getUserLoggedInChallenges(loggedInUser.id));
   const [routes, setRoutes] = useState(navLinksUser);
 
-  const isAdmin = userLoggedIn.role === 'admin';
+  const isAdmin = loggedInUser.role === 'admin';
   const availableChallenges = filteredChallengesWithStatus(
-    userLoggedInChallenges.challenges,
+    loggedInUserChallenges.challenges,
     challengesFromAdmin,
     'Available'
   );
 
-  const handleSwitchAdminOrUser = () => {
-    setUserLoggedIn(userLoggedIn.role === 'user' ? adminData : userData);
-    setRoutes(userLoggedIn.role === 'user' ? navLinksAdmin : navLinksUser);
-  };
+  useEffect(() => {
+    if (loggedInUser.role === 'user') {
+      setRoutes(navLinksUser);
+    } else {
+      setRoutes(navLinksAdmin);
+    }
+  }, [loggedInUser.role]);
 
   return (
     <Router>
       <div className="app-wrapper">
-        <Sidebar handleSwitchAdminOrUser={handleSwitchAdminOrUser} routes={routes} userLoggedIn={userLoggedIn} />
+        <Sidebar routes={routes} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
         <div className="app-wrapper__screens">
           <Switch>
             <Route
@@ -50,7 +54,9 @@ const App = () => {
               render={props => <ChallengesPage {...props} availableChallenges={availableChallenges} />}
             />
             <Route path="/shop" render={props => <ShopPage {...props} />} />
-            <Route path="/admin" render={props => <AdminPage {...props} />} />
+            <Route path="/admin/challenges" render={props => <ChallengesPageAdmin {...props} />} />
+            <Route path="/admin/validation" render={props => <ValidationPageAdmin {...props} />} />
+            <Route path="/admin/shop" render={props => <ShopPageAdmin {...props} />} />
             <Route component={NotFoundPage} />
           </Switch>
         </div>

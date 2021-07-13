@@ -1,4 +1,4 @@
-.redirect-message {
+.empty-placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,16 +13,12 @@
     justify-content: center;
   }
 
-  &__icon {
-    font-size: 3rem;
+  &__image {
+    width: 30rem;
   }
 
-  &__title {
-    margin: 1rem 0;
-    font-size: 2rem;
-  }
   &__message {
-    margin-bottom: 1rem;
+    margin: 1rem 0;
     font-size: 2rem;
   }
 }

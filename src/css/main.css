@@ -318,19 +318,23 @@ button[disabled] {
   padding: 1.5rem 0;
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.challenges-section__items--scrollable {
   overflow-x: auto;
   flex-wrap: nowrap;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
 }
 
-.challenges-section__items::-webkit-scrollbar {
+.challenges-section__items--scrollable::-webkit-scrollbar {
   height: 1rem;
   border-radius: 1rem;
   background: #6a758d;
 }
 
-.challenges-section__items::-webkit-scrollbar-thumb:horizontal {
+.challenges-section__items--scrollable::-webkit-scrollbar-thumb:horizontal {
   background-color: #fc5d27;
   border-radius: 1rem;
 }
@@ -343,7 +347,7 @@ button[disabled] {
   font-size: 2rem;
 }
 
-.redirect-message {
+.empty-placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -352,7 +356,7 @@ button[disabled] {
   align-items: space-between;
 }
 
-.redirect-message__content {
+.empty-placeholder__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -360,17 +364,12 @@ button[disabled] {
   justify-content: center;
 }
 
-.redirect-message__icon {
-  font-size: 3rem;
+.empty-placeholder__image {
+  width: 30rem;
 }
 
-.redirect-message__title {
+.empty-placeholder__message {
   margin: 1rem 0;
-  font-size: 2rem;
-}
-
-.redirect-message__message {
-  margin-bottom: 1rem;
   font-size: 2rem;
 }
 

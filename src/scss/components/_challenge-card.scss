@@ -3,58 +3,70 @@
 .challenge-card {
   position: relative;
   width: 30rem;
-  min-height: 33rem;
-  padding: 3rem;
+  min-width: 30rem;
+  height: 33rem;
+  overflow: hidden;
   box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.06);
   border-radius: 0.6rem;
   background-color: $color-white;
-  margin-top: 5px;
+  scroll-snap-align: start;
+
+  &--in-pending {
+    border-top: 0.5rem solid $color-orange;
+  }
+  &--validated {
+    border-top: 0.5rem solid $color-green;
+  }
+  &--denied {
+    border-top: 0.5rem solid $color-red;
+  }
+
+  &__content {
+    padding: 3rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__top {
+    flex: 1;
+  }
 
   &__title {
     padding-bottom: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.6rem;
     line-height: 1.9rem;
   }
 
+  &__middle {
+    flex: 3;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 1rem;
+
+    &::-webkit-scrollbar {
+      border-radius: 1rem;
+      width: 0.5rem;
+    }
+    &::-webkit-scrollbar-thumb:vertical {
+      background-color: $color-grey-dark;
+      border-radius: 1rem;
+    }
+  }
+
   &__description {
-    padding-top: 2rem;
     font-size: 1.4rem;
     line-height: 2.4rem;
+    text-align: left;
     color: $color-grey-dark;
   }
 
-  &__buttons-card {
-    background-color: red;
+  &__bottom {
+    flex: 1;
     display: flex;
-    position: absolute;
-    bottom: 3rem;
+    align-items: flex-end;
+    justify-content: space-between;
   }
-}
-
-// TO BE REMOVED
-.btn-container {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 3rem;
-}
-
-.btn-complete {
-  background-color: $color-blue;
-  color: $color-white;
-  border-radius: 0.5rem;
-  width: 50%;
-  padding: 1rem;
-  font-weight: bold;
-  border: none;
-}
-
-.btn-quit {
-  font-weight: bold;
-  border: 0.1rem solid $color-blue;
-  color: $color-blue;
-  background-color: $color-white;
-  border-radius: 0.5rem;
-  width: 40%;
-  padding: 1rem;
 }

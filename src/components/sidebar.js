@@ -5,7 +5,7 @@ import UserCard from './user-card';
 import RewardInfo from './reward-info';
 import ProgressCard from './progress-card';
 
-function Sidebar({routes, loggedInUser, handleSwitchUser}) {
+function Sidebar({routes, loggedInUser, onSwitchUser}) {
   const {profilePic, name, job, xp, credits} = loggedInUser;
 
   return (
@@ -17,7 +17,7 @@ function Sidebar({routes, loggedInUser, handleSwitchUser}) {
           <ProgressCard userXp={xp} />
         </div>
         <div className="sidebar__navigation">
-          <Navigation routes={routes} handleSwitchUser={handleSwitchUser} />
+          <Navigation routes={routes} onSwitchUser={onSwitchUser} />
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@ function Sidebar({routes, loggedInUser, handleSwitchUser}) {
 }
 
 Sidebar.propTypes = {
-  handleSwitchUser: PropTypes.func.isRequired,
+  onSwitchUser: PropTypes.func.isRequired,
   loggedInUser: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,

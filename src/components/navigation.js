@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 
-function Navigation({routes, handleSwitchUser}) {
+function Navigation({routes, onSwitchUser}) {
   return (
     <nav className="navigation">
       {routes.map(({name, exact, link}) => (
@@ -11,7 +11,7 @@ function Navigation({routes, handleSwitchUser}) {
             exact={exact}
             activeClassName="active"
             to={link}
-            onClick={name.includes('Switch to') ? handleSwitchUser : undefined}
+            onClick={name.includes('Switch to') ? onSwitchUser : undefined}
           >
             {name}
           </NavLink>
@@ -22,7 +22,7 @@ function Navigation({routes, handleSwitchUser}) {
 }
 
 Navigation.propTypes = {
-  handleSwitchUser: PropTypes.func.isRequired,
+  onSwitchUser: PropTypes.func.isRequired,
   routes: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Sidebar from './sidebar';
-import HomePage from '../pages/user-pages/home-page';
+import OverviewPage from '../pages/user-pages/overview-page';
 import ChallengesPage from '../pages/user-pages/challenges-page';
 import ShopPage from '../pages/user-pages/shop-page';
 import ValidationPageAdmin from '../pages/admin-pages/validation-page-admin';
@@ -11,7 +11,7 @@ import NotFoundPage from '../pages/not-found-page';
 import {filteredChallengesWithStatus, getUser, getLoggedInUserChallenges, navLinksUser, navLinksAdmin} from '../utils';
 import {challengesList} from '../utils/dummy-data';
 
-// to be removed later
+// to be removed when fetch mock will be implemented
 const userData = getUser('user');
 const adminData = getUser('admin');
 
@@ -44,7 +44,7 @@ const App = () => {
           routes={routes}
           loggedInUser={loggedInUser}
           setLoggedInUser={setLoggedInUser}
-          handleSwitchUser={handleSwitchUser}
+          onSwitchUser={handleSwitchUser}
         />
         <div className="app-wrapper__screens">
           <Switch>
@@ -52,7 +52,7 @@ const App = () => {
               path="/"
               exact
               render={props => (
-                <HomePage {...props} isAdmin={isAdmin} challengesInProgress={[]} challengesCompleted={[]} />
+                <OverviewPage {...props} isAdmin={isAdmin} challengesInProgress={[]} challengesCompleted={[]} />
               )}
             />
             <Route

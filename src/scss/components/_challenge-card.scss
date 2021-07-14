@@ -48,11 +48,10 @@
 
     &::-webkit-scrollbar {
       border-radius: 1rem;
-      background: $color-grey-dark;
       width: 0.5rem;
     }
     &::-webkit-scrollbar-thumb:vertical {
-      background-color: $color-orange;
+      background-color: $color-grey-dark;
       border-radius: 1rem;
     }
   }

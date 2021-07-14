@@ -52,7 +52,12 @@ const App = () => {
               path="/"
               exact
               render={props => (
-                <OverviewPage {...props} isAdmin={isAdmin} challengesInProgress={[]} challengesCompleted={[]} />
+                <OverviewPage
+                  {...props}
+                  isAdmin={isAdmin}
+                  challengesInProgress={availableChallenges}
+                  challengesCompleted={availableChallenges}
+                />
               )}
             />
             <Route

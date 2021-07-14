@@ -279,12 +279,11 @@ button[disabled] {
 
 .challenge-card__middle::-webkit-scrollbar {
   border-radius: 1rem;
-  background: #6a758d;
   width: 0.5rem;
 }
 
 .challenge-card__middle::-webkit-scrollbar-thumb:vertical {
-  background-color: #fc5d27;
+  background-color: #6a758d;
   border-radius: 1rem;
 }
 
@@ -332,11 +331,10 @@ button[disabled] {
 .challenges-section__items--scrollable::-webkit-scrollbar {
   height: 1rem;
   border-radius: 1rem;
-  background: #6a758d;
 }
 
 .challenges-section__items--scrollable::-webkit-scrollbar-thumb:horizontal {
-  background-color: #fc5d27;
+  background-color: #6a758d;
   border-radius: 1rem;
 }
 

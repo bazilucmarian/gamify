@@ -26,10 +26,9 @@
       &::-webkit-scrollbar {
         height: 1rem;
         border-radius: 1rem;
-        background: $color-grey-dark;
       }
       &::-webkit-scrollbar-thumb:horizontal {
-        background-color: $color-orange;
+        background-color: $color-grey-dark;
         border-radius: 1rem;
       }
     }

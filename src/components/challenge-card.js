@@ -6,7 +6,7 @@ import RewardInfo from './reward-info';
 import {camelCaseToKebabCase} from '../utils';
 
 function ChallengeCard({isAdmin, challenge}) {
-  const status = 'Available';
+  const status = 'available';
 
   return (
     <div className={`challenge-card challenge-card--${camelCaseToKebabCase(status)}`}>

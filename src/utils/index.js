@@ -9,7 +9,7 @@ import {
   getLoggedInUserChallenges,
   filteredChallengesWithStatus
 } from './utils-functions';
-import {challengesList, users, userChallengesDummy} from './dummy-data';
+import {challengesList, users, userChallengesDummy} from '../mocks/fixtures';
 
 export {
   calculateXp,

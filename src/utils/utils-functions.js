@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-cycle
-import {userChallengesDummy, users} from './dummy-data';
-
 // to be removed when the backend will be implemented
+
+import {userChallengesDummy, users} from '../mocks/fixtures';
 
 const getUser = role => users.find(user => user.role === role);
 

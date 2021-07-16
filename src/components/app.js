@@ -9,7 +9,7 @@ import ChallengesPageAdmin from '../pages/admin-pages/challenges-page-admin';
 import ShopPageAdmin from '../pages/admin-pages/shop-page-admin';
 import NotFoundPage from '../pages/not-found-page';
 import {filteredChallengesWithStatus, getUser, getLoggedInUserChallenges, navLinksUser, navLinksAdmin} from '../utils';
-import {challengesList} from '../utils/dummy-data';
+import {challengesList} from '../mocks/fixtures';
 
 // to be removed when fetch mock will be implemented
 const userData = getUser('user');
@@ -60,10 +60,7 @@ const App = () => {
                 />
               )}
             />
-            <Route
-              path="/challenges"
-              render={props => <ChallengesPage {...props} availableChallenges={availableChallenges} />}
-            />
+            <Route path="/challenges" render={props => <ChallengesPage {...props} loggedInUser={loggedInUser} />} />
             <Route path="/shop" render={props => <ShopPage {...props} />} />
             <Route path="/admin/challenges" render={props => <ChallengesPageAdmin {...props} />} />
             <Route path="/admin/validation" render={props => <ValidationPageAdmin {...props} />} />

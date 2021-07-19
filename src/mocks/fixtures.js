@@ -3,12 +3,13 @@ export const statusDictionary = {
   inProgress: 'inProgress',
   inPending: 'inPending',
   validated: 'Validated',
-  denied: 'Denied'
+  denied: 'Denied',
+  all: 'All'
 };
 
 const challengesList = [
   {
-    title: 'Do a byte-sized learning talk',
+    title: 'Challenge no. 1',
     xp: 15,
     credits: 50,
     id: 1,
@@ -16,7 +17,7 @@ const challengesList = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
   },
   {
-    title: 'Heckaton participation',
+    title: 'Challenge no. 2',
     xp: 30,
     credits: 70,
     id: 2,
@@ -24,7 +25,7 @@ const challengesList = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
   },
   {
-    title: 'workshop organization',
+    title: 'Challenge no. 3',
     xp: 45,
     credits: 75,
     id: 3,
@@ -32,10 +33,58 @@ const challengesList = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
   },
   {
-    title: 'workshop organization',
+    title: 'Challenge no. 4',
     xp: 45,
     credits: 75,
     id: 4,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
+  },
+  {
+    title: 'Challenge no. 5',
+    xp: 45,
+    credits: 75,
+    id: 5,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
+  },
+  {
+    title: 'Challenge no. 6',
+    xp: 45,
+    credits: 75,
+    id: 6,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
+  },
+  {
+    title: 'Challenge no. 7',
+    xp: 45,
+    credits: 75,
+    id: 7,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
+  },
+  {
+    title: 'Challenge no. 8',
+    xp: 45,
+    credits: 75,
+    id: 8,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
+  },
+  {
+    title: 'Challenge no. 9',
+    xp: 45,
+    credits: 75,
+    id: 9,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
+  },
+  {
+    title: 'Challenge no. 10',
+    xp: 45,
+    credits: 75,
+    id: 10,
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
   }
@@ -62,21 +111,32 @@ const users = [
   }
 ];
 
-const userChallengesDummy = [
+const userChallengesData = [
   {
     userId: 123,
-    challenges: challengesList.map(challenge => ({
-      challengeId: challenge.id,
-      status: statusDictionary.available
-    }))
+    challenges: [
+      {
+        challengeId: 4,
+        status: statusDictionary.inProgress
+      },
+      {
+        challengeId: 2,
+        status: statusDictionary.validated
+      },
+      {
+        challengeId: 5,
+        status: statusDictionary.denied
+      },
+      {
+        challengeId: 8,
+        status: statusDictionary.inPending
+      }
+    ]
   },
   {
     userId: 9232,
-    challenges: challengesList.map(challenge => ({
-      challengeId: challenge.id,
-      status: statusDictionary.available
-    }))
+    challenges: []
   }
 ];
 
-export {challengesList, users, userChallengesDummy};
+export {challengesList, users, userChallengesData};

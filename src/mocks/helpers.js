@@ -1,19 +1,40 @@
-import {userChallengesDummy, challengesList} from './fixtures';
+import {challengesList, statusDictionary, userChallengesData} from './fixtures';
+
+const getStatus = (challenges, id) => {
+  const [{status}] = challenges.filter(({challengeId}) => challengeId === id);
+  return status;
+};
+
+const filterByStatus = (challenges, statuses) => challenges.filter(({status}) => statuses.includes(status));
 
 export const filterChallenges = (usrId, sts) => {
-  // Get all user's challenges
-  const [userChallenges] = userChallengesDummy.filter(({userId}) => userId === usrId);
+  const [{challenges: userChallenges}] = userChallengesData.filter(({userId}) => userId === usrId);
+  const userChallengesIds = userChallenges?.map(({challengeId}) => challengeId);
 
-  // Filter user's challenges by STATUS
-  const filteredChallengesByStatus = userChallenges.challenges.filter(({status}) => status === sts);
+  if (sts === statusDictionary.available) {
+    // Returns available user challenges
+    return challengesList.filter(({id}) => !userChallengesIds.includes(id));
+  }
 
-  // Filter all challenges corresponding to user's challenges (xp,title...etc)
-  const userFilteredChallenges = challengesList.filter(({id}) =>
-    filteredChallengesByStatus.some(({challengeId}) => challengeId === id)
-  );
+  // Returns inProgress/denied/pending/validated challenges
+  const filteredChallengesWithStatus = challengesList
+    .map(challenge =>
+      userChallengesIds.includes(challenge.id) ? {...challenge, status: getStatus(userChallenges, challenge.id)} : null
+    )
+    .filter(Boolean);
 
-  // Add the status to the challenges object
-  const userChallengesWithStatus = userFilteredChallenges.map(item => ({...item, status: sts}));
+  const inProgressChallenges = filterByStatus(filteredChallengesWithStatus, [
+    statusDictionary.inProgress,
+    statusDictionary.inPending
+  ]);
 
-  return userChallengesWithStatus;
+  const completedChallenges = filterByStatus(filteredChallengesWithStatus, [
+    statusDictionary.validated,
+    statusDictionary.denied
+  ]);
+
+  return {
+    inProgressChallenges,
+    completedChallenges
+  };
 };

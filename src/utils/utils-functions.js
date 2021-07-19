@@ -1,11 +1,11 @@
 // eslint-disable-next-line import/no-cycle
 // to be removed when the backend will be implemented
 
-import {userChallengesDummy, users} from '../mocks/fixtures';
+import {userChallengesData, users} from '../mocks/fixtures';
 
 const getUser = role => users.find(user => user.role === role);
 
-const getLoggedInUserChallenges = userId => userChallengesDummy.find(user => user.userId === userId);
+const getLoggedInUserChallenges = userId => userChallengesData.find(user => user.userId === userId);
 
 const filteredChallengesWithStatus = (userChallenges, challengeListFromAdmin, status) => {
   const ids = userChallenges.filter(challenge => challenge.status === status).map(challenge => challenge.challengeId);

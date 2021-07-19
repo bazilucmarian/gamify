@@ -10,3 +10,14 @@ export const getAvailableChallenges = async (userId, status) => {
   }
   return data;
 };
+
+export const getInProgressAndCompletedChallenges = async userId => {
+  let data;
+  try {
+    const statusResponse = await fetch(`/user-challenges/${userId}`);
+    data = await statusResponse.json();
+  } catch (e) {
+    console.error(e.message);
+  }
+  return data;
+};

@@ -6,10 +6,8 @@ import RewardInfo from './reward-info';
 import {camelCaseToKebabCase} from '../utils';
 
 function ChallengeCard({isAdmin, challenge}) {
-  const status = 'available';
-
   return (
-    <div className={`challenge-card challenge-card--${camelCaseToKebabCase(status)}`}>
+    <div className={`challenge-card challenge-card--${camelCaseToKebabCase(challenge.status)}`}>
       <div className="challenge-card__content">
         <div className="challenge-card__top">
           <div className="challenge-card__title">{challenge.title}</div>
@@ -20,7 +18,7 @@ function ChallengeCard({isAdmin, challenge}) {
         </div>
 
         <div className="challenge-card__bottom">
-          {isAdmin ? <ButtonContainerAdmin type="validation" /> : <ButtonsContainerUser status={status} />}
+          {isAdmin ? <ButtonContainerAdmin type="validation" /> : <ButtonsContainerUser status={challenge.status} />}
         </div>
       </div>
     </div>
@@ -31,7 +29,8 @@ ChallengeCard.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     credits: PropTypes.number,
-    xp: PropTypes.number
+    xp: PropTypes.number,
+    status: PropTypes.string
   }).isRequired,
   isAdmin: PropTypes.bool
 };

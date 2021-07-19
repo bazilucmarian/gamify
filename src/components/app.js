@@ -51,14 +51,7 @@ const App = () => {
             <Route
               path="/"
               exact
-              render={props => (
-                <OverviewPage
-                  {...props}
-                  isAdmin={isAdmin}
-                  challengesInProgress={availableChallenges}
-                  challengesCompleted={availableChallenges}
-                />
-              )}
+              render={props => <OverviewPage {...props} isAdmin={isAdmin} loggedInUser={loggedInUser} />}
             />
             <Route path="/challenges" render={props => <ChallengesPage {...props} loggedInUser={loggedInUser} />} />
             <Route path="/shop" render={props => <ShopPage {...props} />} />

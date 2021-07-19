@@ -114,24 +114,7 @@ const users = [
 const userChallengesData = [
   {
     userId: 123,
-    challenges: [
-      {
-        challengeId: 4,
-        status: statusDictionary.inProgress
-      },
-      {
-        challengeId: 2,
-        status: statusDictionary.validated
-      },
-      {
-        challengeId: 5,
-        status: statusDictionary.denied
-      },
-      {
-        challengeId: 8,
-        status: statusDictionary.inPending
-      }
-    ]
+    challenges: []
   },
   {
     userId: 9232,

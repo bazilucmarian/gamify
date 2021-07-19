@@ -15,6 +15,10 @@ export const filterChallenges = (usrId, sts) => {
     // Returns available user challenges
     return challengesList.filter(({id}) => !userChallengesIds.includes(id));
   }
+  if (sts === statusDictionary.all) {
+    // Returns all the challenges (admin page)
+    return challengesList;
+  }
 
   // Returns inProgress/denied/pending/validated challenges
   const filteredChallengesWithStatus = challengesList

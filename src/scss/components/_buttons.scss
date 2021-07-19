@@ -32,6 +32,7 @@ button[disabled] {
   @include transition(all 0.2s ease-in-out);
 }
 
+//color prop
 .primary {
   color: $color-orange;
 }
@@ -46,6 +47,14 @@ button[disabled] {
 
 .fourth {
   color: $color-red;
+}
+.standard {
+  color: color-grey-dark;
+}
+
+// variant prop
+.standard {
+  color: color-grey-dark;
 }
 
 .outlined-primary {

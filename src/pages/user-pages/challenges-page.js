@@ -1,37 +1,36 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import ChallengesSection from '../../components/challenges-section';
-import {getAvailableChallenges} from '../../services';
+import {getAvailableChallenges} from '../../services/services';
 import {statusDictionary} from '../../mocks/fixtures';
+import {changeStatusRequest} from '../../services/services-utils';
 
-function ChallengesPage({loggedInUser}) {
+function ChallengesPage({loggedInUserId}) {
   const [availableChallenges, setAvailableChallenges] = useState([]);
+
+  const handleChangeStatus = async (challengeId, newStatus, userId = loggedInUserId, operation) => {
+    const newUpdatedState = await changeStatusRequest(availableChallenges, challengeId, newStatus, userId, operation);
+    setAvailableChallenges(newUpdatedState);
+  };
 
   useEffect(() => {
     (async () => {
-      const challenges = await getAvailableChallenges(loggedInUser.id, statusDictionary.available);
+      const challenges = await getAvailableChallenges(loggedInUserId, statusDictionary.available);
       setAvailableChallenges(challenges);
     })();
-  }, []);
+  }, [loggedInUserId]);
 
   return (
     <ChallengesSection
       title="Available Challenges"
       filteredChallenges={availableChallenges}
-      loggedInUser={loggedInUser}
+      handleChangeStatus={handleChangeStatus}
     />
   );
 }
 
 ChallengesPage.propTypes = {
-  loggedInUser: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    job: PropTypes.string,
-    profilePic: PropTypes.string,
-    credits: PropTypes.number,
-    xp: PropTypes.number
-  }).isRequired
+  loggedInUserId: PropTypes.number.isRequired
 };
 
 export default ChallengesPage;

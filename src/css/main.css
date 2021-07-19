@@ -69,6 +69,14 @@ button[disabled] {
   color: #b73520;
 }
 
+.standard {
+  color: color-grey-dark;
+}
+
+.standard {
+  color: color-grey-dark;
+}
+
 .outlined-primary {
   border-radius: 0.5rem;
   color: #fc5d27;
@@ -239,10 +247,6 @@ button[disabled] {
   scroll-snap-align: start;
 }
 
-.challenge-card--in-pending {
-  border-top: 0.5rem solid #fc5d27;
-}
-
 .challenge-card--validated {
   border-top: 0.5rem solid #0e9260;
 }
@@ -251,12 +255,21 @@ button[disabled] {
   border-top: 0.5rem solid #b73520;
 }
 
+.challenge-card--validation {
+  height: 37rem;
+}
+
 .challenge-card__content {
   padding: 3rem;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.challenge-card__content--extend {
+  display: grid;
+  grid-template-rows: 1fr 1fr 2.5fr 1fr;
 }
 
 .challenge-card__top {

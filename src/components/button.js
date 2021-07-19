@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Button({children, variant, color, size, ...otherProps}) {
   return (
-    <button type="button" className={`btn btn--${size} ${color} ${variant}`} {...otherProps}>
+    <button type="button" className={`btn btn--${size} ${color} ${variant && variant}`} {...otherProps}>
       {children}
     </button>
   );
@@ -11,8 +11,9 @@ function Button({children, variant, color, size, ...otherProps}) {
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,
-  color: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'fourth']),
+  color: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'fourth', 'standard']),
   variant: PropTypes.oneOf([
+    'standard',
     'outlined-primary',
     'outlined-secondary',
     'outlined-tertiary',
@@ -25,8 +26,8 @@ Button.propTypes = {
   size: PropTypes.oneOf(['lg', 'md', 'sm'])
 };
 Button.defaultProps = {
-  variant: '',
-  color: 'outlined-secondary',
+  variant: 'standard',
+  color: 'standard',
   size: 'md'
 };
 export default Button;

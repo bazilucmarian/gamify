@@ -11,14 +11,15 @@
   background-color: $color-white;
   scroll-snap-align: start;
 
-  &--in-pending {
-    border-top: 0.5rem solid $color-orange;
-  }
   &--validated {
     border-top: 0.5rem solid $color-green;
   }
   &--denied {
     border-top: 0.5rem solid $color-red;
+  }
+
+  &--validation {
+    height: 37rem;
   }
 
   &__content {
@@ -27,6 +28,10 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    &--extend {
+      display: grid;
+      grid-template-rows: 1fr 1fr 2.5fr 1fr;
+    }
   }
 
   &__top {

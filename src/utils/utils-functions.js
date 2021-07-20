@@ -14,6 +14,6 @@ const filteredChallengesWithStatus = (userChallenges, challengeListFromAdmin, st
 };
 
 const camelCaseToKebabCase = string =>
-  string.replace(/((?<=[a-z\d])[A-Z]|(?<=[A-Z\d])[A-Z](?=[a-z]))/g, '-$1').toLowerCase();
+  string?.replace(/((?<=[a-z\d])[A-Z]|(?<=[A-Z\d])[A-Z](?=[a-z]))/g, '-$1').toLowerCase();
 
 export {getUser, getLoggedInUserChallenges, filteredChallengesWithStatus, camelCaseToKebabCase};

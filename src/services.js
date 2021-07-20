@@ -16,8 +16,8 @@ export const getInProgressAndCompletedChallenges = async userId => {
   try {
     const statusResponse = await fetch(`/user-challenges/${userId}`);
     data = await statusResponse.json();
-  } catch (e) {
-    console.error(e.message);
+  } catch (error) {
+    console.error(error.message);
   }
   return data;
 };

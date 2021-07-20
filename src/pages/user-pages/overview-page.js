@@ -17,7 +17,9 @@ function OverviewPage({isAdmin, loggedInUser}) {
     })();
   }, []);
 
-  if (challengesInProgress.length === 0 && challengesCompleted.length === 0) return <EmptyPlaceholder />;
+  if (challengesInProgress.length === 0 && challengesCompleted.length === 0) {
+    return <EmptyPlaceholder />;
+  }
   return (
     <div className="home-page">
       <ChallengesSection

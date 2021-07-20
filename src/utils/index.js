@@ -1,7 +1,9 @@
 /* eslint-disable import/no-cycle */
-import calculateXp from './calculateXp';
+import {challengesList, users, userChallengesData} from '../mocks/fixtures';
+
+import calculateXp from './calculate-xp';
 import {navLinksUser, navLinksAdmin} from './nav-links';
-import getInitials from './getInitials';
+import getInitials from './get-initials';
 import {statusDictionary} from './status-dictionary';
 import {
   camelCaseToKebabCase,
@@ -9,7 +11,6 @@ import {
   getLoggedInUserChallenges,
   filteredChallengesWithStatus
 } from './utils-functions';
-import {challengesList, users, userChallengesData} from '../mocks/fixtures';
 
 export {
   calculateXp,

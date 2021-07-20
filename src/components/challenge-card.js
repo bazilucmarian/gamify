@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import {camelCaseToKebabCase} from '../utils';
+
 import ButtonContainerAdmin from './button-container-admin';
 import ButtonsContainerUser from './button-container-user';
 import RewardInfo from './reward-info';
-import {camelCaseToKebabCase} from '../utils';
 
 function ChallengeCard({isAdmin, challenge}) {
   return (

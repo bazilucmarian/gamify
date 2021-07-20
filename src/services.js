@@ -5,8 +5,8 @@ export const getAvailableChallenges = async (userId, status) => {
   try {
     const statusResponse = await fetch(`/user-challenges/${userId}/${status}`);
     data = await statusResponse.json();
-  } catch (e) {
-    console.error(e.message);
+  } catch (error) {
+    console.error(error.message);
   }
   return data;
 };

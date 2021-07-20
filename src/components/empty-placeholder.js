@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import {useHistory} from 'react-router-dom';
-import Button from './button';
+
 import Empty from '../assets/imgs/Empty.svg';
+
+import Button from './button';
 
 const EmptyPlaceholder = () => {
   const history = useHistory();

@@ -7,10 +7,12 @@ const getUser = role => users.find(user => user.role === role);
 
 const getLoggedInUserChallenges = userId => userChallengesData.find(user => user.userId === userId);
 
-const filteredChallengesWithStatus = (userChallenges, challengeListFromAdmin, status) => {
-  const ids = userChallenges.filter(challenge => challenge.status === status).map(challenge => challenge.challengeId);
-  const filteredChallenges = challengeListFromAdmin.filter(challenge => ids.includes(challenge.id));
-  return filteredChallenges;
+const filteredChallengesWithStatus = (userChallenges, challengeListFromAdmin, challengeStatus) => {
+  const idsMap = new Map(
+    userChallenges.map(({challengeId, status}) => status === challengeStatus && [challengeId, status]).filter(Boolean)
+  );
+
+  return challengeListFromAdmin.filter(({id}) => idsMap.has(id));
 };
 
 const camelCaseToKebabCase = string =>

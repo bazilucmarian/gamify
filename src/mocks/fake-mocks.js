@@ -1,5 +1,6 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint import/no-extraneous-dependencies: ["error", {"peerDependencies": true}] */
 import fetchMock from 'fetch-mock';
+
 import {filterChallenges} from './helpers';
 
 /* CHALLENGES */
@@ -11,7 +12,7 @@ fetchMock.get({
 
     return {
       status: 200,
-      body: filterChallenges(+userId, status)
+      body: filterChallenges(Number(userId), status)
     };
   }
 });

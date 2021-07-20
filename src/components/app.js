@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Sidebar from './sidebar';
+
 import OverviewPage from '../pages/user-pages/overview-page';
 import ChallengesPage from '../pages/user-pages/challenges-page';
 import ShopPage from '../pages/user-pages/shop-page';
@@ -10,6 +10,8 @@ import ShopPageAdmin from '../pages/admin-pages/shop-page-admin';
 import NotFoundPage from '../pages/not-found-page';
 import {filteredChallengesWithStatus, getUser, getLoggedInUserChallenges, navLinksUser, navLinksAdmin} from '../utils';
 import {challengesList} from '../mocks/fixtures';
+
+import Sidebar from './sidebar';
 
 // to be removed when fetch mock will be implemented
 const userData = getUser('user');

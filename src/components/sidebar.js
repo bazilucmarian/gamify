@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Navigation from './navigation';
 import UserCard from './user-card';
 import RewardInfo from './reward-info';

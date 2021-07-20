@@ -1,4 +1,4 @@
-export const statusDictionary = {
+const statusDictionary = {
   available: 'Available',
   inProgress: 'inProgress',
   inPending: 'inPending',
@@ -122,4 +122,4 @@ const userChallengesData = [
   }
 ];
 
-export {challengesList, users, userChallengesData};
+export {challengesList, users, userChallengesData, statusDictionary};

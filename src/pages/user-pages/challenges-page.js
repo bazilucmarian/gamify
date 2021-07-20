@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
+
 import ChallengesSection from '../../components/challenges-section';
 import {getAvailableChallenges} from '../../services';
 import {statusDictionary} from '../../mocks/fixtures';
@@ -12,7 +13,7 @@ function ChallengesPage({loggedInUser}) {
       const challenges = await getAvailableChallenges(loggedInUser.id, statusDictionary.available);
       setAvailableChallenges(challenges);
     })();
-  }, []);
+  }, [loggedInUser]);
 
   return (
     <ChallengesSection

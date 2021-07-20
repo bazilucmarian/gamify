@@ -1,14 +1,14 @@
 import {challengesList, statusDictionary, userChallengesData} from './fixtures';
 
 const getStatus = (challenges, id) => {
-  const [{status}] = challenges.filter(({challengeId}) => challengeId === id);
+  const {status} = challenges.find(({challengeId}) => challengeId === id) || {};
   return status;
 };
 
 const filterByStatus = (challenges, statuses) => challenges.filter(({status}) => statuses.includes(status));
 
 export const filterChallenges = (usrId, sts) => {
-  const [{challenges: userChallenges}] = userChallengesData.filter(({userId}) => userId === usrId);
+  const {challenges: userChallenges} = userChallengesData.find(({userId}) => userId === usrId) || {};
   const userChallengesIds = userChallenges?.map(({challengeId}) => challengeId);
 
   if (sts === statusDictionary.available) {

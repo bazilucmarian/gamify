@@ -7,7 +7,7 @@ export default function calculateXp(xp) {
     if (userXp >= multiplier * initialLevel) {
       userXp -= multiplier * initialLevel;
       initialLevel++;
-      recurse(userXp);
+      recurse();
     }
   }
 

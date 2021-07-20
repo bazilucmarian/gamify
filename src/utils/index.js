@@ -1,6 +1,6 @@
 import calculateXp from './calculateXp';
 import {navLinksUser, navLinksAdmin} from './nav-links';
-import getInitials from './getInitials';
+import getInitials from './get-initials';
 import {statusDictionary} from './status-dictionary';
 import {camelCaseToKebabCase, getUser, getLoggedInUserChallenges, calculateSum} from './utils-functions';
 import {challengesList, users, userChallengesData} from '../mocks/fixtures';

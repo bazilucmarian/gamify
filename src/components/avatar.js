@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import {getInitials} from '../utils';
 
 function Avatar({imageSrc, userName}) {

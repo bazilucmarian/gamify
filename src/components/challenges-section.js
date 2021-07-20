@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import ChallengeCard from './challenge-card';
 
 function ChallengesSection({

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
+
 import ChallengesSection from '../../components/challenges-section';
 import {getAvailableChallenges} from '../../services/services';
 import {statusDictionary} from '../../mocks/fixtures';

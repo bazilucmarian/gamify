@@ -2,7 +2,7 @@
 import {challengesList, statusDictionary, userChallengesData, users} from './fixtures';
 
 const getStatus = (challenges, id) => {
-  const [{status}] = challenges.filter(({challengeId}) => challengeId === id);
+  const {status} = challenges.find(({challengeId}) => challengeId === id) || {};
   return status;
 };
 

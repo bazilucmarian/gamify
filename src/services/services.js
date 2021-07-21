@@ -5,8 +5,8 @@ export const getAvailableChallenges = async (userId, status) => {
   try {
     const statusResponse = await fetch(`/user-challenges/${userId}/${status}`);
     data = await statusResponse.json();
-  } catch (e) {
-    console.error(e.message);
+  } catch (error) {
+    console.error(error.message);
   }
   return data;
 };
@@ -14,25 +14,24 @@ export const getAvailableChallenges = async (userId, status) => {
 export const getInProgressOrCompletedChallenges = async userId => {
   try {
     const userChallengesResponse = await fetch(`/user-challenges/${userId}`);
-    const userChallenges = await userChallengesResponse.json();
-    return userChallenges;
-  } catch (e) {
-    return e.message;
+    return await userChallengesResponse.json();
+  } catch (error) {
+    return error.message;
   }
 };
 
-export const updateChallengeStatus = async (challengeId, newStatus) => {
+export const updateChallengeStatus = async (challengeId, userId, newStatus) => {
   try {
     const response = await fetch('/user-challenges', {
       method: 'PUT',
-      body: {challengeId, status: newStatus}
+      body: {challengeId, userId, status: newStatus}
     });
 
     const messageResponse = await response.json();
     const {message} = messageResponse;
     return message;
-  } catch (e) {
-    return e.message;
+  } catch (error) {
+    return error.message;
   }
 };
 
@@ -40,10 +39,10 @@ export const updateChallengeStatus = async (challengeId, newStatus) => {
 
 export const getAllChallenges = async () => {
   try {
-    const allChallenges = await fetch(`/challenges`);
+    const allChallenges = await fetch('/challenges');
     return await allChallenges.json();
-  } catch (e) {
-    return e.message;
+  } catch (error) {
+    return error.message;
   }
 };
 
@@ -52,8 +51,8 @@ export const getAllUsersChallengesByStatus = async status => {
     const challengesResponse = await fetch(`/challenges/${status}`);
 
     return await challengesResponse.json();
-  } catch (e) {
-    return e.message;
+  } catch (error) {
+    return error.message;
   }
 };
 
@@ -64,10 +63,34 @@ export const deleteChallenge = async challengeId => {
       body: {challengeId}
     });
 
-    const responseData = await response.json();
+    return await response.json();
+  } catch (error) {
+    return error.message;
+  }
+};
 
-    return responseData;
-  } catch (e) {
-    return e.message;
+export const addNewChallenge = async challenge => {
+  try {
+    const response = await fetch('/challenges', {
+      method: 'POST',
+      body: challenge
+    });
+
+    return await response.json();
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const editChallenge = async (challengeFields, challengeId) => {
+  try {
+    const response = await fetch(`/challenges/${challengeId}`, {
+      method: 'PUT',
+      body: challengeFields
+    });
+
+    return await response.json();
+  } catch (error) {
+    return error.message;
   }
 };

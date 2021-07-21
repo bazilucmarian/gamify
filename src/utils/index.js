@@ -1,9 +1,10 @@
-import calculateXp from './calculateXp';
+import {challengesList, users, userChallengesData} from '../mocks/fixtures';
+
+import calculateXp from './calculate-xp';
 import {navLinksUser, navLinksAdmin} from './nav-links';
 import getInitials from './get-initials';
 import {statusDictionary} from './status-dictionary';
-import {camelCaseToKebabCase, getUser, getLoggedInUserChallenges, calculateSum} from './utils-functions';
-import {challengesList, users, userChallengesData} from '../mocks/fixtures';
+import {camelCaseToKebabCase, getUser, getLoggedInUserChallenges, getTotalXpAndCredits} from './utils-functions';
 
 export {
   calculateXp,
@@ -12,7 +13,7 @@ export {
   navLinksAdmin,
   statusDictionary,
   getUser,
-  calculateSum,
+  getTotalXpAndCredits,
   getLoggedInUserChallenges,
   camelCaseToKebabCase,
   challengesList,

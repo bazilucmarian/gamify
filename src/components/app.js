@@ -40,20 +40,16 @@ const App = () => {
         />
         <div className="app-wrapper__screens">
           <Switch>
-            <Route
-              path="/"
-              exact
-              render={props => <OverviewPage {...props} isAdmin={isAdmin} loggedInUserId={loggedInUser.id} />}
-            />
+            <Route path="/" exact render={props => <OverviewPage {...props} loggedInUserId={loggedInUser.id} />} />
             <Route
               path="/challenges"
               render={props => <ChallengesPage {...props} loggedInUserId={loggedInUser.id} />}
             />
             <Route path="/shop" render={props => <ShopPage {...props} />} />
-            <Route path="/admin/challenges" render={props => <ChallengesPageAdmin {...props} isAdmin={isAdmin} />} />
+            <Route path="/admin/challenges" render={props => <ChallengesPageAdmin {...props} />} />
             <Route
               path="/admin/validation"
-              render={props => <ValidationPageAdmin {...props} isAdmin={isAdmin} loggedInUserId={loggedInUser.id} />}
+              render={props => <ValidationPageAdmin {...props} loggedInUserId={loggedInUser.id} />}
             />
             <Route path="/admin/shop" render={props => <ShopPageAdmin {...props} />} />
             <Route component={NotFoundPage} />

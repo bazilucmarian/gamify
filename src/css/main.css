@@ -24,6 +24,7 @@ body {
 button:disabled,
 button[disabled] {
   cursor: default;
+  text-transform: uppercase;
 }
 
 .btn {
@@ -70,11 +71,12 @@ button[disabled] {
 }
 
 .standard {
-  color: color-grey-dark;
+  color: #6a758d;
 }
 
-.standard {
-  color: color-grey-dark;
+.none {
+  background-color: none;
+  border: none;
 }
 
 .outlined-primary {
@@ -317,6 +319,13 @@ button[disabled] {
 .challenges-section {
   min-height: 38.1rem;
   margin-bottom: 2rem;
+  position: relative;
+}
+
+.challenges-section__modalBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .challenges-section__title {

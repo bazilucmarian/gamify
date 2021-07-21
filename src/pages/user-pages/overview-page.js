@@ -6,7 +6,7 @@ import EmptyPlaceholder from '../../components/empty-placeholder';
 import {getInProgressOrCompletedChallenges} from '../../services/services';
 import {changeStatusRequest} from '../../services/services-utils';
 
-function OverviewPage({isAdmin, loggedInUserId}) {
+function OverviewPage({loggedInUserId}) {
   const [inProgressOrPendingChallenges, setInProgressOrPendingChallenges] = useState([]);
   const [completedChallenges, setCompletedChallenges] = useState([]);
 
@@ -31,21 +31,21 @@ function OverviewPage({isAdmin, loggedInUserId}) {
     getUserChallenges();
   }, [loggedInUserId]);
 
-  if (inProgressOrPendingChallenges.length === 0 && completedChallenges.length === 0) return <EmptyPlaceholder />;
+  if (inProgressOrPendingChallenges.length === 0 && completedChallenges.length === 0) {
+    return <EmptyPlaceholder />;
+  }
   return (
     <div className="home-page">
       <ChallengesSection
         title="In progress Challenges"
         filteredChallenges={inProgressOrPendingChallenges}
         handleChangeStatus={handleChangeStatus}
-        isAdmin={isAdmin}
         isScrollable
       />
       <ChallengesSection
         title="Completed Challenges"
         filteredChallenges={completedChallenges}
         handleChangeStatus={handleChangeStatus}
-        isAdmin={isAdmin}
         isScrollable
       />
     </div>
@@ -53,12 +53,7 @@ function OverviewPage({isAdmin, loggedInUserId}) {
 }
 
 OverviewPage.propTypes = {
-  isAdmin: PropTypes.bool,
   loggedInUserId: PropTypes.number.isRequired
-};
-
-OverviewPage.defaultProps = {
-  isAdmin: false
 };
 
 export default OverviewPage;

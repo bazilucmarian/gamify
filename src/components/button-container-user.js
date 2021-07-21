@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import {statusDictionary} from '../utils';
 
+import Button from './button';
+
 function ButtonsContainerUser({status, onClick}) {
   switch (status) {
     case statusDictionary.inProgress:
@@ -63,12 +65,8 @@ function ButtonsContainerUser({status, onClick}) {
 }
 
 ButtonsContainerUser.propTypes = {
-  status: PropTypes.string,
+  status: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired
-};
-
-ButtonsContainerUser.defaultProps = {
-  status: ''
 };
 
 export default ButtonsContainerUser;

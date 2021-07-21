@@ -1,18 +1,18 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from './button';
 import {statusDictionary} from '../utils';
 
-function ButtonContainerAdmin({status, onClick, challengeId}) {
+import Button from './button';
+
+function ButtonContainerAdmin({status, onClick}) {
   return status === 'inPending' ? (
     <>
       <Button
         color="fourth"
         variant="outlined-fourth"
         size="sm"
-        onClick={() => onClick(statusDictionary.denied, 'DELETE')}
+        onClick={() => onClick('DELETE', statusDictionary.denied)}
       >
         Deny
       </Button>
@@ -20,17 +20,17 @@ function ButtonContainerAdmin({status, onClick, challengeId}) {
         color="tertiary"
         variant="contained-tertiary"
         size="md"
-        onClick={() => onClick(statusDictionary.validated, 'DELETE')}
+        onClick={() => onClick('DELETE', statusDictionary.validated)}
       >
         Validate
       </Button>
     </>
   ) : (
     <>
-      <Button color="secondary" variant="outlined-secondary" size="sm">
+      <Button color="secondary" variant="outlined-secondary" size="sm" onClick={() => onClick('EDIT')}>
         Edit
       </Button>
-      <Button color="secondary" variant="contained-secondary" size="md" onClick={() => onClick(challengeId)}>
+      <Button color="secondary" variant="contained-secondary" size="md" onClick={() => onClick('DELETE')}>
         Delete
       </Button>
     </>
@@ -39,11 +39,10 @@ function ButtonContainerAdmin({status, onClick, challengeId}) {
 
 ButtonContainerAdmin.propTypes = {
   status: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
-  challengeId: PropTypes.number.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 ButtonContainerAdmin.defaultProps = {
-  status: undefined
+  status: ''
 };
 export default ButtonContainerAdmin;

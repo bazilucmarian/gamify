@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {camelCaseToKebabCase} from '../utils';
+import {statusDictionary} from '../mocks/fixtures';
 
 import ButtonContainerAdmin from './button-container-admin';
 import ButtonsContainerUser from './button-container-user';
 import RewardInfo from './reward-info';
 import UserCard from './user-card';
-import {camelCaseToKebabCase} from '../utils';
 
-function ChallengeCard({isAdmin, challenge, handleChangeStatus, handleDeleteChallenge}) {
+function ChallengeCard({isAdmin, challenge, onChangeStatus, onUpdateChallenge}) {
   const {status} = challenge;
 
   return (
@@ -19,9 +19,11 @@ function ChallengeCard({isAdmin, challenge, handleChangeStatus, handleDeleteChal
       }`}
     >
       <div
-        className={`challenge-card__content challenge-card__content--${isAdmin && status === 'inPending' && 'extend'}`}
+        className={`challenge-card__content challenge-card__content--${
+          isAdmin && status === statusDictionary.inPending && 'extend'
+        }`}
       >
-        {isAdmin && status === 'inPending' && (
+        {isAdmin && status === statusDictionary.inPending && (
           <div>
             <UserCard userName={challenge.userName} jobTitle={challenge.jobTitle} image={challenge.jobTitle} />
           </div>
@@ -37,13 +39,9 @@ function ChallengeCard({isAdmin, challenge, handleChangeStatus, handleDeleteChal
 
         <div className="challenge-card__bottom">
           {isAdmin ? (
-            <ButtonContainerAdmin
-              challengeId={challenge.id}
-              status={status}
-              onClick={status === 'inPending' ? handleChangeStatus : handleDeleteChallenge}
-            />
+            <ButtonContainerAdmin status={status} onClick={onUpdateChallenge} />
           ) : (
-            <ButtonsContainerUser status={status} onClick={handleChangeStatus} />
+            <ButtonsContainerUser status={status} onClick={onChangeStatus} />
           )}
         </div>
       </div>
@@ -52,8 +50,8 @@ function ChallengeCard({isAdmin, challenge, handleChangeStatus, handleDeleteChal
 }
 
 ChallengeCard.propTypes = {
-  handleChangeStatus: PropTypes.func,
-  handleDeleteChallenge: PropTypes.func,
+  onChangeStatus: PropTypes.func,
+  onUpdateChallenge: PropTypes.func.isRequired,
   challenge: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -68,8 +66,8 @@ ChallengeCard.propTypes = {
   isAdmin: PropTypes.bool
 };
 ChallengeCard.defaultProps = {
-  handleChangeStatus: () => {},
-  handleDeleteChallenge: () => {},
+  onChangeStatus: () => {},
+
   isAdmin: false
 };
 export default ChallengeCard;

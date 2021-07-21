@@ -7,11 +7,15 @@ const getUser = role => users.find(user => user.role === role);
 const getLoggedInUserChallenges = userId => userChallengesData.find(user => user.userId === userId);
 
 const camelCaseToKebabCase = string =>
-  string?.replace(/((?<=[a-z\d])[A-Z]|(?<=[A-Z\d])[A-Z](?=[a-z]))/g, '-$1').toLowerCase();
+  string?.replace(/((?<=[\da-z])[A-Z]|(?<=[\dA-Z])[A-Z](?=[a-z]))/g, '-$1').toLowerCase();
 
-const calculateSum = (challenges, option) =>
-  challenges
-    .filter(({status}) => status === statusDictionary.validated)
-    .reduce((acc, challenge) => acc + challenge[option], 0);
+const getTotalXpAndCredits = challenges => {
+  const filteredChallenges = challenges.filter(({status}) => status === statusDictionary.validated);
 
-export {getUser, getLoggedInUserChallenges, camelCaseToKebabCase, calculateSum};
+  return {
+    xpTotal: filteredChallenges.reduce((accumulator, {xp}) => accumulator + xp, 0),
+    creditsTotal: filteredChallenges.reduce((accumulator, {credits}) => accumulator + credits, 0)
+  };
+};
+
+export {getUser, getLoggedInUserChallenges, camelCaseToKebabCase, getTotalXpAndCredits};

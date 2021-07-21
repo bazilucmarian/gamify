@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
+import {getInProgressOrCompletedChallenges} from '../services/services';
+import {getTotalXpAndCredits} from '../utils';
+
 import Navigation from './navigation';
 import UserCard from './user-card';
 import RewardInfo from './reward-info';
 import ProgressCard from './progress-card';
-import {getInProgressOrCompletedChallenges} from '../services/services';
-import {calculateSum} from '../utils';
 
 function Sidebar({routes, loggedInUser, onSwitchUser}) {
   const {profilePic, name, job, id} = loggedInUser;
 
   const [completedChallenges, setCompletedChallenges] = useState([]);
 
-  const creditsTotal = calculateSum(completedChallenges, 'credits');
-  const xpTotal = calculateSum(completedChallenges, 'xp');
+  const {xpTotal, creditsTotal} = getTotalXpAndCredits(completedChallenges);
 
   useEffect(() => {
     const getUserChallenges = async () => {

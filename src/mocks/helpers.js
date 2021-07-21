@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import {challengesList, statusDictionary, userChallengesData, users} from './fixtures';
 
 const getStatus = (challenges, id) => {
@@ -9,7 +8,7 @@ const getStatus = (challenges, id) => {
 const filterByStatus = (challenges, statuses) => challenges.filter(({status}) => statuses.includes(status));
 
 export const filterChallenges = (usrId, sts) => {
-  const [{challenges: userChallenges}] = userChallengesData.filter(({userId}) => userId === usrId);
+  const {challenges: userChallenges} = userChallengesData.find(({userId}) => userId === usrId);
   const userChallengesIds = userChallenges?.filter(({status}) => status !== sts).map(({challengeId}) => challengeId);
 
   if (sts === statusDictionary.available) {
@@ -18,10 +17,6 @@ export const filterChallenges = (usrId, sts) => {
     return challengesList
       .filter(({id}) => !userChallengesIds.includes(id))
       .map(challenge => ({...challenge, status: sts}));
-  }
-  if (sts === statusDictionary.all) {
-    // Returns all the challenges (admin page)
-    return challengesList;
   }
 
   // Returns inProgress/denied/pending/validated challenges
@@ -50,9 +45,12 @@ export const filterChallenges = (usrId, sts) => {
 // update state functions
 
 export const updateUserChallenges = (userIdParam, challengeId, newStatus) => {
-  const [loggedInUserChallenges] = userChallengesData.filter(({userId}) => userId === +userIdParam);
+  const loggedInUserChallenges = userChallengesData.find(({userId}) => userId === Number(userIdParam));
+  if (!loggedInUserChallenges) {
+    return;
+  }
 
-  const singleChallengeIndex = loggedInUserChallenges.challenges.findIndex(
+  const singleChallengeIndex = loggedInUserChallenges?.challenges.findIndex(
     challenge => challenge.challengeId === challengeId
   );
 
@@ -63,24 +61,6 @@ export const updateUserChallenges = (userIdParam, challengeId, newStatus) => {
   }
 };
 
-export const updateState = (challenges, challengeId, newStatus, userId, operation) => {
-  if (operation === 'DELETE') {
-    updateUserChallenges(userId, challengeId, newStatus);
-    return challenges.filter(({id}) => id !== challengeId);
-  }
-  if (operation === 'UPDATE') {
-    updateUserChallenges(userId, challengeId, newStatus);
-    const newChallenges = challenges.map(challenge => {
-      if (challenge.id === challengeId) {
-        return {...challenge, status: newStatus};
-      }
-      return challenge;
-    });
-    return newChallenges;
-  }
-  return false;
-};
-
 // Admin
 
 // filter challenges by status for all users
@@ -88,16 +68,16 @@ export const updateState = (challenges, challengeId, newStatus, userId, operatio
 export const getChallengesByStatus = statusParam =>
   userChallengesData
     .map(user => {
-      const [userDetails] = users.filter(person => person.id === user.userId);
+      const userDetails = users.find(person => person.id === user.userId);
       const {id: userId, name: userName, job: jobTitle, image} = userDetails || {};
 
-      const userChallengesIds = user.challenges
-        .filter(({status}) => status === statusParam)
-        .map(({challengeId}) => challengeId);
-      const filteredChallenges = challengesList
-        .filter(({id}) => userChallengesIds.includes(id))
+      const userChallengesIds = new Map(
+        user.challenges.map(({status, challengeId}) => status === statusParam && [challengeId, status]).filter(Boolean)
+      );
+
+      return challengesList
+        .filter(({id}) => userChallengesIds.has(id))
         .map(challenge => ({...challenge, status: statusParam, userId, userName, jobTitle, image}));
-      return filteredChallenges;
     })
     .flat();
 
@@ -106,5 +86,22 @@ export const getAllChallengesList = () => challengesList;
 export const deleteChallenge = challengeId => {
   const singleChallengeIndex = challengesList.findIndex(({id}) => id === challengeId);
   challengesList.splice(singleChallengeIndex, 1);
+  return challengesList;
+};
+
+export const getNewChallenges = challenge => {
+  challengesList.unshift(challenge);
+  return challengesList;
+};
+
+export const getNewUpdatedChallenge = (newChallengeData, challengeId) => {
+  const {title: newTitle, xp: newXp, credits: newCredits, description: newDescription} = newChallengeData;
+  const singleChallengeIndex = challengesList.findIndex(({id}) => id === Number(challengeId));
+
+  challengesList[singleChallengeIndex].title = newTitle;
+  challengesList[singleChallengeIndex].credits = newCredits;
+  challengesList[singleChallengeIndex].xp = newXp;
+  challengesList[singleChallengeIndex].description = newDescription;
+
   return challengesList;
 };

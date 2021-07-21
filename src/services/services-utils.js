@@ -1,7 +1,7 @@
 import {updateChallengeStatus} from './services';
 
 // if the status changes from inProgress to inPending, the card will persist, otherwise will be deleted
-export const updateStateUser = (challenges, challengeId, newStatus, operation) => {
+export const updateState = (challenges, challengeId, newStatus, operation) => {
   switch (operation) {
     case 'DELETE':
       return challenges.filter(({id}) => id !== challengeId);
@@ -19,7 +19,7 @@ export const updateStateUser = (challenges, challengeId, newStatus, operation) =
 export const changeStatusRequest = async (allChallenges, challengeId, newStatus, userId, operation) => {
   const status = await updateChallengeStatus(challengeId, userId, newStatus);
   if (status.includes('Success')) {
-    return updateStateUser(allChallenges, challengeId, newStatus, operation);
+    return updateState(allChallenges, challengeId, newStatus, operation);
   }
 
   return [];

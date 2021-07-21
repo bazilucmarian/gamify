@@ -6,7 +6,7 @@ import {
   filterChallenges,
   getAllChallengesList,
   getChallengesByStatus,
-  getNewChallenges,
+  getNewChallengeAdded,
   getNewUpdatedChallenge,
   updateUserChallenges
 } from './helpers';
@@ -88,7 +88,7 @@ fetchMock.post({
     if (challenge) {
       return {
         status: 200,
-        body: getNewChallenges(challenge)
+        body: getNewChallengeAdded(challenge)
       };
     }
     throw new Error('Problems put mock !!');

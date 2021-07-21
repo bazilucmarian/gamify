@@ -16,7 +16,7 @@ function ChallengesPageAdmin() {
 
   const handleAddNewChallenge = async () => {
     //  TO DO : we need challenge as param for this function
-    const newChallenge = {
+    const challenge = {
       title: 'test title',
       xp: 100,
       credits: 20,
@@ -25,12 +25,11 @@ function ChallengesPageAdmin() {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.'
     };
 
-    const newChallenges = await addNewChallenge(newChallenge);
-    setAllChallenges(newChallenges);
+    const newChallengeAdded = await addNewChallenge(challenge);
+    setAllChallenges([newChallengeAdded, ...allChallenges]);
   };
 
   const handleUpdateChallenge = async (challengeId, operation) => {
-    let newUpdatedChallenges = [];
     const updatedFields = {
       title: 'test test',
       xp: 299,
@@ -39,13 +38,23 @@ function ChallengesPageAdmin() {
     };
     switch (operation) {
       case 'DELETE':
-        newUpdatedChallenges = await deleteChallenge(challengeId);
-        setAllChallenges(newUpdatedChallenges);
-
+        {
+          const {message} = await deleteChallenge(challengeId);
+          if (message.includes('Success')) {
+            const filteredChallenges = allChallenges.filter(challenge => challenge.id !== challengeId);
+            setAllChallenges(filteredChallenges);
+          }
+        }
         break;
       case 'EDIT':
-        newUpdatedChallenges = await editChallenge(updatedFields, challengeId);
-        setAllChallenges(newUpdatedChallenges);
+        {
+          const updatedChallenge = await editChallenge(updatedFields, challengeId);
+          const filteredChallenges = allChallenges.map(challenge =>
+            challenge.id === updatedChallenge.id ? updatedChallenge : challenge
+          );
+          setAllChallenges(filteredChallenges);
+        }
+
         break;
 
       default:

@@ -28,7 +28,6 @@ function ValidationPageAdmin({loggedInUserId}) {
       filteredChallenges={inPendingChallenges}
       handleChangeStatus={handleChangeStatus}
       isAdmin
-      typeAdminButtons="validation"
     />
   );
 }

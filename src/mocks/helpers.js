@@ -86,12 +86,12 @@ export const getAllChallengesList = () => challengesList;
 export const deleteChallenge = challengeId => {
   const singleChallengeIndex = challengesList.findIndex(({id}) => id === challengeId);
   challengesList.splice(singleChallengeIndex, 1);
-  return challengesList;
+  return {message: 'Success deleted!'};
 };
 
-export const getNewChallenges = challenge => {
+export const getNewChallengeAdded = challenge => {
   challengesList.unshift(challenge);
-  return challengesList;
+  return challenge;
 };
 
 export const getNewUpdatedChallenge = (newChallengeData, challengeId) => {
@@ -103,5 +103,5 @@ export const getNewUpdatedChallenge = (newChallengeData, challengeId) => {
   challengesList[singleChallengeIndex].xp = newXp;
   challengesList[singleChallengeIndex].description = newDescription;
 
-  return challengesList;
+  return challengesList[singleChallengeIndex];
 };

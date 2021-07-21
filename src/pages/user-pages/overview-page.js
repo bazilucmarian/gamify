@@ -1,10 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
 import ChallengesSection from '../../components/challenges-section';
 import EmptyPlaceholder from '../../components/empty-placeholder';
+import {getInProgressAndCompletedChallenges} from '../../services';
 
-function OverviewPage({challengesInProgress, challengesCompleted, isAdmin}) {
+function OverviewPage({isAdmin, loggedInUser}) {
+  const [challengesInProgress, setChallengesInProgress] = useState([]);
+  const [challengesCompleted, setChallengesCompleted] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const {completedChallenges, inProgressChallenges} = await getInProgressAndCompletedChallenges(loggedInUser.id);
+      setChallengesInProgress(inProgressChallenges);
+      setChallengesCompleted(completedChallenges);
+    })();
+  }, []);
+
   if (challengesInProgress.length === 0 && challengesCompleted.length === 0) {
     return <EmptyPlaceholder />;
   }
@@ -27,30 +39,18 @@ function OverviewPage({challengesInProgress, challengesCompleted, isAdmin}) {
 }
 
 OverviewPage.propTypes = {
-  challengesInProgress: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      xp: PropTypes.number,
-      credits: PropTypes.number,
-      id: PropTypes.number,
-      description: PropTypes.string
-    })
-  ),
-  challengesCompleted: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      xp: PropTypes.number,
-      credits: PropTypes.number,
-      id: PropTypes.number,
-      description: PropTypes.string
-    })
-  ),
+  loggedInUser: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    job: PropTypes.string,
+    profilePic: PropTypes.string,
+    credits: PropTypes.number,
+    xp: PropTypes.number
+  }).isRequired,
   isAdmin: PropTypes.bool
 };
 
 OverviewPage.defaultProps = {
-  challengesInProgress: [],
-  challengesCompleted: [],
   isAdmin: false
 };
 

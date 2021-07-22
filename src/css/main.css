@@ -24,6 +24,7 @@ body {
 button:disabled,
 button[disabled] {
   cursor: default;
+  text-transform: uppercase;
 }
 
 .btn {
@@ -70,6 +71,15 @@ button[disabled] {
 
 .fourth {
   color: #b73520;
+}
+
+.standard {
+  color: #6a758d;
+}
+
+.none {
+  background-color: none;
+  border: none;
 }
 
 .outlined-primary {
@@ -225,14 +235,14 @@ button[disabled] {
   background-color: #ffffff;
   scroll-snap-align: start;
 }
-.challenge-card--in-pending {
-  border-top: 0.5rem solid #fc5d27;
-}
 .challenge-card--validated {
   border-top: 0.5rem solid #0e9260;
 }
 .challenge-card--denied {
   border-top: 0.5rem solid #b73520;
+}
+.challenge-card--validation {
+  height: 37rem;
 }
 .challenge-card__content {
   padding: 3rem;
@@ -240,6 +250,10 @@ button[disabled] {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+.challenge-card__content--extend {
+  display: grid;
+  grid-template-rows: 1fr 1fr 2.5fr 1fr;
 }
 .challenge-card__top {
   flex: 1;
@@ -280,6 +294,12 @@ button[disabled] {
 .challenges-section {
   min-height: 38.1rem;
   margin-bottom: 2rem;
+  position: relative;
+}
+.challenges-section__modalBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .challenges-section__title {
   font-size: 2rem;
@@ -439,43 +459,6 @@ button[disabled] {
 }
 .modal__container .buttons-container .add {
   width: 100px;
-}
-
-.modal-header h1 {
-  text-align: center;
-  font-weight: normal;
-  font-size: 2rem;
-  line-height: 2.3rem;
-  overflow-y: hidden;
-}
-
-.modal-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: calc(100% - 6.5rem);
-}
-.modal-body .form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 2.2rem 0 3rem;
-}
-.modal-body .form__wrapper {
-  display: flex;
-  justify-content: space-between;
-  overflow-y: hidden;
-}
-.modal-body .form__wrapper .form-group {
-  width: 205px;
-}
-
-.modal-footer .buttons-container {
-  display: flex;
-  justify-content: space-between;
-  width: 20rem;
-  float: right;
 }
 
 .sidebar {

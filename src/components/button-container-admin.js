@@ -1,24 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {statusDictionary} from '../utils';
+
 import Button from './button';
 
-function ButtonContainerAdmin({type}) {
-  return type === 'validation' ? (
+function ButtonContainerAdmin({status, onClick}) {
+  return status === 'inPending' ? (
     <>
-      <Button color="fourth" variant="outlined-fourth" size="sm">
+      <Button
+        color="fourth"
+        variant="outlined-fourth"
+        size="sm"
+        onClick={() => onClick('DELETE', statusDictionary.denied)}
+      >
         Deny
       </Button>
-      <Button color="tertiary" variant="contained-tertiary" size="md">
+      <Button
+        color="tertiary"
+        variant="contained-tertiary"
+        size="md"
+        onClick={() => onClick('DELETE', statusDictionary.validated)}
+      >
         Validate
       </Button>
     </>
   ) : (
     <>
-      <Button color="secondary" variant="outlined-secondary" size="sm">
+      <Button color="secondary" variant="outlined-secondary" size="sm" onClick={() => onClick('EDIT')}>
         Edit
       </Button>
-      <Button color="secondary" variant="contained-secondary" size="md">
+      <Button color="secondary" variant="contained-secondary" size="md" onClick={() => onClick('DELETE')}>
         Delete
       </Button>
     </>
@@ -26,10 +38,11 @@ function ButtonContainerAdmin({type}) {
 }
 
 ButtonContainerAdmin.propTypes = {
-  type: PropTypes.string
+  status: PropTypes.string,
+  onClick: PropTypes.func.isRequired
 };
 
 ButtonContainerAdmin.defaultProps = {
-  type: 'validation'
+  status: ''
 };
 export default ButtonContainerAdmin;

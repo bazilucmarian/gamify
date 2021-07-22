@@ -17,10 +17,8 @@ const userData = getUser('user');
 const adminData = getUser('admin');
 
 const App = () => {
-  // to be removed later
   const [loggedInUser, setLoggedInUser] = useState(userData);
   const [routes, setRoutes] = useState(navLinksUser);
-
   const isAdmin = loggedInUser.role === 'admin';
 
   useEffect(() => {
@@ -42,15 +40,17 @@ const App = () => {
         />
         <div className="app-wrapper__screens">
           <Switch>
+            <Route path="/" exact render={props => <OverviewPage {...props} loggedInUserId={loggedInUser.id} />} />
             <Route
-              path="/"
-              exact
-              render={props => <OverviewPage {...props} isAdmin={isAdmin} loggedInUser={loggedInUser} />}
+              path="/challenges"
+              render={props => <ChallengesPage {...props} loggedInUserId={loggedInUser.id} />}
             />
-            <Route path="/challenges" render={props => <ChallengesPage {...props} loggedInUser={loggedInUser} />} />
             <Route path="/shop" render={props => <ShopPage {...props} />} />
             <Route path="/admin/challenges" render={props => <ChallengesPageAdmin {...props} />} />
-            <Route path="/admin/validation" render={props => <ValidationPageAdmin {...props} />} />
+            <Route
+              path="/admin/validation"
+              render={props => <ValidationPageAdmin {...props} loggedInUserId={loggedInUser.id} />}
+            />
             <Route path="/admin/shop" render={props => <ShopPageAdmin {...props} />} />
             <Route component={NotFoundPage} />
           </Switch>

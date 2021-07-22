@@ -7,6 +7,7 @@ const getStatus = (challenges, id) => {
 
 const filterByStatus = (challenges, statuses) => challenges.filter(({status}) => statuses.includes(status));
 
+// GET inProgress/denied/pending/validated challenges for user pages
 export const filterChallenges = (usrId, sts) => {
   const {challenges: userChallenges} = userChallengesData.find(({userId}) => userId === usrId);
   const userChallengesIds = userChallenges?.filter(({status}) => status !== sts).map(({challengeId}) => challengeId);
@@ -42,7 +43,8 @@ export const filterChallenges = (usrId, sts) => {
   };
 };
 
-// update state functions
+// functionality for PUT request : when you press enroll and that challenge doesn't exist in user's challenges, the push method will be performed
+// otherwise, only the status will be updated
 
 export const updateUserChallenges = (userIdParam, challengeId, newStatus) => {
   const loggedInUserChallenges = userChallengesData.find(({userId}) => userId === Number(userIdParam));
@@ -61,10 +63,9 @@ export const updateUserChallenges = (userIdParam, challengeId, newStatus) => {
   }
 };
 
-// Admin
+/* ADMIN-PAGES :the functions below are for admin pages */
 
-// filter challenges by status for all users
-
+// filter challenges by status for all users - for validation page admin
 export const getChallengesByStatus = statusParam =>
   userChallengesData
     .map(user => {
@@ -81,6 +82,7 @@ export const getChallengesByStatus = statusParam =>
     })
     .flat();
 
+//  ADMIN : GET all challenges
 export const getAllChallengesList = () => challengesList;
 
 export const deleteChallenge = challengeId => {
@@ -89,11 +91,13 @@ export const deleteChallenge = challengeId => {
   return {message: 'Success deleted!'};
 };
 
+// ADMIN : POST new challenge
 export const getNewChallengeAdded = challenge => {
   challengesList.unshift(challenge);
   return challenge;
 };
 
+// ADMIN :EDIT a challenge and returns the updated challenge
 export const getNewUpdatedChallenge = (newChallengeData, challengeId) => {
   const {title: newTitle, xp: newXp, credits: newCredits, description: newDescription} = newChallengeData;
   const singleChallengeIndex = challengesList.findIndex(({id}) => id === Number(challengeId));

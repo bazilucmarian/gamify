@@ -1,5 +1,7 @@
 import '../mocks/fake-mocks';
 
+/* USER PAGES SERVICES */
+
 export const getAvailableChallenges = async (userId, status) => {
   let data;
   try {
@@ -35,7 +37,7 @@ export const updateChallengeStatus = async (challengeId, userId, newStatus) => {
   }
 };
 
-// admin
+/* ADMIN PAGES SERVICES */
 
 export const getAllChallenges = async () => {
   try {

@@ -11,7 +11,7 @@ import {
   updateUserChallenges
 } from './helpers';
 
-/* GET CHALLENGES DEPENDING ON STATUS */
+/* GET USER-CHALLENGES DEPENDING ON STATUS */
 fetchMock.get({
   matcher: 'express:/user-challenges/:userId/:status?',
   response: url => {

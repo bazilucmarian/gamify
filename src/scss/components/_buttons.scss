@@ -4,6 +4,7 @@
 button:disabled,
 button[disabled] {
   cursor: default;
+  text-transform: uppercase;
 }
 
 .btn {
@@ -32,6 +33,7 @@ button[disabled] {
   @include transition(all 0.2s ease-in-out);
 }
 
+//color prop
 .primary {
   color: $color-orange;
 }
@@ -46,6 +48,15 @@ button[disabled] {
 
 .fourth {
   color: $color-red;
+}
+.standard {
+  color: $color-grey-dark;
+}
+
+// variant prop
+.none {
+  background-color: none;
+  border: none;
 }
 
 .outlined-primary {

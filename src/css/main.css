@@ -24,6 +24,7 @@ body {
 button:disabled,
 button[disabled] {
   cursor: default;
+  text-transform: uppercase;
 }
 
 .btn {
@@ -67,6 +68,15 @@ button[disabled] {
 
 .fourth {
   color: #b73520;
+}
+
+.standard {
+  color: #6a758d;
+}
+
+.none {
+  background-color: none;
+  border: none;
 }
 
 .outlined-primary {
@@ -239,10 +249,6 @@ button[disabled] {
   scroll-snap-align: start;
 }
 
-.challenge-card--in-pending {
-  border-top: 0.5rem solid #fc5d27;
-}
-
 .challenge-card--validated {
   border-top: 0.5rem solid #0e9260;
 }
@@ -251,12 +257,21 @@ button[disabled] {
   border-top: 0.5rem solid #b73520;
 }
 
+.challenge-card--validation {
+  height: 37rem;
+}
+
 .challenge-card__content {
   padding: 3rem;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.challenge-card__content--extend {
+  display: grid;
+  grid-template-rows: 1fr 1fr 2.5fr 1fr;
 }
 
 .challenge-card__top {
@@ -304,6 +319,13 @@ button[disabled] {
 .challenges-section {
   min-height: 38.1rem;
   margin-bottom: 2rem;
+  position: relative;
+}
+
+.challenges-section__modalBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .challenges-section__title {

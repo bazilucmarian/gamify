@@ -3,35 +3,49 @@ import PropTypes from 'prop-types';
 
 import ChallengesSection from '../../components/challenges-section';
 import EmptyPlaceholder from '../../components/empty-placeholder';
-import {getInProgressAndCompletedChallenges} from '../../services';
+import {getInProgressOrCompletedChallenges} from '../../services/services';
+import {changeStatusRequest} from '../../services/services-utils';
 
-function OverviewPage({isAdmin, loggedInUser}) {
-  const [challengesInProgress, setChallengesInProgress] = useState([]);
-  const [challengesCompleted, setChallengesCompleted] = useState([]);
+function OverviewPage({loggedInUserId}) {
+  const [inProgressOrPendingChallenges, setInProgressOrPendingChallenges] = useState([]);
+  const [completedChallenges, setCompletedChallenges] = useState([]);
+
+  const handleChangeStatus = async (challengeId, newStatus, userId = loggedInUserId, operation) => {
+    const newUpdatedState = await changeStatusRequest(
+      inProgressOrPendingChallenges,
+      challengeId,
+      newStatus,
+      userId,
+      operation
+    );
+    setInProgressOrPendingChallenges(newUpdatedState);
+  };
 
   useEffect(() => {
-    (async () => {
-      const {completedChallenges, inProgressChallenges} = await getInProgressAndCompletedChallenges(loggedInUser.id);
-      setChallengesInProgress(inProgressChallenges);
-      setChallengesCompleted(completedChallenges);
-    })();
-  }, []);
+    const getUserChallenges = async () => {
+      const getFilteredUserChallenges = await getInProgressOrCompletedChallenges(loggedInUserId);
+      setInProgressOrPendingChallenges(getFilteredUserChallenges.inProgressChallenges);
+      setCompletedChallenges(getFilteredUserChallenges.completedChallenges);
+    };
 
-  if (challengesInProgress.length === 0 && challengesCompleted.length === 0) {
+    getUserChallenges();
+  }, [loggedInUserId]);
+
+  if (inProgressOrPendingChallenges.length === 0 && completedChallenges.length === 0) {
     return <EmptyPlaceholder />;
   }
   return (
     <div className="home-page">
       <ChallengesSection
         title="In progress Challenges"
-        filteredChallenges={challengesInProgress}
-        isAdmin={isAdmin}
+        filteredChallenges={inProgressOrPendingChallenges}
+        handleChangeStatus={handleChangeStatus}
         isScrollable
       />
       <ChallengesSection
         title="Completed Challenges"
-        filteredChallenges={challengesCompleted}
-        isAdmin={isAdmin}
+        filteredChallenges={completedChallenges}
+        handleChangeStatus={handleChangeStatus}
         isScrollable
       />
     </div>
@@ -39,19 +53,7 @@ function OverviewPage({isAdmin, loggedInUser}) {
 }
 
 OverviewPage.propTypes = {
-  loggedInUser: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    job: PropTypes.string,
-    profilePic: PropTypes.string,
-    credits: PropTypes.number,
-    xp: PropTypes.number
-  }).isRequired,
-  isAdmin: PropTypes.bool
-};
-
-OverviewPage.defaultProps = {
-  isAdmin: false
+  loggedInUserId: PropTypes.number.isRequired
 };
 
 export default OverviewPage;

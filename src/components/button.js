@@ -11,8 +11,9 @@ function Button({children, variant, color, size, ...otherProps}) {
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,
-  color: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'fourth']),
+  color: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'fourth', 'standard']),
   variant: PropTypes.oneOf([
+    'none',
     'outlined-primary',
     'outlined-secondary',
     'outlined-tertiary',
@@ -25,8 +26,8 @@ Button.propTypes = {
   size: PropTypes.oneOf(['lg', 'md', 'sm'])
 };
 Button.defaultProps = {
-  variant: '',
-  color: 'outlined-secondary',
+  variant: 'none',
+  color: 'standard',
   size: 'md'
 };
 export default Button;

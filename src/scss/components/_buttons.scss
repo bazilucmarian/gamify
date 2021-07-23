@@ -30,6 +30,11 @@ button[disabled] {
     height: 3.6rem;
   }
 
+  &--sm-1 {
+    width: $button-small-1;
+    height: 3.6rem;
+  }
+
   @include transition(all 0.2s ease-in-out);
 }
 

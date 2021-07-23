@@ -1,0 +1,65 @@
+@import '../variables';
+
+.form-group {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  color: $color-grey-dark;
+
+  &__input {
+    width: 100%;
+    height: 100%;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    padding-top: 2rem;
+    padding-bottom: 0.5rem;
+    border: none;
+    outline: none;
+  }
+
+  &__label {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid $color-blue-light;
+    overflow-y: hidden;
+
+    &::after {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      border-bottom: 2px solid $color-blue;
+      transform: translateX(-100%);
+      transition: all 0.3s ease-in;
+    }
+  }
+
+  .content {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    font-size: 1.4rem;
+    transition: all 0.3s ease-in;
+  }
+
+  &__input:focus + &__label .content,
+  &__input:valid + &__label .content {
+    transform: translateY(-75%);
+    font-size: 1.2rem;
+  }
+
+  &__input:focus + &__label::after,
+  &__input:valid + &__label::after {
+    transform: translateY(0%);
+  }
+}
+

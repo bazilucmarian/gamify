@@ -23,7 +23,7 @@ Button.propTypes = {
     'contained-tertiary',
     'contained-fourth'
   ]),
-  size: PropTypes.oneOf(['lg', 'md', 'sm'])
+  size: PropTypes.oneOf(['lg', 'md', 'sm', 'sm-1'])
 };
 Button.defaultProps = {
   variant: 'none',

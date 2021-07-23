@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.form__wrapper {
+  display: flex;
+  justify-content: space-between;
+  overflow-y: hidden;
+}
+
+.form__wrapper .form-group {
+  width: 20rem;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons-container__wrapper {
+  width: 20rem;
+  display: flex;
+  justify-content: space-between;
+}
+/*# sourceMappingURL=add-or-edit-form.css.map */

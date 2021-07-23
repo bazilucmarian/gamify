@@ -1,4 +1,4 @@
-import {deleteChallenge, editChallenge} from '../services/services';
+import {addNewChallenge, deleteChallenge, editChallenge} from '../services/services';
 
 // if the status changes from inProgress to inPending, the card will persist, otherwise will be deleted
 export const updateStateForUserChallenges = (challenges, challengeId, newStatus, operation) => {
@@ -16,13 +16,7 @@ export const updateStateForUserChallenges = (challenges, challengeId, newStatus,
   }
 };
 
-export const updateStateForAdminChallenges = async (allChallenges, challengeId, challengeObj, operation) => {
-  const updatedFields = {
-    title: 'test test',
-    xp: 299,
-    credits: 1999,
-    description: 'Updated Description'
-  };
+export const updateStateForAdminChallenges = async (allChallenges, challengeId, challengeObject, operation) => {
   switch (operation) {
     case 'DELETE':
       {
@@ -34,8 +28,13 @@ export const updateStateForAdminChallenges = async (allChallenges, challengeId, 
       break;
 
     case 'EDIT': {
-      const updatedChallenge = await editChallenge(updatedFields, challengeId);
+      const updatedChallenge = await editChallenge(challengeObject, challengeId);
       return allChallenges.map(challenge => (challenge.id === updatedChallenge.id ? updatedChallenge : challenge));
+    }
+
+    case 'CREATE': {
+      const newChallenge = await addNewChallenge({...challengeObject, id: Date.now()});
+      return [newChallenge, ...allChallenges];
     }
 
     default:

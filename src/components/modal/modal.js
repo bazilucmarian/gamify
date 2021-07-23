@@ -5,22 +5,22 @@ import ModalHeader from './modal-header';
 import ModalBody from './modal-body';
 import ModalFooter from './modal-footer';
 
-function Modal({children, onClose, isVisible}) {
+function Modal({isOpen, hide, children}) {
   const modalRef = useRef();
 
   const closeModal = e => {
     if (modalRef.current === e.target) {
-      onClose(false);
+      hide();
     }
   };
 
   const escapeKeyCloseModal = useCallback(
     e => {
-      if (e.key === 'Escape' && isVisible) {
-        onClose(false);
+      if (e.key === 'Escape' && isOpen) {
+        hide();
       }
     },
-    [onClose, isVisible]
+    [isOpen, hide]
   );
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function Modal({children, onClose, isVisible}) {
 
   return createPortal(
     <div>
-      {isVisible && (
+      {isOpen && (
         <div>
           <div className="overlay" ref={modalRef} onClick={closeModal} aria-hidden="true" />
           <div className="modal">{children}</div>

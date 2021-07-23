@@ -1,0 +1,15 @@
+.modal-header {
+  flex: 0.5;
+  display: flex;
+  justify-content: center;
+
+  .modal-title h1 {
+    h1 {
+      text-align: center;
+      font-weight: normal;
+      font-size: 2rem;
+      line-height: 2.3rem;
+      overflow-y: hidden;
+    }
+  }
+}

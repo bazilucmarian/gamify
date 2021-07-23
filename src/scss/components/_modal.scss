@@ -1,0 +1,38 @@
+@import '../variables';
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 102;
+  background: $modal-overlay;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 12.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50rem;
+  height: 33.7rem;
+  z-index: 103;
+  padding: 3rem;
+  background-color: $color-white;
+  box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.06);
+  border-radius: 0.6rem;
+
+  &__title {
+    h1 {
+      text-align: center;
+      font-weight: normal;
+      font-size: 2rem;
+      line-height: 2.3rem;
+      overflow-y: hidden;
+    }
+  }
+}

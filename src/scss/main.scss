@@ -8,13 +8,11 @@
 @import 'components/challenges-section';
 @import 'components/empty-placeholder';
 @import 'components/input';
-
-// Modal
-@import 'components/modals/modal';
-@import 'components/modals/modal-header';
-@import 'components/modals/modal-body';
-@import 'components/modals/modal-footer';
-@import 'components/modals/modal-footer';
+@import 'components/modal';
+@import 'components/modal-body';
+@import 'components/modal-header';
+@import 'components/modal-footer';
+@import './components/add-or-edit-form.scss';
 
 @import './components/sidebar';
 @import './components/navigation';

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ChallengeCard from './challenge-card';
-import Button from './button';
 
 function ChallengesSection({
   title,
@@ -10,14 +9,14 @@ function ChallengesSection({
   handleChangeStatus,
   isAdmin,
   isScrollable,
-  handleAddNewChallenge,
+
   handleUpdateChallenge
 }) {
   const handleOnClick = (userId, challengeId) => (status, operation) => {
     handleChangeStatus(challengeId, status, userId, operation);
   };
 
-  const handleOnClickAdmin = (userId, challengeId) => (operation, status, challenge) => {
+  const handleOnClickAdmin = (userId, challengeId, challenge) => (operation, status) => {
     if (status) {
       handleChangeStatus(challengeId, status, userId, operation);
     }
@@ -30,14 +29,6 @@ function ChallengesSection({
   return (
     <section className="challenges-section">
       <h2 className="challenges-section__title">{title}</h2>
-      {isAdmin && !title.includes('validated') && (
-        <div className="challenges-section__modalBtn">
-          {/* for testing */}
-          <Button color="secondary" variant="contained-secondary" size="sm" onClick={handleAddNewChallenge}>
-            Add new
-          </Button>
-        </div>
-      )}
 
       <div className={`challenges-section__items challenges-section__items--${isScrollable && 'scrollable'}`}>
         {filteredChallenges?.map(challenge => (
@@ -46,7 +37,7 @@ function ChallengesSection({
             challenge={challenge}
             isAdmin={isAdmin}
             onChangeStatus={handleOnClick(challenge.userId, challenge.id)}
-            onUpdateChallenge={handleOnClickAdmin(challenge.userId, challenge.id)}
+            onUpdateChallenge={handleOnClickAdmin(challenge.userId, challenge.id, challenge)}
           />
         ))}
       </div>
@@ -59,7 +50,6 @@ ChallengesSection.propTypes = {
   isAdmin: PropTypes.bool,
   handleChangeStatus: PropTypes.func,
   handleUpdateChallenge: PropTypes.func,
-  handleAddNewChallenge: PropTypes.func,
   filteredChallenges: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
@@ -75,7 +65,6 @@ ChallengesSection.propTypes = {
 ChallengesSection.defaultProps = {
   handleChangeStatus: () => {},
   handleUpdateChallenge: () => {},
-  handleAddNewChallenge: () => {},
 
   filteredChallenges: [],
   isAdmin: false,

@@ -8,6 +8,12 @@
   font-size: 1.4rem;
   line-height: 2.4rem;
   color: $color-grey-dark;
+  margin: 0.5rem 0;
+
+  &__error {
+    color: $color-red-error;
+    font-size: 1.4rem;
+  }
 
   &__input {
     width: 100%;
@@ -31,7 +37,7 @@
     overflow-y: hidden;
 
     &::after {
-      content: "";
+      content: '';
       height: 100%;
       width: 100%;
       position: absolute;
@@ -45,7 +51,7 @@
 
   .content {
     position: absolute;
-    bottom: 5px;
+    bottom: 0.6rem;
     left: 0;
     font-size: 1.4rem;
     transition: all 0.3s ease-in;
@@ -62,4 +68,3 @@
     transform: translateY(0%);
   }
 }
-

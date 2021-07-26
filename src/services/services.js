@@ -96,3 +96,13 @@ export const editChallenge = async (challengeFields, challengeId) => {
     return error.message;
   }
 };
+
+/* SHOP */
+export const getAllShopItems = async () => {
+  try {
+    const allShopItems = await fetch('/shop');
+    return await allShopItems.json();
+  } catch (error) {
+    return error.message;
+  }
+};

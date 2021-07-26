@@ -122,4 +122,47 @@ const userChallengesData = [
   }
 ];
 
-export {challengesList, users, userChallengesData, statusDictionary};
+const shopItems = [
+  {
+    id: 1,
+    img: '',
+    title: 'Brand new Nokia 1100',
+    credits: 50,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus.'
+  },
+  {
+    id: 2,
+    img: '',
+    title: 'Nokia 3310',
+    credits: 100,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus.'
+  },
+  {
+    id: 3,
+    img: '',
+    title: 'Motorola RAZR',
+    credits: 150,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus.'
+  },
+  {
+    id: 4,
+    img: '',
+    title: 'Sony Ericsson W800i',
+    credits: 200,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus.'
+  },
+  {
+    id: 5,
+    img: '',
+    title: 'LG Chocolate',
+    credits: 200,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus.'
+  }
+];
+
+export {challengesList, users, userChallengesData, statusDictionary, shopItems};

@@ -11,7 +11,7 @@ function ChallengesPageAdmin() {
   const [allChallenges, setAllChallenges] = useState([]);
   const [currentChallenge, setCurrentChallenge] = useState(null);
 
-  const {toggle, isOpen} = useModal();
+  const {isOpen, hideModal, showModal} = useModal();
 
   useEffect(() => {
     const fetchAllChallengesList = async () => {
@@ -23,6 +23,7 @@ function ChallengesPageAdmin() {
 
   const handleAddNewChallenge = async challenge => {
     const newChallenges = await updateStateForAdminChallenges(allChallenges, null, challenge, 'CREATE');
+    hideModal();
     setAllChallenges(newChallenges);
   };
 
@@ -33,22 +34,27 @@ function ChallengesPageAdmin() {
       newUpdatedChallenge,
       'EDIT'
     );
-
+    hideModal();
     setAllChallenges(newChallengesUpdated);
   };
 
   const handleUpdateChallenge = async (challengeId, operation, challenge) => {
     if (challenge && operation === 'EDIT') {
       setCurrentChallenge(challenge);
-      toggle();
-      return;
+      showModal();
+    } else {
+      const newChallengesUpdated = await updateStateForAdminChallenges(
+        allChallenges,
+        challengeId,
+        challenge,
+        operation
+      );
+      setAllChallenges(newChallengesUpdated);
     }
-    const newChallengesUpdated = await updateStateForAdminChallenges(allChallenges, challengeId, challenge, operation);
-    setAllChallenges(newChallengesUpdated);
   };
 
   const handleOnCreate = () => {
-    toggle();
+    showModal();
     setCurrentChallenge(null);
   };
   return (
@@ -64,16 +70,14 @@ function ChallengesPageAdmin() {
           Add new
         </Button>
       </div>
-
-      {isOpen && (
-        <ChallengesModal
-          isOpen={isOpen}
-          hide={toggle}
-          currentChallenge={currentChallenge}
-          handleAddNewChallenge={handleAddNewChallenge}
-          handleEditChallenge={handleEditChallenge}
-        />
-      )}
+      <ChallengesModal
+        isOpen={isOpen}
+        hide={hideModal}
+        currentChallenge={currentChallenge}
+        handleAddNewChallenge={handleAddNewChallenge}
+        handleEditChallenge={handleEditChallenge}
+      />
+      )
     </>
   );
 }

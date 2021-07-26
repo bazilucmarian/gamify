@@ -18,17 +18,8 @@ const emptyState = {
 const ChallengesModal = ({isOpen, hide, currentChallenge, handleAddNewChallenge, handleEditChallenge}) => {
   const isEditing = Boolean(currentChallenge?.id);
 
-  const handler = isEditing ? editChallenge : addChallenge;
+  const handler = isEditing ? () => handleEditChallenge(fields) : () => handleAddNewChallenge(fields);
   const {fields, handleChange, handleSubmit, errors} = useForm(currentChallenge, handler, validate);
-
-  function addChallenge() {
-    handleAddNewChallenge(fields);
-    hide();
-  }
-  function editChallenge() {
-    handleEditChallenge(fields);
-    hide();
-  }
 
   return (
     <Modal isOpen={isOpen} hide={hide}>

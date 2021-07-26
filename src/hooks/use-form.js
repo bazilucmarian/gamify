@@ -8,6 +8,7 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       onSubmitCallback();
+      setIsSubmitting(false);
     }
   }, [errors, isSubmitting, onSubmitCallback]);
 

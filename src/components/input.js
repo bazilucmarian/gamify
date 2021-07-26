@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Input = ({inputId, inputType, inputValue, inputChangedValue, inputLabel, error}) => (
+const Input = ({inputId, inputType, inputValue, inputOnChange, inputLabel, error}) => (
   <div className="form-group">
     <input
       className="form-group__input"
       id={inputId}
       type={inputType}
       value={inputValue}
-      onChange={inputChangedValue}
+      onChange={inputOnChange}
       required
     />
     <label className="form-group__label" htmlFor={inputId}>
@@ -23,7 +23,7 @@ Input.propTypes = {
   inputLabel: PropTypes.string.isRequired,
   inputType: PropTypes.string.isRequired,
   inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  inputChangedValue: PropTypes.func.isRequired
+  inputOnChange: PropTypes.func.isRequired
 };
 
 Input.defaultProps = {

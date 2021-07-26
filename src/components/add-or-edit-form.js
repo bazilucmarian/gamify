@@ -9,7 +9,7 @@ const Form = ({closeModal, isEditing, handleSubmit, handleChange, fields, errors
     <div>
       <Input
         inputLabel="Title"
-        inputChangedValue={handleChange}
+        inputOnChange={handleChange}
         inputValue={fields?.title}
         inputType="text"
         inputId="title"
@@ -18,7 +18,7 @@ const Form = ({closeModal, isEditing, handleSubmit, handleChange, fields, errors
       <div className="form__wrapper">
         <Input
           inputLabel="XP (number)"
-          inputChangedValue={handleChange}
+          inputOnChange={handleChange}
           inputValue={fields?.xp}
           inputType="number"
           inputId="xp"
@@ -26,7 +26,7 @@ const Form = ({closeModal, isEditing, handleSubmit, handleChange, fields, errors
         />
         <Input
           inputLabel="Credits (number)"
-          inputChangedValue={handleChange}
+          inputOnChange={handleChange}
           inputValue={fields?.credits}
           inputType="number"
           inputId="credits"
@@ -35,7 +35,7 @@ const Form = ({closeModal, isEditing, handleSubmit, handleChange, fields, errors
       </div>
       <Input
         inputLabel="Description"
-        inputChangedValue={handleChange}
+        inputOnChange={handleChange}
         inputValue={fields?.description}
         inputType="text"
         inputId="description"

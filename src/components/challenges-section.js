@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ChallengeCard from './challenge-card';
-import ShopCard from './shop-card';
 
 function ChallengesSection({
   title,
@@ -10,10 +9,7 @@ function ChallengesSection({
   handleChangeStatus,
   isAdmin,
   isScrollable,
-
-  handleUpdateChallenge,
-  section,
-  shopItems
+  handleUpdateChallenge
 }) {
   const handleOnClick = (userId, challengeId) => (status, operation) => {
     handleChangeStatus(challengeId, status, userId, operation);
@@ -26,7 +22,7 @@ function ChallengesSection({
     handleUpdateChallenge(challengeId, operation, challenge);
   };
 
-  if (filteredChallenges.length === 0 && section === 'challenge') {
+  if (filteredChallenges.length === 0) {
     return null;
   }
   return (
@@ -42,9 +38,6 @@ function ChallengesSection({
             onChangeStatus={handleOnClick(challenge.userId, challenge.id)}
             onUpdateChallenge={handleOnClickAdmin(challenge.userId, challenge.id, challenge)}
           />
-        ))}
-        {shopItems?.map(shopItem => (
-          <ShopCard key={shopItem?.id} shopItem={shopItem} />
         ))}
       </div>
     </section>
@@ -65,17 +58,7 @@ ChallengesSection.propTypes = {
       description: PropTypes.string
     })
   ),
-  shopItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      img: PropTypes.string,
-      credits: PropTypes.number,
-      id: PropTypes.number,
-      description: PropTypes.string
-    })
-  ),
-  isScrollable: PropTypes.bool,
-  section: PropTypes.string.isRequired
+  isScrollable: PropTypes.bool
 };
 
 ChallengesSection.defaultProps = {
@@ -83,7 +66,6 @@ ChallengesSection.defaultProps = {
   handleUpdateChallenge: () => {},
 
   filteredChallenges: [],
-  shopItems: [],
   isAdmin: false,
   isScrollable: false
 };

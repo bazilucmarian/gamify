@@ -125,43 +125,39 @@ const userChallengesData = [
 const shopItems = [
   {
     id: 1,
-    img: '',
-    title: 'Brand new Nokia 1100',
-    credits: 50,
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus.'
+    images: [
+      {
+        imageUrl:
+          'https://s13emagst.akamaized.net/products/25344/25343964/images/res_078b9a9407015da56782daa40ae21486.jpg?width=450&height=450&hash=93F2D33C5136C49D1E84E029C52A0E9B',
+        name: 'Iphone 11 pro-1'
+      },
+      {
+        imageUrl:
+          'https://s13emagst.akamaized.net/products/25344/25343964/images/res_c8673f9e618622c6687711aab6eb0c98.jpg?width=450&height=450&hash=33725BE424C110EE70E1B255D70E501C',
+        name: 'Iphone 11 pro-2'
+      },
+      {
+        imageUrl:
+          'https://s13emagst.akamaized.net/products/25344/25343964/images/res_4722ab5f91ef91cea115eede08ddc4ff.jpg?width=450&height=450&hash=106F9D774074A7B4BD1DEE3C62EBF2B0',
+        name: 'Iphone 11 pro-3'
+      }
+    ],
+    title: 'Brand new iPhone 11 Pro',
+    description1:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
+    description2:
+      '* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non, imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, se  euismod mauris euismod nec.',
+    credits: 50
   },
   {
     id: 2,
-    img: '',
-    title: 'Nokia 3310',
-    credits: 100,
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus.'
-  },
-  {
-    id: 3,
-    img: '',
-    title: 'Motorola RAZR',
-    credits: 150,
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus.'
-  },
-  {
-    id: 4,
-    img: '',
-    title: 'Sony Ericsson W800i',
-    credits: 200,
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus.'
-  },
-  {
-    id: 5,
-    img: '',
-    title: 'LG Chocolate',
-    credits: 200,
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus.'
+    images: [],
+    title: 'Shop item 2',
+    description1:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad assumenda at culpa cum delectus dicta ducimus facere harum, libero, maxime nisi obcaecati officia quaerat quam, repellat repudiandae saepe veniam?',
+    description2:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem inventore libero nam nulla totam vero!',
+    credits: 80
   }
 ];
 

@@ -407,6 +407,51 @@ button[disabled] {
   font-size: 2rem;
 }
 
+.shop-section {
+  min-height: 38.1rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.shop-section__modalBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.shop-section__title {
+  font-size: 2rem;
+  font-weight: normal;
+  color: #171717;
+  z-index: 100;
+  background: #f3f5f8;
+}
+.shop-section__items {
+  padding: 1.5rem 0;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.shop-section__items--scrollable {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+.shop-section__items--scrollable::-webkit-scrollbar {
+  height: 1rem;
+  border-radius: 1rem;
+}
+.shop-section__items--scrollable::-webkit-scrollbar-thumb:horizontal {
+  background-color: #6a758d;
+  border-radius: 1rem;
+}
+.shop-section__message {
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
 .empty-placeholder {
   display: flex;
   justify-content: center;

@@ -54,20 +54,16 @@
 
   &__description {
     height: 50%;
+    width: 100%;
     font-size: 1.4rem;
     line-height: 2.4rem;
     text-align: left;
     color: $color-grey-dark;
-
-    &::-webkit-scrollbar {
-      border-radius: 1rem;
-      width: 0.5rem;
-    }
-
-    &::-webkit-scrollbar-thumb:vertical {
-      background-color: $color-grey-dark;
-      border-radius: 1rem;
-    }
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
 
   &__title {

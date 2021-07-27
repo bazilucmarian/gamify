@@ -230,18 +230,16 @@ button[disabled] {
 }
 .shop-card__description {
   height: 50%;
+  width: 100%;
   font-size: 1.4rem;
   line-height: 2.4rem;
   text-align: left;
   color: #6a758d;
-}
-.shop-card__description::-webkit-scrollbar {
-  border-radius: 1rem;
-  width: 0.5rem;
-}
-.shop-card__description::-webkit-scrollbar-thumb:vertical {
-  background-color: #6a758d;
-  border-radius: 1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 .shop-card__title {
   padding-bottom: 1rem;

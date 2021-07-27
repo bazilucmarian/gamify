@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ArrowLeft = ({changeSlide}) => (
+const ArrowLeft = ({onClick}) => (
   <svg
-    onClick={() => changeSlide('PREVIOUS')}
+    onClick={onClick}
     width="19"
     height="32"
     viewBox="0 0 19 32"
@@ -17,6 +17,6 @@ const ArrowLeft = ({changeSlide}) => (
 );
 
 ArrowLeft.propTypes = {
-  changeSlide: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 export default ArrowLeft;

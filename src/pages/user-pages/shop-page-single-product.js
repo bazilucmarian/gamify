@@ -13,6 +13,10 @@ const SingleProduct = () => {
   const {id: idParam} = useParams();
   const history = useHistory();
 
+  const handleClose = () => {
+    history.push('/shop');
+  };
+
   useEffect(() => {
     const getShopItem = async () => {
       const [shopItemResponse] = await getSingleShopItem(idParam);
@@ -28,7 +32,7 @@ const SingleProduct = () => {
       </div>
       <div className="single-shopItem__right">
         <div className="single-shopItem__close">
-          <CloseIcon onClick={() => history.push('/shop')} />
+          <CloseIcon onClick={handleClose} />
         </div>
         <div className="single-shopItem__details">
           <h1>{title}</h1>

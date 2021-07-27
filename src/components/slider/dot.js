@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Dot = ({isActive, goToSlide, index}) => (
-  <div
-    className={`dot ${isActive && 'dot--active'}`}
-    onClick={() => goToSlide(index)}
-    onKeyDown={() => goToSlide(index)}
-    role="button"
-    tabIndex="0"
-  />
-);
+const Dot = ({isActive, goToSlide, index}) => {
+  const handleOnClick = () => {
+    goToSlide(index);
+  };
+  return (
+    <div
+      className={`dot ${isActive && 'dot--active'}`}
+      onClick={handleOnClick}
+      onKeyDown={() => handleOnClick}
+      role="button"
+      tabIndex="0"
+    />
+  );
+};
 
 Dot.propTypes = {
   goToSlide: PropTypes.func.isRequired,

@@ -665,18 +665,18 @@ button[disabled] {
   background: #ffffff;
 }
 
-.control-left {
+.control {
   position: absolute;
   top: 50%;
-  left: 2rem;
   cursor: pointer;
 }
 
-.control-right {
-  position: absolute;
-  top: 50%;
+.control--SLIDE_LEFT {
+  left: 2rem;
+}
+
+.control--SLIDE_RIGHT {
   right: 2rem;
-  cursor: pointer;
 }
 
 .sidebar {

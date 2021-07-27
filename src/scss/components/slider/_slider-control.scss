@@ -1,0 +1,12 @@
+.control {
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+
+  &--SLIDE_LEFT {
+    left: 2rem;
+  }
+  &--SLIDE_RIGHT {
+    right: 2rem;
+  }
+}

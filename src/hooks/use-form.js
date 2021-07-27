@@ -14,7 +14,7 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
 
   useEffect(() => {
     setFields(initialState);
-  }, [initialState, initialState?.id]);
+  }, [initialState]);
 
   const handleChange = useCallback(e => {
     let {value} = e.target;

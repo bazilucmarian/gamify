@@ -9,6 +9,10 @@ import Button from './button';
 const EmptyPlaceholder = ({message}) => {
   const history = useHistory();
 
+  const handleRedirect = () => {
+    history.push('/challenges');
+  };
+
   if (!message) {
     return (
       <img
@@ -23,7 +27,7 @@ const EmptyPlaceholder = ({message}) => {
       <div className="empty-placeholder__content">
         <img className="empty-placeholder__image" src={Empty} alt="placeholder-img" />
         <p className="empty-placeholder__message">{message}</p>
-        <Button color="secondary" variant="outlined-secondary" size="lg" onClick={() => history.push('/challenges')}>
+        <Button color="secondary" variant="outlined-secondary" size="lg" onClick={handleRedirect}>
           Go to available challenges ➡
         </Button>
       </div>

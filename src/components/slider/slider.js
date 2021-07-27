@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import useWindowWidth from '../../hooks/use-window-width';
 import EmptyPlaceholder from '../empty-placeholder';
+import {SLIDE_DIRECTION_LEFT, SLIDE_DIRECTION_RIGHT} from '../../constants/slider-direction';
 
 import Slide from './slide';
 import Dots from './dots';
@@ -18,10 +19,10 @@ const Slider = ({images}) => {
 
   const changeSlide = type => {
     switch (type) {
-      case 'NEXT':
+      case SLIDE_DIRECTION_RIGHT:
         setCurrentIndex(prevState => prevState + 1);
         break;
-      case 'PREVIOUS':
+      case SLIDE_DIRECTION_LEFT:
         setCurrentIndex(prevState => prevState - 1);
         break;
 

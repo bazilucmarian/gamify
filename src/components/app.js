@@ -17,7 +17,7 @@ import Sidebar from './sidebar';
 const userData = getUser('user');
 const adminData = getUser('admin');
 
-const App = () => {
+function App() {
   const [loggedInUser, setLoggedInUser] = useState(userData);
   const [routes, setRoutes] = useState(navLinksUser);
   const isAdmin = loggedInUser.role === 'admin';
@@ -61,6 +61,6 @@ const App = () => {
       </div>
     </Router>
   );
-};
+}
 
 export default App;

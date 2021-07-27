@@ -6,7 +6,7 @@ import Slider from '../../components/slider/slider';
 import Button from '../../components/button';
 import {getSingleShopItem} from '../../services/services';
 
-const SingleProduct = () => {
+function SingleProduct() {
   const [shopItem, setShopItem] = useState({});
   const {images, title, description1, description2} = shopItem;
 
@@ -45,6 +45,6 @@ const SingleProduct = () => {
       </div>
     </div>
   );
-};
+}
 
 export default SingleProduct;

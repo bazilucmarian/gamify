@@ -1,7 +1,9 @@
 import React from 'react';
 import PropsType from 'prop-types';
 
-const ModalBody = ({children}) => <div className="modal-body">{children}</div>;
+function ModalBody({children}) {
+  return <div className="modal-body">{children}</div>;
+}
 
 ModalBody.propTypes = {
   children: PropsType.node

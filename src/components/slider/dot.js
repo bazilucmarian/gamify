@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Dot = ({isActive, goToSlide, index}) => {
+function Dot({isActive, goToSlide, index}) {
   const handleOnClick = () => {
     goToSlide(index);
   };
@@ -14,7 +14,7 @@ const Dot = ({isActive, goToSlide, index}) => {
       tabIndex="0"
     />
   );
-};
+}
 
 Dot.propTypes = {
   goToSlide: PropTypes.func.isRequired,

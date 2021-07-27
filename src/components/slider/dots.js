@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 import Dot from './dot';
 
-const Dots = ({allImages, currentIndex, goToSlide}) => (
-  <ul className="dots">
-    {allImages?.map((image, index) => (
-      <Dot key={image.name} isActive={currentIndex === index} index={index} goToSlide={goToSlide} />
-    ))}
-  </ul>
-);
+function Dots({allImages, currentIndex, goToSlide}) {
+  return (
+    <ul className="dots">
+      {allImages?.map((image, index) => (
+        <Dot key={image.name} isActive={currentIndex === index} index={index} goToSlide={goToSlide} />
+      ))}
+    </ul>
+  );
+}
 
 Dots.propTypes = {
   goToSlide: PropTypes.func.isRequired,

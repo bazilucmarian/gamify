@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Slide = ({imageUrl, imageAlt, width}) => (
-  <div className="slide" style={{width}}>
-    <img src={imageUrl} alt={imageAlt} />
-  </div>
-);
+function Slide({imageUrl, imageAlt, width}) {
+  return (
+    <div className="slide" style={{width}}>
+      <img src={imageUrl} alt={imageAlt} />
+    </div>
+  );
+}
 
 Slide.propTypes = {
   imageUrl: PropTypes.string,

@@ -96,17 +96,17 @@ const shopItems = [
     images: [
       {
         imageUrl:
-          'https://s13emagst.akamaized.net/products/25344/25343964/images/res_078b9a9407015da56782daa40ae21486.jpg?width=450&height=450&hash=93F2D33C5136C49D1E84E029C52A0E9B',
+          'https://s13emagst.akamaized.net/products/25344/25343964/images/res_078b9a9407015da56782daa40ae21486.jpg',
         name: 'Iphone 11 pro-1'
       },
       {
         imageUrl:
-          'https://s13emagst.akamaized.net/products/25344/25343964/images/res_c8673f9e618622c6687711aab6eb0c98.jpg?width=450&height=450&hash=33725BE424C110EE70E1B255D70E501C',
+          'https://s13emagst.akamaized.net/products/25344/25343964/images/res_c8673f9e618622c6687711aab6eb0c98.jpg',
         name: 'Iphone 11 pro-2'
       },
       {
         imageUrl:
-          'https://s13emagst.akamaized.net/products/25344/25343964/images/res_4722ab5f91ef91cea115eede08ddc4ff.jpg?width=450&height=450&hash=106F9D774074A7B4BD1DEE3C62EBF2B0',
+          'https://s13emagst.akamaized.net/products/25344/25343964/images/res_4722ab5f91ef91cea115eede08ddc4ff.jpg',
         name: 'Iphone 11 pro-3'
       }
     ],
@@ -121,7 +121,11 @@ const shopItems = [
     id: 2,
     images: [],
     title: 'Shop item 2',
-    description: 'Shop item 2 description',
+    description1:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
+    description2:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
+
     credits: 80
   }
 ];

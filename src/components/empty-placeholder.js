@@ -6,7 +6,7 @@ import Empty from '../assets/imgs/Empty.svg';
 
 import Button from './button';
 
-const EmptyPlaceholder = ({message}) => {
+function EmptyPlaceholder({message}) {
   const history = useHistory();
 
   const handleRedirect = () => {
@@ -33,7 +33,7 @@ const EmptyPlaceholder = ({message}) => {
       </div>
     </div>
   );
-};
+}
 
 EmptyPlaceholder.propTypes = {
   message: PropTypes.string

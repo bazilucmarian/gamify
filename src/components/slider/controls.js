@@ -5,14 +5,16 @@ import {SLIDE_DIRECTION_LEFT, SLIDE_DIRECTION_RIGHT} from '../../constants/slide
 
 import SliderControl from './slider-control';
 
-const Controls = ({currentIndex, allImages, changeSlide}) => (
-  <>
-    {currentIndex > 0 && <SliderControl changeSlide={changeSlide} direction={SLIDE_DIRECTION_LEFT} />}
-    {currentIndex < allImages.length - 1 && (
-      <SliderControl changeSlide={changeSlide} direction={SLIDE_DIRECTION_RIGHT} />
-    )}
-  </>
-);
+function Controls({currentIndex, allImages, changeSlide}) {
+  return (
+    <>
+      {currentIndex > 0 && <SliderControl changeSlide={changeSlide} direction={SLIDE_DIRECTION_LEFT} />}
+      {currentIndex < allImages.length - 1 && (
+        <SliderControl changeSlide={changeSlide} direction={SLIDE_DIRECTION_RIGHT} />
+      )}
+    </>
+  );
+}
 Controls.propTypes = {
   changeSlide: PropTypes.func.isRequired,
   currentIndex: PropTypes.number.isRequired,

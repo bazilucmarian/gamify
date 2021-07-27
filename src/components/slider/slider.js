@@ -9,7 +9,7 @@ import Slide from './slide';
 import Dots from './dots';
 import Controls from './controls';
 
-const Slider = ({images}) => {
+function Slider({images}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const windowWidth = useWindowWidth();
 
@@ -52,7 +52,7 @@ const Slider = ({images}) => {
       <Controls currentIndex={currentIndex} allImages={images} changeSlide={changeSlide} />
     </div>
   );
-};
+}
 Slider.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({

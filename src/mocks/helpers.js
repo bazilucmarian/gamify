@@ -1,4 +1,4 @@
-import {challengesList, statusDictionary, userChallengesData, users} from './fixtures';
+import {challengesList, shopItems, statusDictionary, userChallengesData, users} from './fixtures';
 
 const getStatus = (challenges, id) => {
   const {status} = challenges.find(({challengeId}) => challengeId === id) || {};
@@ -109,3 +109,6 @@ export const getNewUpdatedChallenge = (newChallengeData, challengeId) => {
 
   return challengesList[singleChallengeIndex];
 };
+
+/* SHOP: GET all shop items */
+export const getAllShopItems = () => shopItems;

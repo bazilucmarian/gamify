@@ -8,6 +8,7 @@ import {
   getChallengesByStatus,
   getNewChallengeAdded,
   getNewUpdatedChallenge,
+  getShopItemById,
   updateUserChallenges
 } from './helpers';
 
@@ -107,5 +108,16 @@ fetchMock.put({
       status: 200,
       body: getNewUpdatedChallenge(challenge, challengeId)
     };
+  }
+});
+
+/* SHOP */
+
+fetchMock.get({
+  matcher: 'express:/shop/:id',
+  response: url => {
+    const [, id] = url.split('/').filter(Boolean);
+
+    return {status: 200, body: getShopItemById(Number(id))};
   }
 });

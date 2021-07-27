@@ -9,7 +9,6 @@ function ChallengesSection({
   handleChangeStatus,
   isAdmin,
   isScrollable,
-
   handleUpdateChallenge
 }) {
   const handleOnClick = (userId, challengeId) => (status, operation) => {

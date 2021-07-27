@@ -20,7 +20,7 @@ import {
 export const navLinksUser = [
   {name: USER_HOME_ROUTE_NAME, link: USER_HOME_PAGE_ROUTE_LINK, exact: true},
   {name: USER_CHALLENGES_ROUTE_NAME, link: USER_CHALLENGES_PAGE_ROUTE_LINK, exact: true},
-  {name: USER_SHOP_ROUTE_NAME, link: USER_SHOP_PAGE_ROUTE_LINK, exact: true},
+  {name: USER_SHOP_ROUTE_NAME, link: USER_SHOP_PAGE_ROUTE_LINK, exact: false},
   {name: USER_SWITCH_ADMIN_ROUTE_NAME, link: USER_SWITCH_ADMIN_PAGE_ROUTE_LINK, exact: true}
 ];
 

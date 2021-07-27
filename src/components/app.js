@@ -8,6 +8,7 @@ import ValidationPageAdmin from '../pages/admin-pages/validation-page-admin';
 import ChallengesPageAdmin from '../pages/admin-pages/challenges-page-admin';
 import ShopPageAdmin from '../pages/admin-pages/shop-page-admin';
 import NotFoundPage from '../pages/not-found-page';
+import SingleProduct from '../pages/user-pages/shop-page-single-product';
 import {getUser, navLinksUser, navLinksAdmin} from '../utils';
 
 import Sidebar from './sidebar';
@@ -45,7 +46,9 @@ const App = () => {
               path="/challenges"
               render={props => <ChallengesPage {...props} loggedInUserId={loggedInUser.id} />}
             />
-            <Route path="/shop" render={props => <ShopPage {...props} />} />
+            <Route path="/shop" exact component={ShopPage} />
+            <Route path="/shop/:id" exact component={SingleProduct} />
+
             <Route path="/admin/challenges" render={props => <ChallengesPageAdmin {...props} />} />
             <Route
               path="/admin/validation"

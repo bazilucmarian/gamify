@@ -553,6 +553,132 @@ button[disabled] {
   justify-content: space-between;
 }
 
+.single-shopItem {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 30rem;
+  width: calc(100% - 30rem);
+  height: 100%;
+}
+
+.single-shopItem__left {
+  width: 50%;
+  overflow: hidden;
+}
+
+.single-shopItem__right {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  background: #ffffff;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.single-shopItem__close {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  min-height: 10rem;
+}
+
+.single-shopItem__details {
+  min-height: 50rem;
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+}
+
+.single-shopItem__details > *:not(:last-child) {
+  margin-bottom: 4rem;
+}
+
+.single-shopItem__details h1 {
+  font-size: 4.8rem;
+}
+
+.single-shopItem__p1 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+}
+
+.single-shopItem__p2 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.2rem;
+  line-height: 2.4rem;
+  color: #6a758d;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slider__wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.slide {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.slide img {
+  width: 50vw;
+  height: 100vh;
+}
+
+.dots {
+  position: absolute;
+  bottom: 8rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.dot {
+  width: 1rem;
+  height: 1rem;
+  margin: 0 0.5rem;
+  border-radius: 100%;
+  cursor: pointer;
+  background: #868686;
+}
+
+.dot--active {
+  background: #ffffff;
+}
+
+.control-left {
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  cursor: pointer;
+}
+
+.control-right {
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  cursor: pointer;
+}
+
 .sidebar {
   position: fixed;
   width: 30rem;

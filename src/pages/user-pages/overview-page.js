@@ -32,7 +32,7 @@ function OverviewPage({loggedInUserId}) {
   }, [loggedInUserId]);
 
   if (inProgressOrPendingChallenges.length === 0 && completedChallenges.length === 0) {
-    return <EmptyPlaceholder />;
+    return <EmptyPlaceholder message="Sorry... You have no challenge in progress or completed 😔" />;
   }
   return (
     <div className="home-page">

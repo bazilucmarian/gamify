@@ -1,18 +1,18 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
 
-import {shopItems} from '../../mocks/fixtures';
+import ChallengesSection from '../../components/challenges-section';
+import {getAllShopItems} from '../../services/services';
 
 function ShopPage() {
-  return (
-    <div>
-      {shopItems.map(item => (
-        <Link key={item.id} to={`/shop/${item.id}`}>
-          {item.title}
-        </Link>
-      ))}
-    </div>
-  );
+  const [allShopItems, setAllShopItems] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const shopItems = await getAllShopItems();
+      setAllShopItems(shopItems);
+    })();
+  }, []);
+
+  return <ChallengesSection title="Shop" section="shop" shopItems={allShopItems} />;
 }
 
 export default ShopPage;

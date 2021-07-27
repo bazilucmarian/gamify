@@ -58,6 +58,7 @@ ChallengesSection.propTypes = {
       description: PropTypes.string
     })
   ),
+
   isScrollable: PropTypes.bool
 };
 

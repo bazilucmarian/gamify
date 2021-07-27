@@ -5,6 +5,7 @@ import {
   deleteChallenge,
   filterChallenges,
   getAllChallengesList,
+  getAllShopItems,
   getChallengesByStatus,
   getNewChallengeAdded,
   getNewUpdatedChallenge,
@@ -121,3 +122,11 @@ fetchMock.get({
     return {status: 200, body: getShopItemById(Number(id))};
   }
 });
+/* SHOP: GET all shop items   */
+fetchMock.mock(
+  {url: '/shop', method: 'GET'},
+  {
+    status: 200,
+    body: getAllShopItems()
+  }
+);

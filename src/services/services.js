@@ -107,3 +107,12 @@ export const getSingleShopItem = async id => {
     return error.message;
   }
 };
+
+export const getAllShopItems = async () => {
+  try {
+    const allShopItems = await fetch('/shop');
+    return await allShopItems.json();
+  } catch (error) {
+    return error.message;
+  }
+};

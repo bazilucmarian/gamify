@@ -5,38 +5,47 @@ import Placeholder from '../assets/imgs/placeholder.png';
 
 import Button from './button';
 
-const ShopCard = ({shopItem, isAdmin}) => (
-  <div className="shop-card">
-    <div className="shop-card__content ">
-      <div className="shop-card__top">
-        <div className="shop-card__img">
-          <img src={shopItem?.images.length > 0 ? shopItem.images[0]?.imageUrl : Placeholder} alt={shopItem?.title} />
+const ShopCard = ({shopItem, isAdmin}) => {
+  const {
+    title,
+    description1,
+    credits,
+    images: [{imageUrl} = {}]
+  } = shopItem || {};
+
+  return (
+    <div className="shop-card">
+      <div className="shop-card__content ">
+        <div className="shop-card__top">
+          <div className="shop-card__img">
+            <img src={imageUrl || Placeholder} alt={title} />
+          </div>
+        </div>
+        <div className="shop-card__middle">
+          <p className="shop-card__title">{title}</p>
+          <p className="shop-card__description">{description1}</p>
+        </div>
+
+        <div className="shop-card__bottom">
+          {isAdmin ? (
+            <>
+              <Button color="secondary" variant="outlined-secondary" size="sm">
+                Edit
+              </Button>
+              <Button color="secondary" variant="contained-secondary" size="md">
+                Delete
+              </Button>
+            </>
+          ) : (
+            <Button color="secondary" size="lg" variant="contained-secondary">
+              {`Buy - ${credits} Credits`}
+            </Button>
+          )}
         </div>
       </div>
-      <div className="shop-card__middle">
-        <p className="shop-card__title">{shopItem?.title}</p>
-        <p className="shop-card__description">{shopItem?.description1}</p>
-      </div>
-
-      <div className="shop-card__bottom">
-        {isAdmin ? (
-          <>
-            <Button color="secondary" variant="outlined-secondary" size="sm">
-              Edit
-            </Button>
-            <Button color="secondary" variant="contained-secondary" size="md">
-              Delete
-            </Button>
-          </>
-        ) : (
-          <Button color="secondary" size="lg" variant="contained-secondary">
-            {`Buy - ${shopItem?.credits} Credits`}
-          </Button>
-        )}
-      </div>
     </div>
-  </div>
-);
+  );
+};
 ShopCard.propTypes = {
   isAdmin: PropTypes.bool,
   shopItem: PropTypes.shape({

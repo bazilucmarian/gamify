@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
-import ShopSection from '../../components/shop-section';
 import {getAllShopItems} from '../../services/services';
+import ShopSection from '../../components/shop-section';
 
 function ShopPage() {
   const [allShopItems, setAllShopItems] = useState([]);

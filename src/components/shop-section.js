@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ShopCard from './shop-card';
 
-function ShopSection({title, isScrollable, shopItems, isAdmin}) {
+const ShopSection = ({title, isScrollable, shopItems, isAdmin}) => {
   if (shopItems.length === 0) {
     return null;
   }
@@ -19,7 +19,7 @@ function ShopSection({title, isScrollable, shopItems, isAdmin}) {
       </div>
     </section>
   );
-}
+};
 
 ShopSection.propTypes = {
   title: PropTypes.string.isRequired,

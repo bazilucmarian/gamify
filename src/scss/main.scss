@@ -10,11 +10,18 @@
 @import 'components/shop-section';
 @import 'components/empty-placeholder';
 @import 'components/input';
-@import 'components/modal';
-@import 'components/modal-body';
-@import 'components/modal-header';
-@import 'components/modal-footer';
+@import 'components/modal/modal';
+@import 'components/modal/modal-body';
+@import 'components/modal/modal-header';
+@import 'components/modal/modal-footer';
 @import './components/add-or-edit-form.scss';
+@import './pages/shop-page-single-product';
+@import './components/slider/slider';
+@import './components/slider/slide';
+@import './components/slider/dots';
+@import './components/slider/dot';
+@import './components/slider/slider-control';
+@import './components/shop-section';
 
 @import './components/sidebar';
 @import './components/navigation';

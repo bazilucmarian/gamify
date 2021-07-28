@@ -110,5 +110,8 @@ export const getNewUpdatedChallenge = (newChallengeData, challengeId) => {
   return challengesList[singleChallengeIndex];
 };
 
+// SHOP
+
+export const getShopItemById = itemId => shopItems.filter(({id}) => id === itemId);
 /* SHOP: GET all shop items */
 export const getAllShopItems = () => shopItems;

@@ -9,6 +9,7 @@ import {
   getChallengesByStatus,
   getNewChallengeAdded,
   getNewUpdatedChallenge,
+  getShopItemById,
   updateUserChallenges
 } from './helpers';
 
@@ -111,6 +112,16 @@ fetchMock.put({
   }
 });
 
+/* SHOP */
+
+fetchMock.get({
+  matcher: 'express:/shop/:id',
+  response: url => {
+    const [, id] = url.split('/').filter(Boolean);
+
+    return {status: 200, body: getShopItemById(Number(id))};
+  }
+});
 /* SHOP: GET all shop items   */
 fetchMock.mock(
   {url: '/shop', method: 'GET'},

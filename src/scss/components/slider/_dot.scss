@@ -1,0 +1,14 @@
+@import '../../variables';
+
+.dot {
+  width: 1rem;
+  height: 1rem;
+  margin: 0 0.5rem;
+  border-radius: 100%;
+  cursor: pointer;
+  background: $color-grey-medium;
+
+  &--active {
+    background: $color-white;
+  }
+}

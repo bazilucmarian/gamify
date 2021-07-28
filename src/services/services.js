@@ -97,7 +97,17 @@ export const editChallenge = async (challengeFields, challengeId) => {
   }
 };
 
-/* SHOP */
+/* Shop services */
+
+export const getSingleShopItem = async id => {
+  try {
+    const response = await fetch(`/shop/${id}`);
+    return await response.json();
+  } catch (error) {
+    return error.message;
+  }
+};
+
 export const getAllShopItems = async () => {
   try {
     const allShopItems = await fetch('/shop');

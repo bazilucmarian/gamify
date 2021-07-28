@@ -5,6 +5,7 @@ import ShopSection from '../../components/shop-section';
 
 function ShopPage() {
   const [allShopItems, setAllShopItems] = useState([]);
+
   useEffect(() => {
     (async () => {
       const shopItems = await getAllShopItems();

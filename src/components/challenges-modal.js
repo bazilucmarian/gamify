@@ -15,7 +15,7 @@ const emptyState = {
   description: ''
 };
 
-const ChallengesModal = ({isOpen, hide, currentChallenge, handleAddNewChallenge, handleEditChallenge}) => {
+function ChallengesModal({isOpen, hide, currentChallenge, handleAddNewChallenge, handleEditChallenge}) {
   const isEditing = Boolean(currentChallenge?.id);
 
   const handler = isEditing ? handleEditChallenge : handleAddNewChallenge;
@@ -41,7 +41,7 @@ const ChallengesModal = ({isOpen, hide, currentChallenge, handleAddNewChallenge,
       </Modal.Body>
     </Modal>
   );
-};
+}
 
 ChallengesModal.propTypes = {
   handleAddNewChallenge: PropTypes.func.isRequired,

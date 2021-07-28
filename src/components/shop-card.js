@@ -1,24 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
 
 import Placeholder from '../assets/imgs/placeholder.png';
 
 import Button from './button';
 
 const ShopCard = ({shopItem, isAdmin}) => {
+  const history = useHistory();
   const {
     title,
+    id,
     description1,
     credits,
     images: [{imageUrl} = {}]
   } = shopItem || {};
+
+  const handleRedirect = () => {
+    history.push(`/shop/${id}`);
+  };
 
   return (
     <div className="shop-card">
       <div className="shop-card__content ">
         <div className="shop-card__top">
           <div className="shop-card__img">
-            <img src={imageUrl || Placeholder} alt={title} />
+            <img src={imageUrl || Placeholder} alt={title} onClick={handleRedirect} aria-hidden="true" />
           </div>
         </div>
         <div className="shop-card__middle">

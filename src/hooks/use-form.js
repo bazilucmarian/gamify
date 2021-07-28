@@ -10,11 +10,11 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
       onSubmitCallback(fields);
       setIsSubmitting(false);
     }
-  }, [errors, isSubmitting, onSubmitCallback]);
+  }, [errors, fields, isSubmitting, onSubmitCallback]);
 
   useEffect(() => {
     setFields(initialState);
-  }, [initialState?.id]);
+  }, [initialState]);
 
   const handleChange = useCallback(e => {
     let {value} = e.target;

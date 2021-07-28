@@ -1,0 +1,50 @@
+@import '../variables';
+
+.shop-section {
+  min-height: 38.1rem;
+  margin-bottom: 2rem;
+  position: relative;
+
+  &__modalBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: normal;
+    color: $color-black;
+    z-index: 100;
+    background: $color-grey-light;
+  }
+  &__items {
+    padding: 1.5rem 0;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    &--scrollable {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      &::-webkit-scrollbar {
+        height: 1rem;
+        border-radius: 1rem;
+      }
+      &::-webkit-scrollbar-thumb:horizontal {
+        background-color: $color-grey-dark;
+        border-radius: 1rem;
+      }
+    }
+  }
+
+  &__message {
+    height: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+  }
+}

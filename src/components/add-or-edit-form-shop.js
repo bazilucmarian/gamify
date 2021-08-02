@@ -10,14 +10,17 @@ import Button from './button';
 
 function FormShop({closeModal, handleChange, fields, errors}) {
   const [imageURLS, setImageURLS] = useState([]);
-  let imageURLField = fields?.imageURL;
+  const imageURLField = fields?.imageURL;
 
   const handleAddURL = () => {
     // TODO: needs validation improvements
     if (imageURLField) {
-      const urls = imageURLField.split(',').filter(url => (checkUrl(url) ? url : null));
-      setImageURLS(urls);
-      imageURLField = '';
+      const url = checkUrl(imageURLField) ? imageURLField : null;
+      if (url) {
+        setImageURLS(prev => [...prev, url]);
+        // eslint-disable-next-line no-param-reassign
+        fields.imageURL = '';
+      }
     }
   };
 
@@ -41,10 +44,11 @@ function FormShop({closeModal, handleChange, fields, errors}) {
           <Input
             inputLabel="ImageUrl"
             inputOnChange={handleChange}
-            inputValue={imageURLField}
+            inputValue={fields?.imageURL}
             inputType="text"
             inputId="imageURL"
             error={errors.xp}
+            isRequired={false}
           />
 
           <div className="input-arrow">
@@ -62,11 +66,12 @@ function FormShop({closeModal, handleChange, fields, errors}) {
               </div>
             </Fragment>
           ))}
+        {/* TODO: This input will be of type "number". */}
         <Input
           inputLabel="Credits cost (number)"
           inputOnChange={handleChange}
           inputValue={fields?.credits}
-          inputType="number"
+          inputType="text"
           inputId="credits"
           error={errors.credits}
         />
@@ -75,8 +80,8 @@ function FormShop({closeModal, handleChange, fields, errors}) {
           inputOnChange={handleChange}
           inputValue={fields?.description1}
           inputType="text"
-          inputId="description"
-          error={errors.description}
+          inputId="description1"
+          error={errors.description1}
         />
       </div>
       <div className="buttons-container">
@@ -100,7 +105,7 @@ FormShop.propTypes = {
     title: PropTypes.string,
     xp: PropTypes.string,
     credits: PropTypes.string,
-    description: PropTypes.string
+    description1: PropTypes.string
   }),
   fields: PropTypes.shape({
     title: PropTypes.string,

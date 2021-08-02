@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Input({inputId, inputType, inputValue, inputOnChange, inputLabel, error}) {
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
+    <div className="form-group__container">
       <div className="form-group">
         <input
           className="form-group__input"

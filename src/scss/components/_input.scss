@@ -10,6 +10,11 @@
   color: $color-grey-dark;
   margin: 1rem 0;
 
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__error {
     color: $color-red-error;
     font-size: 1.2rem;

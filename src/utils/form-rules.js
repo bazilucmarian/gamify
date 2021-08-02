@@ -1,24 +1,26 @@
+import {descriptionMinLength, maxCredits, maxXp, minCredits, minXp, titleMinLength} from '../constants/form-validation';
+
 /* eslint-disable prefer-const */
 export default function validate(fields) {
   const specialCharacters = /[!"#$%*<>?^~§©®°¶]+/;
 
   let errors = {};
-  if (fields.title.trim().length < 6) {
-    errors.title = 'Please lengthen title to 6 characters or more';
+  if (fields.title.trim().length < titleMinLength) {
+    errors.title = `Please lengthen title to ${titleMinLength} characters or more`;
   } else if (fields.title.match(specialCharacters) !== null) {
     errors.title = 'Remove special characters from the title.';
   }
 
-  if (!(fields.xp > 0 && fields.xp <= 200)) {
-    errors.xp = 'XP must be between 1 and 200';
+  if (!(fields.xp >= minXp && fields.xp <= maxXp)) {
+    errors.xp = `XP must be between ${minXp} and ${maxXp}`;
   }
 
-  if (!(fields.credits > 0 && fields.credits <= 200)) {
-    errors.credits = 'Credits must be between 1 and 200';
+  if (!(fields.credits >= minCredits && fields.credits <= maxCredits)) {
+    errors.credits = `Credits must be between ${minCredits} and ${maxCredits}`;
   }
 
-  if (fields.description.trim().length < 10) {
-    errors.description = 'Please lengthen description to 10 characters or more';
+  if (fields.description.trim().length < descriptionMinLength) {
+    errors.description = `Please lengthen description to ${descriptionMinLength} characters or more`;
   }
 
   return errors;

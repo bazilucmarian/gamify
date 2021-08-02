@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Input({inputId, inputType, inputValue, inputOnChange, inputLabel, error}) {
+function Input({inputId, inputType, inputValue, inputOnChange, inputLabel, error, className}) {
   return (
     <div className="form-group">
       <input
-        className="form-group__input"
+        className={`form-group__input ${className}`}
         id={inputId}
         type={inputType}
         value={inputValue}
@@ -20,6 +20,7 @@ function Input({inputId, inputType, inputValue, inputOnChange, inputLabel, error
 }
 
 Input.propTypes = {
+  className: PropTypes.string,
   error: PropTypes.string,
   inputId: PropTypes.string.isRequired,
   inputLabel: PropTypes.string.isRequired,
@@ -30,7 +31,8 @@ Input.propTypes = {
 
 Input.defaultProps = {
   error: '',
-  inputValue: ''
+  inputValue: '',
+  className: ''
 };
 
 export default Input;

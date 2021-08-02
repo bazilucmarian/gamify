@@ -1,4 +1,14 @@
+@import '../../variables';
+
 .modal-body {
-  flex: 2;
-  // border: 1px solid;
+  &::-webkit-scrollbar {
+    height: 1rem;
+    border-radius: 1rem;
+    width: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb:vertical {
+    background-color: $color-grey-dark;
+    border-radius: 1rem;
+  }
 }

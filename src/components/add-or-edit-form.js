@@ -7,7 +7,7 @@ import Button from './button';
 function Form({closeModal, isEditing, handleSubmit, handleChange, fields, errors}) {
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <div>
+      <div style={{display: 'flex', flexDirection: 'column'}}>
         <Input
           inputLabel="Title"
           inputOnChange={handleChange}

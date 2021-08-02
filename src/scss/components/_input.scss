@@ -8,11 +8,12 @@
   font-size: 1.4rem;
   line-height: 2.4rem;
   color: $color-grey-dark;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 
   &__error {
     color: $color-red-error;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    margin-top: -1rem;
   }
 
   &__input {

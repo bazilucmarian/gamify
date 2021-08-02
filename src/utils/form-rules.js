@@ -1,25 +1,25 @@
 /* eslint-disable prefer-const */
 export default function validate(fields) {
+  const specialCharacters = /[!"#$%*<>?^~§©®°¶]+/;
+
   let errors = {};
-  if (!fields.title) {
-    errors.email = 'Title is required';
-  } else if (fields.title.length < 6) {
-    errors.title = 'You should modify title length';
+  if (fields.title.trim().length < 6) {
+    errors.title = 'Please lengthen title to 6 characters or more';
+  } else if (fields.title.match(specialCharacters) !== null) {
+    errors.title = 'Remove special characters from the title.';
   }
-  if (!fields.xp) {
-    errors.xp = 'xp is required';
-  } else if (typeof fields.xp !== 'number') {
-    errors.xp = 'Xp is a number !!';
+
+  if (!(fields.xp > 0 && fields.xp <= 200)) {
+    errors.xp = 'XP must be between 1 and 200';
   }
-  if (!fields.credits) {
-    errors.credits = 'credits is required';
-  } else if (typeof fields.credits !== 'number') {
-    errors.credits = 'credits is a number !!';
+
+  if (!(fields.credits > 0 && fields.credits <= 200)) {
+    errors.credits = 'Credits must be between 1 and 200';
   }
-  if (!fields.description) {
-    errors.description = 'description is required';
-  } else if (fields.description.length < 6) {
-    errors.description = 'You should modify description';
+
+  if (fields.description.trim().length < 10) {
+    errors.description = 'Please lengthen description to 10 characters or more';
   }
+
   return errors;
 }

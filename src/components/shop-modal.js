@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {useForm} from '../hooks/use-form';
-import validate from '../utils/form-rules';
 
 import Modal from './modal/modal';
 import FormShop from './add-or-edit-form-shop';
@@ -14,11 +13,10 @@ const emptyState = {
   description: ''
 };
 
-function ShopModal({isOpen, hide, currentShopItem, handleAddNewShopItem, handleEditShopItem}) {
+function ShopModal({isOpen, hide, currentShopItem}) {
   const isEditing = Boolean(currentShopItem?.id);
 
-  const handler = isEditing ? handleEditShopItem : handleAddNewShopItem;
-  const {fields, handleChange, handleSubmit, errors, clearField} = useForm(currentShopItem, handler, validate);
+  const {fields, handleChange, handleSubmit, errors, clearField} = useForm(currentShopItem);
 
   return (
     <Modal isOpen={isOpen} hide={hide}>
@@ -42,8 +40,6 @@ function ShopModal({isOpen, hide, currentShopItem, handleAddNewShopItem, handleE
 }
 
 ShopModal.propTypes = {
-  handleAddNewShopItem: PropTypes.func.isRequired,
-  handleEditShopItem: PropTypes.func.isRequired,
   hide: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   currentShopItem: PropTypes.shape({

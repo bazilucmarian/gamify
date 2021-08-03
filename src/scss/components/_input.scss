@@ -8,7 +8,7 @@
   font-size: 1.4rem;
   line-height: 2.4rem;
   color: $color-grey-dark;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 
   &__container {
     display: flex;
@@ -32,7 +32,7 @@
     border: none;
     outline: none;
 
-    &::placeholder{
+    &::placeholder {
       color: transparent;
     }
   }
@@ -69,7 +69,7 @@
 
   &__input:focus + &__label .content,
   &__input:not(:placeholder-shown) + &__label .content {
-    transform: translateY(-75%);
+    transform: translateY(-70%);
     font-size: 1.2rem;
   }
 

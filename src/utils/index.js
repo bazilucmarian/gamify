@@ -4,7 +4,6 @@ import calculateXp from './calculate-xp';
 import checkUrl from './check-url';
 import {navLinksUser, navLinksAdmin} from './nav-links';
 import getInitials from './get-initials';
-import checkUrl from './check-url';
 import {statusDictionary} from './status-dictionary';
 import {camelCaseToKebabCase, getUser, getLoggedInUserChallenges, getTotalXpAndCredits} from './utils-functions';
 
@@ -21,6 +20,5 @@ export {
   camelCaseToKebabCase,
   challengesList,
   users,
-  userChallengesData,
-  checkUrl
+  userChallengesData
 };

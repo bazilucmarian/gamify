@@ -24,16 +24,6 @@ function ShopPageAdmin() {
     }
   };
 
-  // const handleEditShopItem = async newUpdatedShopItem => {
-  //   const newShopItems = await updateStateShopAdmin(allShopItems, newUpdatedShopItem, 'EDIT');
-  //   hideModal();
-  //   setAllShopItems(newShopItems);
-  // };
-  // const handleAddNewShopItem = async newShopItem => {
-  //   const newShopItems = await updateStateShopAdmin(allShopItems, newShopItem, 'CREATE');
-  //   setAllShopItems(newShopItems);
-  // };
-
   const handleOnCreate = () => {
     showModal();
     setCurrentShopItem(null);

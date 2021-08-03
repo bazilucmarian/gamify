@@ -815,10 +815,11 @@ button[disabled] {
   border-radius: 100%;
   cursor: pointer;
   background: #868686;
+  border: 0.1rem solid #868686;
 }
 
 .dot--active {
-  background: #ffffff;
+  background: #f3f5f8;
 }
 
 .control {

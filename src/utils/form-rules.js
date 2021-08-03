@@ -1,25 +1,27 @@
+import {descriptionMinLength, maxCredits, maxXp, minCredits, minXp, titleMinLength} from '../constants/form-validation';
+
 /* eslint-disable prefer-const */
 export default function validate(fields) {
+  const specialCharacters = /[!"#$%*<>?^~§©®°¶]+/;
+
   let errors = {};
-  if (!fields.title) {
-    errors.email = 'Title is required';
-  } else if (fields.title.length < 6) {
-    errors.title = 'You should modify title length';
+  if (fields.title.trim().length < titleMinLength) {
+    errors.title = `Please lengthen title to ${titleMinLength} characters or more`;
+  } else if (fields.title.match(specialCharacters) !== null) {
+    errors.title = 'Remove special characters from the title.';
   }
-  if (!fields.xp) {
-    errors.xp = 'xp is required';
-  } else if (typeof fields.xp !== 'number') {
-    errors.xp = 'Xp is a number !!';
+
+  if (!(fields.xp >= minXp && fields.xp <= maxXp)) {
+    errors.xp = `XP must be between ${minXp} and ${maxXp}`;
   }
-  if (!fields.credits) {
-    errors.credits = 'credits is required';
-  } else if (typeof fields.credits !== 'number') {
-    errors.credits = 'credits is a number !!';
+
+  if (!(fields.credits >= minCredits && fields.credits <= maxCredits)) {
+    errors.credits = `Credits must be between ${minCredits} and ${maxCredits}`;
   }
-  if (!fields.description) {
-    errors.description = 'description is required';
-  } else if (fields.description.length < 6) {
-    errors.description = 'You should modify description';
+
+  if (fields.description.trim().length < descriptionMinLength) {
+    errors.description = `Please lengthen description to ${descriptionMinLength} characters or more`;
   }
+
   return errors;
 }

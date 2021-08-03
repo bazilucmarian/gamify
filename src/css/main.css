@@ -21,6 +21,18 @@ body {
   height: 100%;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 button:disabled,
 button[disabled] {
   cursor: default;
@@ -221,6 +233,7 @@ button[disabled] {
 
 .shop-card__img {
   height: 100%;
+  width: 100%;
   background-color: #c4c4c4;
   overflow: hidden;
   cursor: pointer;
@@ -458,11 +471,13 @@ button[disabled] {
   margin-bottom: 2rem;
   position: relative;
 }
+
 .shop-section__modalBtn {
   position: absolute;
   top: 0;
   right: 0;
 }
+
 .shop-section__title {
   font-size: 2rem;
   font-weight: normal;
@@ -470,26 +485,31 @@ button[disabled] {
   z-index: 100;
   background: #f3f5f8;
 }
+
 .shop-section__items {
   padding: 1.5rem 0;
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
 }
+
 .shop-section__items--scrollable {
   overflow-x: auto;
   flex-wrap: nowrap;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
 }
+
 .shop-section__items--scrollable::-webkit-scrollbar {
   height: 1rem;
   border-radius: 1rem;
 }
+
 .shop-section__items--scrollable::-webkit-scrollbar-thumb:horizontal {
   background-color: #6a758d;
   border-radius: 1rem;
 }
+
 .shop-section__message {
   height: 20rem;
   display: flex;
@@ -532,12 +552,18 @@ button[disabled] {
   font-size: 1.4rem;
   line-height: 2.4rem;
   color: #6a758d;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
+}
+
+.form-group__container {
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group__error {
   color: #ff0033;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  margin-top: -1rem;
 }
 
 .form-group__input {
@@ -606,13 +632,11 @@ button[disabled] {
 .modal {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   position: fixed;
   top: 12.7rem;
   left: 50%;
   transform: translateX(-50%);
   width: 50rem;
-  height: 33.7rem;
   z-index: 103;
   padding: 3rem;
   background-color: #ffffff;
@@ -629,11 +653,12 @@ button[disabled] {
 }
 
 .modal-body {
-  flex: 2;
+  margin-top: 2rem;
+  height: 100%;
 }
 
 .modal-header {
-  flex: 0.5;
+  height: 3rem;
   display: flex;
   justify-content: center;
 }
@@ -657,6 +682,11 @@ button[disabled] {
   height: 100%;
 }
 
+.form__container {
+  display: flex;
+  flex-direction: column;
+}
+
 .form__wrapper {
   display: flex;
   justify-content: space-between;
@@ -670,6 +700,7 @@ button[disabled] {
 .buttons-container {
   display: flex;
   justify-content: flex-end;
+  margin-top: 2rem;
 }
 
 .buttons-container__wrapper {
@@ -784,10 +815,11 @@ button[disabled] {
   border-radius: 100%;
   cursor: pointer;
   background: #868686;
+  border: 0.1rem solid #868686;
 }
 
 .dot--active {
-  background: #ffffff;
+  background: #f3f5f8;
 }
 
 .control {

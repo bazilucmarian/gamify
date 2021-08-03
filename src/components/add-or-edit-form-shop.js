@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {Fragment, useState} from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,8 +9,19 @@ import {checkUrl} from '../utils';
 import Input from './input';
 import Button from './button';
 
-function FormShop({closeModal, handleChange, fields, errors, clearField}) {
-  const [imageURLS, setImageURLS] = useState([]);
+function FormShop({
+  closeModal,
+  handleChange,
+  handleSubmit,
+  fields,
+  errors,
+  clearField,
+  currentShopItem,
+  isEditing,
+  updateSingleField
+}) {
+  const [imageURLS, setImageURLS] = useState(isEditing ? currentShopItem?.images : []);
+
   const imageURLField = fields?.imageURL;
 
   const handleAddURL = () => {
@@ -18,19 +30,21 @@ function FormShop({closeModal, handleChange, fields, errors, clearField}) {
       const validURL = checkUrl(imageURLField) ? imageURLField : null;
 
       if (validURL) {
-        setImageURLS(prev => [...prev, validURL]);
+        setImageURLS(prev => [...prev, {imageUrl: validURL, name: `${fields.title}-${Math.random()}`}]);
         clearField('imageURL');
+        updateSingleField('images', [...imageURLS, {imageUrl: validURL, name: `${fields.title}-${Math.random()}`}]);
       }
     }
   };
 
-  const handleRemoveURL = (url, index) => {
-    const filteredURLS = imageURLS.filter((item, imageIndex) => index !== imageIndex);
+  const handleRemoveURL = index => {
+    const filteredURLS = imageURLS.filter((_, imageIndex) => index !== imageIndex);
     setImageURLS(filteredURLS);
+    updateSingleField('images', filteredURLS);
   };
 
   return (
-    <form className="form shop-">
+    <form className="form shop-" onSubmit={handleSubmit}>
       <div>
         <Input
           inputLabel="Title"
@@ -56,12 +70,12 @@ function FormShop({closeModal, handleChange, fields, errors, clearField}) {
           </div>
         </div>
         {imageURLS &&
-          imageURLS.map((url, index) => (
+          imageURLS.map(({imageUrl}, index) => (
             <Fragment key={Date.now() * Math.random()}>
               <div className="url-container">
-                <p className="url">{url}</p>
+                <p className="url">{imageUrl}</p>
                 <div className="url-icon">
-                  <Close onClick={() => handleRemoveURL(url, index)} />
+                  <Close onClick={() => handleRemoveURL(index)} />
                 </div>
               </div>
             </Fragment>
@@ -71,7 +85,7 @@ function FormShop({closeModal, handleChange, fields, errors, clearField}) {
           inputLabel="Credits cost (number)"
           inputOnChange={handleChange}
           inputValue={fields?.credits}
-          inputType="text"
+          inputType="number"
           inputId="credits"
           error={errors.credits}
         />
@@ -90,7 +104,7 @@ function FormShop({closeModal, handleChange, fields, errors, clearField}) {
             Cancel
           </Button>
           <Button variant="contained-secondary" color="secondary" size="sm-1" type="submit">
-            Add
+            {isEditing ? 'Edit' : 'Add'}
           </Button>
         </div>
       </div>
@@ -100,8 +114,10 @@ function FormShop({closeModal, handleChange, fields, errors, clearField}) {
 
 FormShop.propTypes = {
   handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   clearField: PropTypes.func,
+  isEditing: PropTypes.bool,
   errors: PropTypes.shape({
     title: PropTypes.string,
     xp: PropTypes.string,
@@ -111,15 +127,29 @@ FormShop.propTypes = {
   fields: PropTypes.shape({
     title: PropTypes.string,
     imageURL: PropTypes.string,
-    credits: PropTypes.string,
+    credits: PropTypes.number,
     description: PropTypes.string
+  }),
+  currentShopItem: PropTypes.shape({
+    credits: PropTypes.number,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    title: PropTypes.string,
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        imageUrl: PropTypes.string,
+        name: PropTypes.string
+      })
+    )
   })
 };
 
 FormShop.defaultProps = {
   clearField: () => {},
   errors: {},
-  fields: {}
+  fields: {},
+  currentShopItem: {},
+  isEditing: false
 };
 
 export default FormShop;

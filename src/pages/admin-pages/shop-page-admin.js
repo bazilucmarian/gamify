@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react';
 import {getAllShopItems} from '../../services/services';
 import ShopSection from '../../components/shop-section';
 import Button from '../../components/button';
-// import ShopModal from '../../components/shop-modal';
 import useModal from '../../hooks/use-modal';
 import {updateStateShopAdmin} from '../../reducers';
 import ShopModal from '../../components/shop-modal';
@@ -22,6 +21,12 @@ function ShopPageAdmin() {
       const newShopItems = await updateStateShopAdmin(allShopItems, shopItem, operation);
       setAllShopItems(newShopItems);
     }
+  };
+
+  const handleEditShopItem = async newUpdatedShopItem => {
+    const newShopItems = await updateStateShopAdmin(allShopItems, newUpdatedShopItem, 'EDIT');
+    hideModal();
+    setAllShopItems(newShopItems);
   };
 
   const handleOnCreate = () => {
@@ -44,7 +49,13 @@ function ShopPageAdmin() {
           Add new
         </Button>
       </div>
-      <ShopModal isOpen={isOpen} hide={hideModal} currentShopItem={currentShopItem} />
+      <ShopModal
+        isOpen={isOpen}
+        hide={hideModal}
+        currentShopItem={currentShopItem}
+        handleEditShopItem={handleEditShopItem}
+        handleAddNewShopItem={() => {}}
+      />
     </>
   );
 }

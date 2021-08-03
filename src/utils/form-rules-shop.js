@@ -1,4 +1,4 @@
-import {descriptionMinLength, maxCredits, minCredits, titleMinLength} from '../constants/form-validation';
+import {descriptionMinLength, maxCredits, minCredits, titleMinLength} from '../constants/form-shop';
 
 /* eslint-disable prefer-const */
 export default function validateShopForm(fields) {

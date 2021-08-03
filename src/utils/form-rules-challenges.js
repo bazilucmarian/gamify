@@ -1,7 +1,7 @@
-import {descriptionMinLength, maxCredits, maxXp, minCredits, minXp, titleMinLength} from '../constants/form-validation';
+import {descriptionMinLength, maxCredits, maxXp, minCredits, minXp, titleMinLength} from '../constants/form-challenges';
 
 /* eslint-disable prefer-const */
-export default function validate(fields) {
+export default function validateChallengesForm(fields) {
   const specialCharacters = /[!"#$%*<>?^~§©®°¶]+/;
 
   let errors = {};

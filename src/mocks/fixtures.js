@@ -111,10 +111,9 @@ const shopItems = [
       }
     ],
     title: 'Brand new iPhone 11 Pro',
-    description1:
+    description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-    description2:
-      '* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non, imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, se  euismod mauris euismod nec.',
+
     credits: 50
   },
   {
@@ -138,10 +137,9 @@ const shopItems = [
       }
     ],
     title: 'Macbook Pro 13',
-    description1:
+    description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-    description2:
-      '* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non, imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, se  euismod mauris euismod nec.',
+
     credits: 55
   },
   {
@@ -166,10 +164,9 @@ const shopItems = [
       }
     ],
     title: 'XBOX',
-    description1:
+    description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-    description2:
-      '* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non, imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, se  euismod mauris euismod nec.',
+
     credits: 40
   },
   {
@@ -194,10 +191,8 @@ const shopItems = [
       }
     ],
     title: 'Gaming glasses',
-    description1:
+    description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-    description2:
-      '* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non, imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, se  euismod mauris euismod nec.',
     credits: 25
   },
   {
@@ -222,19 +217,16 @@ const shopItems = [
       }
     ],
     title: 'Ultrawide monitor',
-    description1:
+    description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-    description2:
-      '* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non, imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, se  euismod mauris euismod nec.',
+
     credits: 80
   },
   {
     id: 6,
     images: [],
     title: 'Shop item 2',
-    description1:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-    description2:
+    description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
 
     credits: 80

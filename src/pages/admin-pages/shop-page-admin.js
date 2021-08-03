@@ -3,9 +3,41 @@ import React, {useEffect, useState} from 'react';
 import {getAllShopItems} from '../../services/services';
 import ShopSection from '../../components/shop-section';
 import Button from '../../components/button';
+// import ShopModal from '../../components/shop-modal';
+import useModal from '../../hooks/use-modal';
+import {updateStateShopAdmin} from '../../reducers';
+import ShopModal from '../../components/shop-modal';
 
 function ShopPageAdmin() {
   const [allShopItems, setAllShopItems] = useState([]);
+  const [currentShopItem, setCurrentShopItem] = useState(null);
+
+  const {isOpen, hideModal, showModal} = useModal();
+
+  const handleUpdateShopItems = async (shopItem, operation) => {
+    if (shopItem && operation === 'EDIT') {
+      setCurrentShopItem(shopItem);
+      showModal();
+    } else {
+      const newShopItems = await updateStateShopAdmin(allShopItems, shopItem, operation);
+      setAllShopItems(newShopItems);
+    }
+  };
+
+  // const handleEditShopItem = async newUpdatedShopItem => {
+  //   const newShopItems = await updateStateShopAdmin(allShopItems, newUpdatedShopItem, 'EDIT');
+  //   hideModal();
+  //   setAllShopItems(newShopItems);
+  // };
+  // const handleAddNewShopItem = async newShopItem => {
+  //   const newShopItems = await updateStateShopAdmin(allShopItems, newShopItem, 'CREATE');
+  //   setAllShopItems(newShopItems);
+  // };
+
+  const handleOnCreate = () => {
+    showModal();
+    setCurrentShopItem(null);
+  };
 
   useEffect(() => {
     (async () => {
@@ -16,12 +48,13 @@ function ShopPageAdmin() {
 
   return (
     <>
-      <ShopSection title="Shop" shopItems={allShopItems} isAdmin />
+      <ShopSection title="Shop" shopItems={allShopItems} isAdmin handleUpdateShopItems={handleUpdateShopItems} />
       <div className="add-button">
-        <Button color="secondary" variant="contained-secondary" size="sm">
+        <Button color="secondary" variant="contained-secondary" size="sm" onClick={handleOnCreate}>
           Add new
         </Button>
       </div>
+      <ShopModal isOpen={isOpen} hide={hideModal} currentShopItem={currentShopItem} />
     </>
   );
 }

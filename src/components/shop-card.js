@@ -5,13 +5,14 @@ import {useHistory} from 'react-router-dom';
 import Placeholder from '../assets/imgs/placeholder.png';
 
 import Button from './button';
+import ButtonContainerAdmin from './button-container-admin';
 
-const ShopCard = ({shopItem, isAdmin}) => {
+const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
   const history = useHistory();
   const {
     title,
     id,
-    description1,
+    description,
     credits,
     images: [{imageUrl} = {}]
   } = shopItem || {};
@@ -30,19 +31,12 @@ const ShopCard = ({shopItem, isAdmin}) => {
         </div>
         <div className="shop-card__middle">
           <p className="shop-card__title">{title}</p>
-          <p className="shop-card__description">{description1}</p>
+          <p className="shop-card__description">{description}</p>
         </div>
 
         <div className="shop-card__bottom">
           {isAdmin ? (
-            <>
-              <Button color="secondary" variant="outlined-secondary" size="sm">
-                Edit
-              </Button>
-              <Button color="secondary" variant="contained-secondary" size="md">
-                Delete
-              </Button>
-            </>
+            <ButtonContainerAdmin onClick={onUpdateShopItems} />
           ) : (
             <Button color="secondary" size="lg" variant="contained-secondary">
               {`Buy - ${credits} Credits`}
@@ -58,7 +52,6 @@ ShopCard.propTypes = {
   shopItem: PropTypes.shape({
     title: PropTypes.string,
     description1: PropTypes.string,
-    description2: PropTypes.string,
     credits: PropTypes.number,
     images: PropTypes.arrayOf(
       PropTypes.shape({
@@ -67,11 +60,13 @@ ShopCard.propTypes = {
       })
     ),
     id: PropTypes.number
-  }).isRequired
+  }).isRequired,
+  onUpdateShopItems: PropTypes.func
 };
 
 ShopCard.defaultProps = {
-  isAdmin: false
+  isAdmin: false,
+  onUpdateShopItems: () => {}
 };
 
 export default ShopCard;

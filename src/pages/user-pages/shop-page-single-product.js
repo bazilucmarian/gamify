@@ -8,7 +8,7 @@ import {getSingleShopItem} from '../../services/services';
 
 function SingleProduct() {
   const [shopItem, setShopItem] = useState({});
-  const {images, title, description1, description2} = shopItem;
+  const {images, title, description} = shopItem;
 
   const {id: idParam} = useParams();
   const history = useHistory();
@@ -36,11 +36,10 @@ function SingleProduct() {
         </div>
         <div className="single-shopItem__details">
           <h1>{title}</h1>
-          <p className="single-shopItem__p1">{description1}</p>
+          <p className="single-shopItem__p1">{description}</p>
           <Button color="secondary" variant="contained-secondary" size="lg">
             Buy - 50 Credits
           </Button>
-          <p className="single-shopItem__p2">{description2}</p>
         </div>
       </div>
     </div>

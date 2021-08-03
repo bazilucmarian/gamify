@@ -12,7 +12,7 @@ function Input({inputId, inputType, inputValue, inputOnChange, inputLabel, error
           value={inputValue}
           onChange={inputOnChange}
           required={isRequired}
-        placeholder="placeholder"
+          placeholder="placeholder"
         />
         <label className="form-group__label" htmlFor={inputId}>
           <span className="content">{inputLabel}</span>

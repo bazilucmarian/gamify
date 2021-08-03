@@ -10,7 +10,7 @@ const emptyState = {
   title: '',
   imageURL: '',
   credits: '',
-  description1: ''
+  description: ''
 };
 
 function ShopModal({isOpen, hide}) {
@@ -36,7 +36,7 @@ ShopModal.propTypes = {
     title: PropTypes.string,
     xp: PropTypes.number,
     credits: PropTypes.string,
-    description1: PropTypes.string,
+    description: PropTypes.string,
     imageURL: PropTypes.string,
     id: PropTypes.number
   })

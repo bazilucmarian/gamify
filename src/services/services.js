@@ -116,3 +116,30 @@ export const getAllShopItems = async () => {
     return error.message;
   }
 };
+
+// shop
+export const deleteShopItem = async shopItemId => {
+  try {
+    const response = await fetch(`/shop/${shopItemId}`, {
+      method: 'DELETE',
+      body: {shopItemId}
+    });
+
+    return await response.json();
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const addNewShopItem = async shopItem => {
+  try {
+    const response = await fetch('/shop', {
+      method: 'POST',
+      body: shopItem
+    });
+
+    return await response.json();
+  } catch (error) {
+    return error.message;
+  }
+};

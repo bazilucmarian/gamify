@@ -3,6 +3,7 @@ import fetchMock from 'fetch-mock';
 
 import {
   deleteChallenge,
+  deleteShopItem,
   filterChallenges,
   getAllChallengesList,
   getAllShopItems,
@@ -130,3 +131,20 @@ fetchMock.mock(
     body: getAllShopItems()
   }
 );
+
+/* SHOP ADMIN */
+
+fetchMock.delete({
+  matcher: 'express:/shop/:shopItemId',
+  response: (_, opts) => {
+    const {shopItemId} = opts.body;
+
+    if (shopItemId) {
+      return {
+        status: 200,
+        body: deleteShopItem(shopItemId)
+      };
+    }
+    throw new Error('Problems delete mock!!');
+  }
+});

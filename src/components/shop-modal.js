@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {useForm} from '../hooks/use-form';
+import {addTitle, editTitle} from '../constants/form-shop';
 
 import Modal from './modal/modal';
 import FormShop from './add-or-edit-form-shop';
@@ -13,17 +14,27 @@ const emptyState = {
   description: ''
 };
 
-function ShopModal({isOpen, hide}) {
-  const {fields, handleChange, clearField} = useForm(emptyState);
+function ShopModal({isOpen, hide, currentShopItem}) {
+  const isEditing = Boolean(currentShopItem?.id);
+
+  const {fields, handleChange, handleSubmit, errors, clearField} = useForm(currentShopItem);
+
   return (
     <Modal isOpen={isOpen} hide={hide}>
       <Modal.Header>
-        <div className="modal__title">
-          <h1>Add shop item</h1>
-        </div>
+        <div className="modal__title">{isEditing ? <h1>{editTitle}</h1> : <h1>{addTitle}</h1>}</div>
       </Modal.Header>
       <Modal.Body>
-        <FormShop closeModal={hide} fields={fields} clearField={clearField} handleChange={handleChange} />
+        <FormShop
+          closeModal={hide}
+          currentShopItem={currentShopItem}
+          isEditing={isEditing}
+          errors={errors}
+          fields={fields}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          clearField={clearField}
+        />
       </Modal.Body>
     </Modal>
   );

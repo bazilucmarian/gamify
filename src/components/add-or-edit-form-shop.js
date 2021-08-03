@@ -66,7 +66,7 @@ function FormShop({closeModal, handleChange, fields, errors, clearField}) {
               </div>
             </Fragment>
           ))}
-        {/* TODO: This input will be of type "number". */}
+
         <Input
           inputLabel="Credits cost (number)"
           inputOnChange={handleChange}

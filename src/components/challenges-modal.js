@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import {useForm} from '../hooks/use-form';
 import validate from '../utils/form-rules';
+import {addTitle, editTitle} from '../constants/form-challenges';
 
 import Modal from './modal/modal';
 import Form from './add-or-edit-form';
@@ -24,7 +25,7 @@ function ChallengesModal({isOpen, hide, currentChallenge, handleAddNewChallenge,
   return (
     <Modal isOpen={isOpen} hide={hide}>
       <Modal.Header>
-        <div className="modal__title">{isEditing ? <h1>Edit Challenge</h1> : <h1>Add new Challenge</h1>}</div>
+        <div className="modal__title">{isEditing ? <h1>{editTitle}</h1> : <h1>{addTitle}</h1>}</div>
       </Modal.Header>
       <Modal.Body>
         <Form

@@ -115,3 +115,10 @@ export const getNewUpdatedChallenge = (newChallengeData, challengeId) => {
 export const getShopItemById = itemId => shopItems.filter(({id}) => id === itemId);
 /* SHOP: GET all shop items */
 export const getAllShopItems = () => shopItems;
+
+//  ADMIN-SHOP : delete specific shopItem
+export const deleteShopItem = shopItemId => {
+  const singleShopItemIndex = shopItems.findIndex(({id}) => id === shopItemId);
+  shopItems.splice(singleShopItemIndex, 1);
+  return {message: 'Success deleted!'};
+};

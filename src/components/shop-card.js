@@ -5,8 +5,9 @@ import {useHistory} from 'react-router-dom';
 import Placeholder from '../assets/imgs/placeholder.png';
 
 import Button from './button';
+import ButtonContainerAdmin from './button-container-admin';
 
-const ShopCard = ({shopItem, isAdmin}) => {
+const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
   const history = useHistory();
   const {
     title,
@@ -35,14 +36,7 @@ const ShopCard = ({shopItem, isAdmin}) => {
 
         <div className="shop-card__bottom">
           {isAdmin ? (
-            <>
-              <Button color="secondary" variant="outlined-secondary" size="sm">
-                Edit
-              </Button>
-              <Button color="secondary" variant="contained-secondary" size="md">
-                Delete
-              </Button>
-            </>
+            <ButtonContainerAdmin onClick={onUpdateShopItems} />
           ) : (
             <Button color="secondary" size="lg" variant="contained-secondary">
               {`Buy - ${credits} Credits`}
@@ -66,11 +60,13 @@ ShopCard.propTypes = {
       })
     ),
     id: PropTypes.number
-  }).isRequired
+  }).isRequired,
+  onUpdateShopItems: PropTypes.func
 };
 
 ShopCard.defaultProps = {
-  isAdmin: false
+  isAdmin: false,
+  onUpdateShopItems: () => {}
 };
 
 export default ShopCard;

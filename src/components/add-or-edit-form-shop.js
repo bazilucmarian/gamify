@@ -8,18 +8,18 @@ import {checkUrl} from '../utils';
 import Input from './input';
 import Button from './button';
 
-function FormShop({closeModal, handleChange, fields, errors}) {
+function FormShop({closeModal, handleChange, fields, errors, clearField}) {
   const [imageURLS, setImageURLS] = useState([]);
   const imageURLField = fields?.imageURL;
 
   const handleAddURL = () => {
     // TODO: needs validation improvements
     if (imageURLField) {
-      const url = checkUrl(imageURLField) ? imageURLField : null;
-      if (url) {
-        setImageURLS(prev => [...prev, url]);
-        // eslint-disable-next-line no-param-reassign
-        fields.imageURL = '';
+      const validURL = checkUrl(imageURLField) ? imageURLField : null;
+
+      if (validURL) {
+        setImageURLS(prev => [...prev, validURL]);
+        clearField('imageURL');
       }
     }
   };
@@ -101,6 +101,7 @@ function FormShop({closeModal, handleChange, fields, errors}) {
 FormShop.propTypes = {
   handleChange: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
+  clearField: PropTypes.func,
   errors: PropTypes.shape({
     title: PropTypes.string,
     xp: PropTypes.string,
@@ -116,6 +117,7 @@ FormShop.propTypes = {
 };
 
 FormShop.defaultProps = {
+  clearField: () => {},
   errors: {},
   fields: {}
 };

@@ -14,7 +14,7 @@ const emptyState = {
 };
 
 function ShopModal({isOpen, hide}) {
-  const {fields, handleChange} = useForm(emptyState);
+  const {fields, handleChange, clearField} = useForm(emptyState);
   return (
     <Modal isOpen={isOpen} hide={hide}>
       <Modal.Header>
@@ -23,7 +23,7 @@ function ShopModal({isOpen, hide}) {
         </div>
       </Modal.Header>
       <Modal.Body>
-        <FormShop closeModal={hide} fields={fields} handleChange={handleChange} />
+        <FormShop closeModal={hide} fields={fields} clearField={clearField} handleChange={handleChange} />
       </Modal.Body>
     </Modal>
   );

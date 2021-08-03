@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {useForm} from '../hooks/use-form';
+import {addTitle, editTitle} from '../constants/form-shop';
 
 import Modal from './modal/modal';
 import FormShop from './add-or-edit-form-shop';
@@ -21,7 +22,7 @@ function ShopModal({isOpen, hide, currentShopItem}) {
   return (
     <Modal isOpen={isOpen} hide={hide}>
       <Modal.Header>
-        <div className="modal__title">{isEditing ? <h1>Edit ShopItem</h1> : <h1>Add new shopItem</h1>}</div>
+        <div className="modal__title">{isEditing ? <h1>{editTitle}</h1> : <h1>{addTitle}</h1>}</div>
       </Modal.Header>
       <Modal.Body>
         <FormShop

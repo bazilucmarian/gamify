@@ -19,7 +19,7 @@ function ShopModal({isOpen, hide}) {
     <Modal isOpen={isOpen} hide={hide}>
       <Modal.Header>
         <div className="modal__title">
-          <h1>Add new shopItem</h1>
+          <h1>Add shop item</h1>
         </div>
       </Modal.Header>
       <Modal.Body>

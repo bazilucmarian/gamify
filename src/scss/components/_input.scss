@@ -25,6 +25,10 @@
     padding-bottom: 0.5rem;
     border: none;
     outline: none;
+
+    &::placeholder{
+      color: transparent;
+    }
   }
 
   &__label {
@@ -58,13 +62,13 @@
   }
 
   &__input:focus + &__label .content,
-  &__input:valid + &__label .content {
+  &__input:not(:placeholder-shown) + &__label .content {
     transform: translateY(-75%);
     font-size: 1.2rem;
   }
 
   &__input:focus + &__label::after,
-  &__input:valid + &__label::after {
+  &__input:not(:placeholder-shown) + &__label::after {
     transform: translateY(0%);
   }
 }

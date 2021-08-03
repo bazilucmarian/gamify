@@ -11,6 +11,7 @@ function Input({inputId, inputType, inputValue, inputOnChange, inputLabel, error
         value={inputValue}
         onChange={inputOnChange}
         required={isRequired}
+        placeholder="placeholder"
       />
       <label className="form-group__label" htmlFor={inputId}>
         {error ? <span className="form-group__error">{error}</span> : <span className="content">{inputLabel}</span>}

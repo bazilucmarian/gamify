@@ -502,6 +502,9 @@ button[disabled] {
   border: none;
   outline: none;
 }
+.form-group__input::placeholder {
+  color: transparent;
+}
 .form-group__label {
   height: 100%;
   width: 100%;
@@ -529,11 +532,11 @@ button[disabled] {
   font-size: 1.4rem;
   transition: all 0.3s ease-in;
 }
-.form-group__input:focus + .form-group__label .content, .form-group__input:valid + .form-group__label .content {
+.form-group__input:focus + .form-group__label .content, .form-group__input:not(:placeholder-shown) + .form-group__label .content {
   transform: translateY(-75%);
   font-size: 1.2rem;
 }
-.form-group__input:focus + .form-group__label::after, .form-group__input:valid + .form-group__label::after {
+.form-group__input:focus + .form-group__label::after, .form-group__input:not(:placeholder-shown) + .form-group__label::after {
   transform: translateY(0%);
 }
 

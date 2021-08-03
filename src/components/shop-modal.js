@@ -49,8 +49,9 @@ ShopModal.propTypes = {
   currentShopItem: PropTypes.shape({
     title: PropTypes.string,
     xp: PropTypes.number,
-    credits: PropTypes.number,
+    credits: PropTypes.string,
     description: PropTypes.string,
+    imageURL: PropTypes.string,
     id: PropTypes.number
   })
 };

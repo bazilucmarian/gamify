@@ -51,7 +51,7 @@ ShopCard.propTypes = {
   isAdmin: PropTypes.bool,
   shopItem: PropTypes.shape({
     title: PropTypes.string,
-    description1: PropTypes.string,
+    description: PropTypes.string,
     credits: PropTypes.number,
     images: PropTypes.arrayOf(
       PropTypes.shape({

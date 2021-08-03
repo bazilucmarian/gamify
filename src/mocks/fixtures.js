@@ -113,7 +113,6 @@ const shopItems = [
     title: 'Brand new iPhone 11 Pro',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-
     credits: 50
   },
   {
@@ -139,7 +138,6 @@ const shopItems = [
     title: 'Macbook Pro 13',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-
     credits: 55
   },
   {
@@ -166,7 +164,6 @@ const shopItems = [
     title: 'XBOX',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-
     credits: 40
   },
   {
@@ -219,7 +216,6 @@ const shopItems = [
     title: 'Ultrawide monitor',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-
     credits: 80
   },
   {
@@ -228,7 +224,6 @@ const shopItems = [
     title: 'Shop item 2',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec quam dignissim, vehicula dolor non,imperdiet enim. Proin vel sapien eget odio congue ultricies ac eget sem. Donec tempus aliquam ante, sed euismod mauris euismod nec. In malesuada nisi id leo vehicula elementum. Nullam fermentum bibendum quam, invarius urna molestie in. Nulla sit amet ligula consequat, vehicula nunc quis, tristique enim. Suspendisse potenti. Aenean aliquet, turpis eu condimentum imperdiet, magna eros consequat ante.',
-
     credits: 80
   }
 ];

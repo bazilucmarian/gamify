@@ -8,7 +8,7 @@
   font-size: 1.4rem;
   line-height: 2.4rem;
   color: $color-grey-dark;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 
   &__container {
     display: flex;
@@ -31,6 +31,10 @@
     padding-bottom: 0.5rem;
     border: none;
     outline: none;
+
+    &::placeholder{
+      color: transparent;
+    }
   }
 
   &__label {
@@ -64,13 +68,13 @@
   }
 
   &__input:focus + &__label .content,
-  &__input:valid + &__label .content {
+  &__input:not(:placeholder-shown) + &__label .content {
     transform: translateY(-75%);
     font-size: 1.2rem;
   }
 
   &__input:focus + &__label::after,
-  &__input:valid + &__label::after {
+  &__input:not(:placeholder-shown) + &__label::after {
     transform: translateY(0%);
   }
 }

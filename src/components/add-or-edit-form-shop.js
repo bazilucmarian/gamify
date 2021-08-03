@@ -25,7 +25,7 @@ function FormShop({closeModal, handleChange, fields, errors, clearField}) {
   };
 
   const handleRemoveURL = (url, index) => {
-    const filteredURLS = imageURLS.filter((item, i) => index !== i);
+    const filteredURLS = imageURLS.filter((item, imageIndex) => index !== imageIndex);
     setImageURLS(filteredURLS);
   };
 
@@ -78,10 +78,10 @@ function FormShop({closeModal, handleChange, fields, errors, clearField}) {
         <Input
           inputLabel="Description"
           inputOnChange={handleChange}
-          inputValue={fields?.description1}
+          inputValue={fields?.description}
           inputType="text"
-          inputId="description1"
-          error={errors.description1}
+          inputId="description"
+          error={errors.description}
         />
       </div>
       <div className="buttons-container">
@@ -106,13 +106,13 @@ FormShop.propTypes = {
     title: PropTypes.string,
     xp: PropTypes.string,
     credits: PropTypes.string,
-    description1: PropTypes.string
+    description: PropTypes.string
   }),
   fields: PropTypes.shape({
     title: PropTypes.string,
     imageURL: PropTypes.string,
     credits: PropTypes.string,
-    description1: PropTypes.string
+    description: PropTypes.string
   })
 };
 

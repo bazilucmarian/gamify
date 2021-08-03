@@ -30,6 +30,10 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
     setFields({});
   }, []);
 
+  const clearField = field => {
+    setFields(prevState => ({...prevState, [field]: ''}));
+  };
+
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
@@ -43,6 +47,7 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
     fields,
     handleChange,
     resetForm,
+    clearField,
     handleSubmit,
     errors
   };

@@ -11,7 +11,7 @@ import Button from './button';
 
 const target = {target: {id: 'imageURL', value: ''}};
 
-function FormShop({closeModal, handleChange, handleSubmit, fields, errors, clearField, currentShopItem, isEditing}) {
+function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEditing}) {
   const handleAddURL = () => {
     const imageURLField = fields?.imageURL;
     if (imageURLField) {
@@ -107,7 +107,7 @@ FormShop.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  clearField: PropTypes.func,
+  isEditing: PropTypes.bool,
   isEditing: PropTypes.bool,
   errors: PropTypes.shape({
     title: PropTypes.string,
@@ -118,6 +118,12 @@ FormShop.propTypes = {
   fields: PropTypes.shape({
     title: PropTypes.string,
     imageURL: PropTypes.string,
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        imageUrl: PropTypes.string,
+        name: PropTypes.string
+      })
+    ),
     credits: PropTypes.number,
     description: PropTypes.string
   }),
@@ -136,7 +142,6 @@ FormShop.propTypes = {
 };
 
 FormShop.defaultProps = {
-  clearField: () => {},
   errors: {},
   fields: {},
   currentShopItem: {},

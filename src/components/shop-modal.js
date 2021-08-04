@@ -20,8 +20,7 @@ function ShopModal({isOpen, hide, currentShopItem, handleAddNewShopItem, handleE
   const isEditing = Boolean(currentShopItem?.id);
 
   const handler = isEditing ? handleEditShopItem : handleAddNewShopItem;
-  const {fields, handleChange, handleSubmit, errors, clearField} = useForm(currentShopItem, handler, validateShopForm);
-
+  const {fields, handleChange, handleSubmit, errors} = useForm(currentShopItem, handler, validateShopForm);
   return (
     <Modal isOpen={isOpen} hide={hide}>
       <Modal.Header>
@@ -36,7 +35,6 @@ function ShopModal({isOpen, hide, currentShopItem, handleAddNewShopItem, handleE
           fields={fields}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
-          clearField={clearField}
         />
       </Modal.Body>
     </Modal>

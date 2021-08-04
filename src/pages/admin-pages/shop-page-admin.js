@@ -35,6 +35,12 @@ function ShopPageAdmin() {
     hideModal();
   };
 
+  const handleEditShopItem = async newUpdatedShopItem => {
+    const newShopItems = await updateStateShopAdmin(allShopItems, newUpdatedShopItem, 'EDIT');
+    hideModal();
+    setAllShopItems(newShopItems);
+  };
+
   const handleOnCreate = () => {
     showModal();
     setCurrentShopItem();

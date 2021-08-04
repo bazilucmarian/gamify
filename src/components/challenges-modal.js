@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 
 import {useForm} from '../hooks/use-form';
-import validate from '../utils/form-rules-challenges';
+import validateChallengesForm from '../utils/form-rules-challenges';
 import {addTitle, editTitle} from '../constants/form-challenges';
 
 import Modal from './modal/modal';
@@ -20,8 +20,7 @@ function ChallengesModal({isOpen, hide, currentChallenge, handleAddNewChallenge,
   const isEditing = Boolean(currentChallenge?.id);
 
   const handler = isEditing ? handleEditChallenge : handleAddNewChallenge;
-  const {fields, handleChange, handleSubmit, errors} = useForm(currentChallenge, handler, validate);
-
+  const {fields, handleChange, handleSubmit, errors} = useForm(currentChallenge, handler, validateChallengesForm);
   return (
     <Modal isOpen={isOpen} hide={hide}>
       <Modal.Header>

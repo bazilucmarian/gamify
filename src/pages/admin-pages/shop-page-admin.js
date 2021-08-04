@@ -3,14 +3,13 @@ import React, {useEffect, useState} from 'react';
 import {getAllShopItems} from '../../services/services';
 import ShopSection from '../../components/shop-section';
 import Button from '../../components/button';
-// import ShopModal from '../../components/shop-modal';
 import useModal from '../../hooks/use-modal';
 import {updateStateShopAdmin} from '../../reducers';
 import ShopModal from '../../components/shop-modal';
 
 function ShopPageAdmin() {
   const [allShopItems, setAllShopItems] = useState([]);
-  const [currentShopItem, setCurrentShopItem] = useState(null);
+  const [currentShopItem, setCurrentShopItem] = useState();
 
   const {isOpen, hideModal, showModal} = useModal();
 
@@ -24,9 +23,15 @@ function ShopPageAdmin() {
     }
   };
 
+  const handleEditShopItem = async newUpdatedShopItem => {
+    const newShopItems = await updateStateShopAdmin(allShopItems, newUpdatedShopItem, 'EDIT');
+    hideModal();
+    setAllShopItems(newShopItems);
+  };
+
   const handleOnCreate = () => {
     showModal();
-    setCurrentShopItem(null);
+    setCurrentShopItem();
   };
 
   useEffect(() => {
@@ -44,7 +49,13 @@ function ShopPageAdmin() {
           Add new
         </Button>
       </div>
-      <ShopModal isOpen={isOpen} hide={hideModal} currentShopItem={currentShopItem} />
+      <ShopModal
+        isOpen={isOpen}
+        hide={hideModal}
+        currentShopItem={currentShopItem}
+        handleEditShopItem={handleEditShopItem}
+        handleAddNewShopItem={() => {}}
+      />
     </>
   );
 }

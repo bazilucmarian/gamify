@@ -9,7 +9,7 @@ import ShopModal from '../../components/shop-modal';
 
 function ShopPageAdmin() {
   const [allShopItems, setAllShopItems] = useState([]);
-  const [currentShopItem, setCurrentShopItem] = useState(null);
+  const [currentShopItem, setCurrentShopItem] = useState();
 
   const {isOpen, hideModal, showModal} = useModal();
 
@@ -31,7 +31,7 @@ function ShopPageAdmin() {
 
   const handleOnCreate = () => {
     showModal();
-    setCurrentShopItem(null);
+    setCurrentShopItem();
   };
 
   useEffect(() => {

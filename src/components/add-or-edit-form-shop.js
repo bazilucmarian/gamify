@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React, {Fragment, useState} from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 import Plus from '../icons/plus';
@@ -9,25 +8,28 @@ import {checkUrl} from '../utils';
 import Input from './input';
 import Button from './button';
 
-function FormShop({closeModal, handleChange, handleSubmit, fields, errors, clearField, currentShopItem, isEditing}) {
-  const [imageURLS, setImageURLS] = useState(isEditing ? currentShopItem?.images : []);
-
-  const imageURLField = fields?.imageURL;
-
+const target = {target: {id: 'imageURL', value: ''}};
+function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEditing}) {
   const handleAddURL = () => {
+    const imageURLField = fields?.imageURL;
     if (imageURLField) {
       const validURL = checkUrl(imageURLField) ? imageURLField : null;
 
       if (validURL) {
-        setImageURLS(prev => [...prev, {imageUrl: validURL, name: `${fields.title}-${Math.random()}`}]);
-        clearField('imageURL');
+        handleChange(target, 'images', [
+          ...fields?.images,
+          {imageUrl: validURL, name: `${fields.title}-${Math.random()}`}
+        ]);
       }
     }
   };
 
   const handleRemoveURL = index => {
-    const filteredURLS = imageURLS.filter((_, imageIndex) => index !== imageIndex);
-    setImageURLS(filteredURLS);
+    handleChange(
+      target,
+      'images',
+      fields?.images.filter((_, imageIndex) => index !== imageIndex)
+    );
   };
 
   return (
@@ -44,7 +46,7 @@ function FormShop({closeModal, handleChange, handleSubmit, fields, errors, clear
         <div className="image-container">
           <Input
             inputLabel="ImageUrl"
-            inputOnChange={e => handleChange(e, 'images')}
+            inputOnChange={handleChange}
             inputValue={fields?.imageURL}
             inputType="text"
             inputId="imageURL"
@@ -56,8 +58,8 @@ function FormShop({closeModal, handleChange, handleSubmit, fields, errors, clear
             <Plus onClick={handleAddURL} />
           </div>
         </div>
-        {imageURLS &&
-          imageURLS.map(({imageUrl}, index) => (
+        {fields?.images &&
+          fields.images.map(({imageUrl}, index) => (
             <Fragment key={Date.now() * Math.random()}>
               <div className="url-container">
                 <p className="url">{imageUrl}</p>
@@ -103,7 +105,6 @@ FormShop.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  clearField: PropTypes.func,
   isEditing: PropTypes.bool,
   errors: PropTypes.shape({
     title: PropTypes.string,
@@ -114,6 +115,12 @@ FormShop.propTypes = {
   fields: PropTypes.shape({
     title: PropTypes.string,
     imageURL: PropTypes.string,
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        imageUrl: PropTypes.string,
+        name: PropTypes.string
+      })
+    ),
     credits: PropTypes.number,
     description: PropTypes.string
   }),
@@ -132,7 +139,6 @@ FormShop.propTypes = {
 };
 
 FormShop.defaultProps = {
-  clearField: () => {},
   errors: {},
   fields: {},
   currentShopItem: {},

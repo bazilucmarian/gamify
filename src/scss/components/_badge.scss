@@ -1,0 +1,18 @@
+.badge-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &.strip {
+    position: absolute;
+    top: 1.5rem;
+    left: -4.5rem;
+    background-color: $color-orange;
+    color: $color-black;
+    font-weight: 500;
+    font-size: 1.8rem;
+    padding: 0.5rem 5rem;
+    text-align: center;
+    transform: rotate(-45deg);
+  }
+}

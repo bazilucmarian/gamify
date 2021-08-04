@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
 import ChallengesSection from '../../components/challenges-section';
-import EmptyPlaceholder from '../../components/empty-placeholder';
-import {getInProgressOrCompletedChallenges} from '../../services/services';
+// import EmptyPlaceholder from '../../components/empty-placeholder';
+import {getInProgressOrCompletedChallenges, getItemsAddedToShoppingList} from '../../services/services';
 import {changeStatusRequest} from '../../services/services-utils';
+import ShopSection from '../../components/shop-section';
 
 function OverviewPage({loggedInUserId}) {
   const [inProgressOrPendingChallenges, setInProgressOrPendingChallenges] = useState([]);
   const [completedChallenges, setCompletedChallenges] = useState([]);
+  const [shoppingList, setShoppingList] = useState([]);
 
   const handleChangeStatus = async (challengeId, newStatus, userId = loggedInUserId, operation) => {
     const newUpdatedState = await changeStatusRequest(
@@ -29,11 +31,17 @@ function OverviewPage({loggedInUserId}) {
     };
 
     getUserChallenges();
+
+    const getShopItems = async () => {
+      const shopItems = await getItemsAddedToShoppingList(loggedInUserId);
+      setShoppingList(shopItems);
+    };
+    getShopItems();
   }, [loggedInUserId]);
 
-  if (inProgressOrPendingChallenges.length === 0 && completedChallenges.length === 0) {
-    return <EmptyPlaceholder message="Sorry... You have no challenge in progress or completed 😔" />;
-  }
+  // if (inProgressOrPendingChallenges.length === 0 && completedChallenges.length === 0) {
+  //   return <EmptyPlaceholder message="Sorry... You have no challenge in progress or completed 😔" />;
+  // }
   return (
     <div className="home-page">
       <ChallengesSection
@@ -48,6 +56,8 @@ function OverviewPage({loggedInUserId}) {
         handleChangeStatus={handleChangeStatus}
         isScrollable
       />
+
+      <ShopSection title="Purchased products" shopItems={shoppingList} />
     </div>
   );
 }

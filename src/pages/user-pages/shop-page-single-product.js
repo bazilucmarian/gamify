@@ -8,7 +8,7 @@ import {getSingleShopItem} from '../../services/services';
 
 function SingleProduct() {
   const [shopItem, setShopItem] = useState({});
-  const {images, title, description} = shopItem;
+  const {images, title, description, credits} = shopItem;
 
   const {id: idParam} = useParams();
   const history = useHistory();
@@ -37,8 +37,13 @@ function SingleProduct() {
         <div className="single-shopItem__details">
           <h1>{title}</h1>
           <p className="single-shopItem__p1">{description}</p>
-          <Button color="secondary" variant="contained-secondary" size="lg">
-            Buy - 50 Credits
+          <Button
+            color="secondary"
+            variant="contained-secondary"
+            size="lg"
+            // onClick={() => handleUpdateShopItems('ADD_TO_SHOPPING_LIST')}
+          >
+            {`Buy - ${credits} Credits`}
           </Button>
         </div>
       </div>

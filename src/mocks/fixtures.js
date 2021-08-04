@@ -234,7 +234,7 @@ const users = [
     name: 'Daniel Toma',
     job: 'Programmer',
     profilePic: '',
-    credits: 10,
+    credits: 0,
     xp: 100,
     role: 'user'
   },
@@ -260,4 +260,15 @@ const userChallengesData = [
   }
 ];
 
-export {challengesList, users, userChallengesData, statusDictionary, shopItems};
+const userShopData = [
+  {
+    userId: 123,
+    shopItems: []
+  },
+  {
+    userId: 9232,
+    shopItems: []
+  }
+];
+
+export {challengesList, users, userChallengesData, statusDictionary, shopItems, userShopData};

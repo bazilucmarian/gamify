@@ -4,6 +4,8 @@ import {statusDictionary, userChallengesData, users} from '../mocks/fixtures';
 
 const getUser = role => users.find(user => user.role === role);
 
+const getUserById = id => users.find(user => user.id === id);
+
 const getLoggedInUserChallenges = userId => userChallengesData.find(user => user.userId === userId);
 
 const camelCaseToKebabCase = string =>
@@ -18,4 +20,4 @@ const getTotalXpAndCredits = challenges => {
   };
 };
 
-export {getUser, getLoggedInUserChallenges, camelCaseToKebabCase, getTotalXpAndCredits};
+export {getUser, getLoggedInUserChallenges, camelCaseToKebabCase, getTotalXpAndCredits, getUserById};

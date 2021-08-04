@@ -5,7 +5,13 @@ import checkUrl from './check-url';
 import {navLinksUser, navLinksAdmin} from './nav-links';
 import getInitials from './get-initials';
 import {statusDictionary} from './status-dictionary';
-import {camelCaseToKebabCase, getUser, getLoggedInUserChallenges, getTotalXpAndCredits} from './utils-functions';
+import {
+  camelCaseToKebabCase,
+  getUser,
+  getLoggedInUserChallenges,
+  getTotalXpAndCredits,
+  getUserById
+} from './utils-functions';
 
 export {
   calculateXp,
@@ -16,6 +22,7 @@ export {
   statusDictionary,
   getUser,
   getTotalXpAndCredits,
+  getUserById,
   getLoggedInUserChallenges,
   camelCaseToKebabCase,
   challengesList,

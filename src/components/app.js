@@ -46,8 +46,8 @@ function App() {
               path="/challenges"
               render={props => <ChallengesPage {...props} loggedInUserId={loggedInUser.id} />}
             />
-            <Route path="/shop" exact component={ShopPage} />
-            <Route path="/shop/:id" exact component={SingleProduct} />
+            <Route path="/shop" exact render={props => <ShopPage {...props} loggedInUser={loggedInUser} />} />
+            <Route path="/shop/:id" exact render={props => <SingleProduct {...props} loggedInUser={loggedInUser} />} />
 
             <Route path="/admin/challenges" render={props => <ChallengesPageAdmin {...props} />} />
             <Route

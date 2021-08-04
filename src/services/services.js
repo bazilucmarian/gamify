@@ -156,3 +156,30 @@ export const editShopItem = async shopItem => {
     return error.message;
   }
 };
+
+// requests for getting items from shopping list or add new one
+
+export const addItemToShoppingList = async (userId, shopItem) => {
+  try {
+    const response = await fetch(`/shop/cart/${userId}`, {
+      method: 'POST',
+      body: shopItem
+    });
+
+    return await response.json();
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const getItemsAddedToShoppingList = async userId => {
+  try {
+    const response = await fetch(`/shop/cart/${userId}`, {
+      method: 'GET'
+    });
+
+    return await response.json();
+  } catch (error) {
+    return error.message;
+  }
+};

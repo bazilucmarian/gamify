@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
@@ -6,6 +7,7 @@ import Placeholder from '../assets/imgs/placeholder.png';
 
 import Button from './button';
 import ButtonContainerAdmin from './button-container-admin';
+import Badge from './badge';
 
 const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
   const history = useHistory();
@@ -14,6 +16,7 @@ const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
     id,
     description,
     credits,
+    quantity,
     images: [{imageUrl} = {}]
   } = shopItem || {};
 
@@ -37,8 +40,15 @@ const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
         <div className="shop-card__bottom">
           {isAdmin ? (
             <ButtonContainerAdmin onClick={onUpdateShopItems} />
+          ) : !isAdmin && quantity ? (
+            <Badge quantity={quantity} />
           ) : (
-            <Button color="secondary" size="lg" variant="contained-secondary">
+            <Button
+              color="secondary"
+              size="lg"
+              variant="contained-secondary"
+              onClick={() => onUpdateShopItems('ADD_TO_SHOPPING_LIST')}
+            >
               {`Buy - ${credits} Credits`}
             </Button>
           )}

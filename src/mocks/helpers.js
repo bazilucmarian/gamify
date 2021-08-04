@@ -1,8 +1,15 @@
-import {challengesList, shopItems, statusDictionary, userChallengesData, users} from './fixtures';
+import {getTotalXpAndCredits, getUserById} from '../utils';
+
+import {challengesList, shopItems, statusDictionary, userChallengesData, users, userShopData} from './fixtures';
 
 const getStatus = (challenges, id) => {
   const {status} = challenges.find(({challengeId}) => challengeId === id) || {};
   return status;
+};
+
+const getQuantity = (userShop, id) => {
+  const {quantity} = userShop?.shopItems?.find(({shopItemId}) => shopItemId === Number(id)) || {};
+  return quantity;
 };
 
 const filterByStatus = (challenges, statuses) => challenges.filter(({status}) => statuses.includes(status));
@@ -36,6 +43,13 @@ export const filterChallenges = (usrId, sts) => {
     statusDictionary.validated,
     statusDictionary.denied
   ]);
+
+  // update userXp and credits with challenges validated
+  const userLoggedIn = getUserById(usrId);
+  const validatedChallenges = filterByStatus(filteredChallengesWithStatus, [statusDictionary.validated]);
+  const {xpTotal, creditsTotal} = getTotalXpAndCredits(validatedChallenges, userLoggedIn.xp, userLoggedIn.credits);
+  userLoggedIn.xp = xpTotal;
+  userLoggedIn.credits = creditsTotal;
 
   return {
     inProgressChallenges,
@@ -134,4 +148,27 @@ export const getNewUpdatedShopItem = (shopItem, shopItemId) => {
   shopItems[singleShopItemIndex].images = newImages;
 
   return shopItems[singleShopItemIndex];
+};
+
+// SHOP: USER:  functionality for PUT request for  shopping list  : when you press buy the product id and quantity will be added to the database
+
+export const updateShopItems = (userIdParam, shopItemId) => {
+  const loggedInShopItems = userShopData.find(({userId}) => userId === Number(userIdParam));
+
+  const singleShopItemIndex = loggedInShopItems?.shopItems.findIndex(item => item.shopItemId === shopItemId);
+  if (singleShopItemIndex !== -1) {
+    loggedInShopItems.shopItems[singleShopItemIndex].quantity += 1;
+  } else {
+    loggedInShopItems.shopItems.push({shopItemId, quantity: 1});
+  }
+};
+
+// SHOP:USER
+export const getItemsAddedToShoppingList = userIdParam => {
+  const userShop = userShopData?.find(({userId}) => userId === Number(userIdParam));
+  const userShopIds = new Set(userShop?.shopItems?.map(({shopItemId}) => shopItemId));
+
+  return shopItems
+    .filter(shopItem => userShopIds.has(shopItem.id))
+    .map(shopItem => ({...shopItem, userId: userIdParam, quantity: getQuantity(userShop, shopItem.id)}));
 };

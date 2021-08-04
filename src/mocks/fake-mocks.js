@@ -8,10 +8,12 @@ import {
   getAllChallengesList,
   getAllShopItems,
   getChallengesByStatus,
+  getItemsAddedToShoppingList,
   getNewChallengeAdded,
   getNewUpdatedChallenge,
   getNewUpdatedShopItem,
   getShopItemById,
+  updateShopItems,
   updateUserChallenges
 } from './helpers';
 
@@ -162,6 +164,39 @@ fetchMock.put({
     return {
       status: 200,
       body: getNewUpdatedShopItem(shopItem, shopItemId)
+    };
+  }
+});
+
+/* USER : add new shop item to shopping list */
+fetchMock.post({
+  matcher: 'express:/shop/cart/:userId',
+
+  response: (url, opts) => {
+    const userId = url.split('/').filter(Boolean)[2];
+    const shopItem = opts.body;
+
+    updateShopItems(userId, shopItem.id);
+
+    if (shopItem) {
+      return {
+        status: 200,
+        body: {message: 'Success Added'}
+      };
+    }
+    throw new Error('Problems  !!');
+  }
+});
+
+fetchMock.get({
+  matcher: 'express:/shop/cart/:userId',
+
+  response: (url, opts) => {
+    const userId = url.split('/').filter(Boolean)[2];
+
+    return {
+      status: 200,
+      body: getItemsAddedToShoppingList(userId)
     };
   }
 });

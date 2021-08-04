@@ -5,12 +5,17 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const resetForm = useCallback(() => {
+    setFields({});
+  }, []);
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       onSubmitCallback(fields);
       setIsSubmitting(false);
+      resetForm();
     }
-  }, [errors, fields, isSubmitting, onSubmitCallback]);
+  }, [errors, fields, isSubmitting, onSubmitCallback, resetForm]);
 
   useEffect(() => {
     setFields(initialState);
@@ -28,10 +33,6 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
       [id]: value,
       ...(fieldName && {[fieldName]: fieldValue})
     }));
-  }, []);
-
-  const resetForm = useCallback(() => {
-    setFields({});
   }, []);
 
   const handleSubmit = useCallback(

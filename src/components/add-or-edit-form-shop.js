@@ -108,7 +108,6 @@ FormShop.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   isEditing: PropTypes.bool,
-  isEditing: PropTypes.bool,
   errors: PropTypes.shape({
     title: PropTypes.string,
     xp: PropTypes.string,

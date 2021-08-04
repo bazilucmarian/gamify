@@ -155,16 +155,3 @@ export const editShopItem = async shopItem => {
     return error.message;
   }
 };
-
-export const editShopItem = async shopItem => {
-  try {
-    const response = await fetch(`/shop/${shopItem.id}`, {
-      method: 'PUT',
-      body: shopItem
-    });
-
-    return await response.json();
-  } catch (error) {
-    return error.message;
-  }
-};

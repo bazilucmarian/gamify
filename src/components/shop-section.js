@@ -11,6 +11,7 @@ const ShopSection = ({title, isScrollable, shopItems, isAdmin, handleUpdateShopI
   if (shopItems.length === 0) {
     return null;
   }
+
   return (
     <section className="shop-section">
       <h2 className="shop-section__title">{title}</h2>

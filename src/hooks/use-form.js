@@ -5,29 +5,35 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const resetForm = useCallback(() => {
+    const blankState = Object.fromEntries(Object.entries(fields).map(([key, value]) => [key, '']));
+    setFields(blankState);
+  }, [fields]);
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       onSubmitCallback(fields);
+      resetForm();
       setIsSubmitting(false);
     }
-  }, [errors, fields, isSubmitting, onSubmitCallback]);
+  }, [errors, fields, isSubmitting, onSubmitCallback, resetForm]);
 
   useEffect(() => {
     setFields(initialState);
   }, [initialState]);
 
-  const handleChange = useCallback(e => {
+  const handleChange = useCallback((e, fieldName, fieldValue) => {
     let {value} = e.target;
     const {id, type} = e.target;
 
     if (type === 'number') {
       value = Number(value);
     }
-    setFields(prevState => ({...prevState, [id]: value}));
-  }, []);
-
-  const resetForm = useCallback(() => {
-    setFields({});
+    setFields(prevState => ({
+      ...prevState,
+      [id]: value,
+      ...(fieldName && {[fieldName]: fieldValue})
+    }));
   }, []);
 
   const clearField = field => {
@@ -46,7 +52,6 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
   return {
     fields,
     handleChange,
-    resetForm,
     clearField,
     handleSubmit,
     errors

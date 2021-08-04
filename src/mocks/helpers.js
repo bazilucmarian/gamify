@@ -122,3 +122,22 @@ export const deleteShopItem = shopItemId => {
   shopItems.splice(singleShopItemIndex, 1);
   return {message: 'Success deleted!'};
 };
+
+//  ADMIN-SHOP: POST new ShopItem
+export const getNewShopItemAdded = shopItem => {
+  shopItems.unshift(shopItem);
+  return shopItem;
+};
+
+//  ADMIN-SHOP : edit specific shopItem
+
+export const getNewUpdatedShopItem = (shopItem, shopItemId) => {
+  const {title: newTitle, credits: newCredits, description: newDescription, images: newImages} = shopItem;
+  const singleShopItemIndex = shopItems.findIndex(({id}) => id === Number(shopItemId));
+  shopItems[singleShopItemIndex].title = newTitle;
+  shopItems[singleShopItemIndex].credits = newCredits;
+  shopItems[singleShopItemIndex].description = newDescription;
+  shopItems[singleShopItemIndex].images = newImages;
+
+  return shopItems[singleShopItemIndex];
+};

@@ -1,7 +1,7 @@
-import {descriptionMinLength, maxCredits, maxXp, minCredits, minXp, titleMinLength} from '../constants/form-validation';
+import {descriptionMinLength, maxCredits, minCredits, titleMinLength} from '../constants/form-shop';
 
 /* eslint-disable prefer-const */
-export default function validate(fields) {
+export default function validateShopForm(fields) {
   const specialCharacters = /[!"#$%*<>?^~§©®°¶]+/;
 
   let errors = {};
@@ -9,10 +9,6 @@ export default function validate(fields) {
     errors.title = `Please lengthen title to ${titleMinLength} characters or more`;
   } else if (fields.title.match(specialCharacters) !== null) {
     errors.title = 'Remove special characters from the title.';
-  }
-
-  if (!(fields.xp >= minXp && fields.xp <= maxXp)) {
-    errors.xp = `XP must be between ${minXp} and ${maxXp}`;
   }
 
   if (!(fields.credits >= minCredits && fields.credits <= maxCredits)) {

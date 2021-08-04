@@ -9,7 +9,9 @@ import {
   getAllShopItems,
   getChallengesByStatus,
   getNewChallengeAdded,
+  getNewShopItemAdded,
   getNewUpdatedChallenge,
+  getNewUpdatedShopItem,
   getShopItemById,
   updateUserChallenges
 } from './helpers';
@@ -146,5 +148,38 @@ fetchMock.delete({
       };
     }
     throw new Error('Problems delete mock!!');
+  }
+});
+
+/* ADMIN : EDIT specific shop item by admin */
+
+fetchMock.put({
+  matcher: 'express:/shop/:shopItemId',
+  response: (url, opts) => {
+    const [, shopItemId] = url.split('/').filter(Boolean);
+
+    const shopItem = opts.body;
+
+    return {
+      status: 200,
+      body: getNewUpdatedShopItem(shopItem, shopItemId)
+    };
+  }
+});
+
+/* ADMIN : CREATE new shopItem by admin */
+fetchMock.post({
+  matcher: url => url === '/shop',
+
+  response: (_, opts) => {
+    const shopItem = opts.body;
+
+    if (shopItem) {
+      return {
+        status: 200,
+        body: getNewShopItemAdded(shopItem)
+      };
+    }
+    throw new Error('Problems put mock !!');
   }
 });

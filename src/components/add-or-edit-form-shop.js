@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
@@ -52,7 +51,7 @@ function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEdi
             inputValue={fields?.imageURL}
             inputType="text"
             inputId="imageURL"
-            // error={errors.xp}
+            error={errors.imagesURL}
             isRequired={false}
           />
 
@@ -110,7 +109,7 @@ FormShop.propTypes = {
   isEditing: PropTypes.bool,
   errors: PropTypes.shape({
     title: PropTypes.string,
-    xp: PropTypes.string,
+    imagesURL: PropTypes.string,
     credits: PropTypes.string,
     description: PropTypes.string
   }),

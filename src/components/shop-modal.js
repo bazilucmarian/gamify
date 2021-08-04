@@ -12,7 +12,7 @@ const emptyState = {
   title: '',
   imageURL: '',
   images: [],
-  credits: undefined,
+  credits: '',
   description: ''
 };
 

@@ -9,30 +9,18 @@ import {checkUrl} from '../utils';
 import Input from './input';
 import Button from './button';
 
-function FormShop({
-  closeModal,
-  handleChange,
-  handleSubmit,
-  fields,
-  errors,
-  clearField,
-  currentShopItem,
-  isEditing,
-  updateSingleField
-}) {
+function FormShop({closeModal, handleChange, handleSubmit, fields, errors, clearField, currentShopItem, isEditing}) {
   const [imageURLS, setImageURLS] = useState(isEditing ? currentShopItem?.images : []);
 
   const imageURLField = fields?.imageURL;
 
   const handleAddURL = () => {
-    // TODO: needs validation improvements
     if (imageURLField) {
       const validURL = checkUrl(imageURLField) ? imageURLField : null;
 
       if (validURL) {
         setImageURLS(prev => [...prev, {imageUrl: validURL, name: `${fields.title}-${Math.random()}`}]);
         clearField('imageURL');
-        updateSingleField('images', [...imageURLS, {imageUrl: validURL, name: `${fields.title}-${Math.random()}`}]);
       }
     }
   };
@@ -40,7 +28,6 @@ function FormShop({
   const handleRemoveURL = index => {
     const filteredURLS = imageURLS.filter((_, imageIndex) => index !== imageIndex);
     setImageURLS(filteredURLS);
-    updateSingleField('images', filteredURLS);
   };
 
   return (
@@ -57,7 +44,7 @@ function FormShop({
         <div className="image-container">
           <Input
             inputLabel="ImageUrl"
-            inputOnChange={handleChange}
+            inputOnChange={e => handleChange(e, 'images')}
             inputValue={fields?.imageURL}
             inputType="text"
             inputId="imageURL"

@@ -16,14 +16,18 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
     setFields(initialState);
   }, [initialState]);
 
-  const handleChange = useCallback(e => {
+  const handleChange = useCallback((e, fieldName) => {
     let {value} = e.target;
     const {id, type} = e.target;
 
     if (type === 'number') {
       value = Number(value);
     }
-    setFields(prevState => ({...prevState, [id]: value}));
+    setFields(prevState => ({
+      ...prevState,
+      [id]: value,
+      ...(fieldName && {[fieldName]: [...prevState[fieldName], value]})
+    }));
   }, []);
 
   const resetForm = useCallback(() => {
@@ -32,10 +36,6 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
 
   const clearField = field => {
     setFields(prevState => ({...prevState, [field]: ''}));
-  };
-
-  const updateSingleField = (field, newData) => {
-    setFields(prevState => ({...prevState, [field]: newData}));
   };
 
   const handleSubmit = useCallback(
@@ -53,7 +53,6 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
     resetForm,
     clearField,
     handleSubmit,
-    errors,
-    updateSingleField
+    errors
   };
 };

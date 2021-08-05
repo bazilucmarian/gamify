@@ -9,6 +9,7 @@ import {
   getAllShopItems,
   getChallengesByStatus,
   getNewChallengeAdded,
+  getNewShopItemAdded,
   getNewUpdatedChallenge,
   getNewUpdatedShopItem,
   getShopItemById,
@@ -163,5 +164,22 @@ fetchMock.put({
       status: 200,
       body: getNewUpdatedShopItem(shopItem, shopItemId)
     };
+  }
+});
+
+/* ADMIN : CREATE new shopItem by admin */
+fetchMock.post({
+  matcher: url => url === '/shop',
+
+  response: (_, opts) => {
+    const shopItem = opts.body;
+
+    if (shopItem) {
+      return {
+        status: 200,
+        body: getNewShopItemAdded(shopItem)
+      };
+    }
+    throw new Error('Problems put mock !!');
   }
 });

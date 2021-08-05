@@ -1,4 +1,11 @@
-import {addNewChallenge, deleteChallenge, deleteShopItem, editChallenge, editShopItem} from '../services/services';
+import {
+  addNewChallenge,
+  addNewShopItem,
+  deleteChallenge,
+  deleteShopItem,
+  editChallenge,
+  editShopItem
+} from '../services/services';
 
 // if the status changes from inProgress to inPending, the card will persist, otherwise will be deleted
 export const updateStateForUserChallenges = (challenges, challengeId, newStatus, operation) => {
@@ -63,7 +70,8 @@ export const updateStateShopAdmin = async (allShopItems, shopItem, operation) =>
     }
 
     case 'CREATE': {
-      break;
+      const newShopItem = await addNewShopItem({...shopItem, id: Date.now()});
+      return [newShopItem, ...allShopItems];
     }
 
     default:

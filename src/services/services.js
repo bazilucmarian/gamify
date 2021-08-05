@@ -137,7 +137,6 @@ export const addNewShopItem = async shopItem => {
       method: 'POST',
       body: shopItem
     });
-
     return await response.json();
   } catch (error) {
     return error.message;

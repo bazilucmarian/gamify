@@ -9,6 +9,7 @@ import ButtonContainerAdmin from './button-container-admin';
 
 const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
   const history = useHistory();
+
   const {
     title,
     id,

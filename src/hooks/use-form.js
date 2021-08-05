@@ -1,20 +1,25 @@
 import {useCallback, useEffect, useState} from 'react';
 
-export const useForm = (initialState, onSubmitCallback, validate) => {
+export const useForm = (initialState, currentState, onSubmitCallback, validate) => {
   const [fields, setFields] = useState();
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const resetForm = useCallback(() => {
+    setFields(initialState);
+  }, [initialState]);
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       onSubmitCallback(fields);
+      resetForm();
       setIsSubmitting(false);
     }
-  }, [errors, fields, isSubmitting, onSubmitCallback]);
+  }, [errors, fields, isSubmitting, onSubmitCallback, resetForm]);
 
   useEffect(() => {
-    setFields(initialState);
-  }, [initialState]);
+    setFields(currentState);
+  }, [currentState]);
 
   const handleChange = useCallback((e, fieldName, fieldValue) => {
     let {value} = e.target;
@@ -28,10 +33,6 @@ export const useForm = (initialState, onSubmitCallback, validate) => {
       [id]: value,
       ...(fieldName && {[fieldName]: fieldValue})
     }));
-  }, []);
-
-  const resetForm = useCallback(() => {
-    setFields({});
   }, []);
 
   const handleSubmit = useCallback(

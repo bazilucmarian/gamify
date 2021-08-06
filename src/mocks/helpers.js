@@ -149,6 +149,12 @@ export const deleteShopItem = shopItemId => {
   return {message: 'Success deleted!'};
 };
 
+//  ADMIN-SHOP: POST new ShopItem
+export const getNewShopItemAdded = shopItem => {
+  shopItems.unshift(shopItem);
+  return shopItem;
+};
+
 //  ADMIN-SHOP : edit specific shopItem
 
 export const getNewUpdatedShopItem = (shopItem, shopItemId) => {

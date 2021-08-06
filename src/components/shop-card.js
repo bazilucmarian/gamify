@@ -11,6 +11,7 @@ import Badge from './badge';
 
 const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
   const history = useHistory();
+
   const {
     title,
     id,

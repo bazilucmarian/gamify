@@ -1,6 +1,7 @@
 import {
   addItemToShoppingList,
   addNewChallenge,
+  addNewShopItem,
   deleteChallenge,
   deleteShopItem,
   editChallenge,
@@ -70,7 +71,8 @@ export const updateStateShopAdmin = async (allShopItems, shopItem, operation) =>
     }
 
     case 'CREATE': {
-      break;
+      const newShopItem = await addNewShopItem({...shopItem, id: Date.now()});
+      return [newShopItem, ...allShopItems];
     }
 
     default:

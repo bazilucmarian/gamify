@@ -9,6 +9,7 @@ import Input from './input';
 import Button from './button';
 
 const target = {target: {id: 'imageURL', value: ''}};
+
 function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEditing}) {
   const handleAddURL = () => {
     const imageURLField = fields?.imageURL;
@@ -50,7 +51,7 @@ function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEdi
             inputValue={fields?.imageURL}
             inputType="text"
             inputId="imageURL"
-            error={errors.xp}
+            error={errors.imagesURL}
             isRequired={false}
           />
 
@@ -108,7 +109,7 @@ FormShop.propTypes = {
   isEditing: PropTypes.bool,
   errors: PropTypes.shape({
     title: PropTypes.string,
-    xp: PropTypes.string,
+    imagesURL: PropTypes.string,
     credits: PropTypes.string,
     description: PropTypes.string
   }),

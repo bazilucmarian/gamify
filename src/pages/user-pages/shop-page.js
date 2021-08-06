@@ -3,9 +3,9 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
+import {updateStatePurchasedShopItems} from '../../reducers';
 import {getAllShopItems} from '../../services/services';
 import ShopSection from '../../components/shop-section';
-import {updateStatePurchasedShopItems} from '../../reducers';
 
 function ShopPage({loggedInUser, setLoggedInUser, forceUpdate}) {
   const [allShopItems, setAllShopItems] = useState([]);

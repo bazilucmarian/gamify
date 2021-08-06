@@ -23,10 +23,16 @@ function ShopPageAdmin() {
     }
   };
 
+  const handleAddNewShopItem = async newShopItem => {
+    const newShopItems = await updateStateShopAdmin(allShopItems, newShopItem, 'CREATE');
+    setAllShopItems(newShopItems);
+    hideModal();
+  };
+
   const handleEditShopItem = async newUpdatedShopItem => {
     const newShopItems = await updateStateShopAdmin(allShopItems, newUpdatedShopItem, 'EDIT');
-    hideModal();
     setAllShopItems(newShopItems);
+    hideModal();
   };
 
   const handleOnCreate = () => {
@@ -54,7 +60,7 @@ function ShopPageAdmin() {
         hide={hideModal}
         currentShopItem={currentShopItem}
         handleEditShopItem={handleEditShopItem}
-        handleAddNewShopItem={() => {}}
+        handleAddNewShopItem={handleAddNewShopItem}
       />
     </>
   );

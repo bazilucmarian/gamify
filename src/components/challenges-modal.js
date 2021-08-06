@@ -20,7 +20,12 @@ function ChallengesModal({isOpen, hide, currentChallenge, handleAddNewChallenge,
   const isEditing = Boolean(currentChallenge?.id);
 
   const handler = isEditing ? handleEditChallenge : handleAddNewChallenge;
-  const {fields, handleChange, handleSubmit, errors} = useForm(currentChallenge, handler, validateChallengesForm);
+  const {fields, handleChange, handleSubmit, errors} = useForm(
+    emptyState,
+    currentChallenge,
+    handler,
+    validateChallengesForm
+  );
   return (
     <Modal isOpen={isOpen} hide={hide}>
       <Modal.Header>

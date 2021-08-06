@@ -10,30 +10,18 @@ export const getUserService = async role => {
   } catch (error) {
     console.error(error.message);
   }
-  console.log('user- from service', data);
   return data;
-};
-
-export const getUserServiceById = async userId => {
-  try {
-    const statusResponse = await fetch(`/user-data/${userId}`);
-    return await statusResponse.json();
-  } catch (error) {
-    return error.message;
-  }
 };
 
 /* USER PAGES SERVICES */
 
 export const getAvailableChallenges = async (userId, status) => {
-  let data;
   try {
     const statusResponse = await fetch(`/user-challenges/${userId}/${status}`);
-    data = await statusResponse.json();
+    return await statusResponse.json();
   } catch (error) {
-    console.error(error.message);
+    return error.message;
   }
-  return data;
 };
 
 export const getInProgressOrCompletedChallenges = async userId => {

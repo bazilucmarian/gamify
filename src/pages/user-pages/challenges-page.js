@@ -6,6 +6,7 @@ import {getAvailableChallenges} from '../../services/services';
 import {statusDictionary} from '../../mocks/fixtures';
 import {changeStatusRequest} from '../../services/services-utils';
 
+const userFromLocalStorage = JSON.parse(localStorage.getItem('userInfo'));
 function ChallengesPage({loggedInUserId}) {
   const [availableChallenges, setAvailableChallenges] = useState([]);
 
@@ -21,6 +22,9 @@ function ChallengesPage({loggedInUserId}) {
     })();
   }, [loggedInUserId]);
 
+  if (availableChallenges?.length === 0) {
+    return null;
+  }
   return (
     <ChallengesSection
       title="Available Challenges"
@@ -31,7 +35,10 @@ function ChallengesPage({loggedInUserId}) {
 }
 
 ChallengesPage.propTypes = {
-  loggedInUserId: PropTypes.number.isRequired
+  loggedInUserId: PropTypes.number
+};
+ChallengesPage.defaultProps = {
+  loggedInUserId: userFromLocalStorage.id
 };
 
 export default ChallengesPage;

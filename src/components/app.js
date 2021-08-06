@@ -19,16 +19,12 @@ function App() {
   const [routes, setRoutes] = useState(navLinksUser);
   const isAdmin = loggedInUser.role === 'admin';
 
-  // const location = useLocation();
-
   const handleSwitchUser = async () => {
     const userData = await getUserService(isAdmin ? 'user' : 'admin');
-    console.log('from handleSwitch', userData);
     setLoggedInUser(userData);
   };
 
   const forceUpdate = async () => {
-    console.log('call force update---');
     const userData = await getUserService('user');
     setLoggedInUser(userData);
   };
@@ -41,6 +37,7 @@ function App() {
     (async () => {
       const userData = await getUserService('user');
       setLoggedInUser(userData);
+      localStorage.setItem('userInfo', JSON.stringify(userData));
     })();
   }, []);
 
@@ -49,31 +46,14 @@ function App() {
       <Sidebar routes={routes} loggedInUser={loggedInUser} onSwitchUser={handleSwitchUser} />
       <div className="app-wrapper__screens">
         <Switch>
-          <Route
-            path="/"
-            exact
-            render={props => (
-              <OverviewPage {...props} loggedInUserId={loggedInUser?.id} setLoggedInUser={setLoggedInUser} />
-            )}
-          />
+          <Route path="/" exact render={props => <OverviewPage {...props} loggedInUserId={loggedInUser?.id} />} />
           <Route path="/challenges" render={props => <ChallengesPage {...props} loggedInUserId={loggedInUser?.id} />} />
           <Route
             path="/shop"
             exact
-            render={props => (
-              <ShopPage
-                {...props}
-                loggedInUser={loggedInUser}
-                setLoggedInUser={setLoggedInUser}
-                forceUpdate={forceUpdate}
-              />
-            )}
+            render={props => <ShopPage {...props} loggedInUser={loggedInUser} forceUpdate={forceUpdate} />}
           />
-          <Route
-            path="/shop/:id"
-            exact
-            render={props => <SingleProduct {...props} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} />}
-          />
+          <Route path="/shop/:id" exact render={props => <SingleProduct {...props} loggedInUser={loggedInUser} />} />
 
           <Route path="/admin/challenges" render={props => <ChallengesPageAdmin {...props} />} />
           <Route

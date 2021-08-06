@@ -16,8 +16,7 @@ import {
   getShopItemById,
   updateShopItems,
   updateUserChallenges,
-  getUser,
-  getUserByUserId
+  getUser
 } from './helpers';
 
 // get user by role
@@ -26,21 +25,10 @@ fetchMock.get({
   response: url => {
     const [, role] = url.split('/').filter(Boolean);
 
-    console.log('fetch-mock', role);
-    console.log('fetch-mock', getUser(role).credits);
     return {
       status: 200,
       body: getUser(role)
     };
-  }
-});
-
-fetchMock.get({
-  matcher: 'express:/user-data/:userId',
-  response: url => {
-    const [, userId] = url.split('/').filter(Boolean);
-    console.log(userId);
-    return {status: 400, body: getUserByUserId(userId)};
   }
 });
 

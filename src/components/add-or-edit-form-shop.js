@@ -13,15 +13,14 @@ const target = {target: {id: 'imageURL', value: ''}};
 function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEditing}) {
   const handleAddURL = () => {
     const imageURLField = fields?.imageURL;
-    if (imageURLField) {
-      const validURL = checkUrl(imageURLField) ? imageURLField : null;
-
-      if (validURL) {
-        handleChange(target, 'images', [
-          ...fields?.images,
-          {imageUrl: validURL, name: `${fields.title}-${Math.random()}`}
-        ]);
-      }
+    if (imageURLField && checkUrl(imageURLField)) {
+      handleChange(target, 'images', [
+        ...fields?.images,
+        {imageUrl: imageURLField, name: `${fields.title}-${Math.random()}`}
+      ]);
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('url is incorrect');
     }
   };
 

@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-alert */
 import React, {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
 import {useParams, useHistory} from 'react-router-dom';
 
 import CloseIcon from '../../icons/close-icon';
@@ -9,7 +9,7 @@ import Button from '../../components/button';
 import {getSingleShopItem} from '../../services/services';
 import {updateStatePurchasedShopItems} from '../../reducers';
 
-function SingleProduct({loggedInUser, setLoggedInUser}) {
+function SingleProduct({loggedInUser, forceUpdate}) {
   const [shopItem, setShopItem] = useState({});
   const {images, title, description, credits} = shopItem;
 
@@ -22,10 +22,9 @@ function SingleProduct({loggedInUser, setLoggedInUser}) {
 
   const handleAddToShoppingList = async operation => {
     const {message} = await updateStatePurchasedShopItems(shopItem, loggedInUser?.id, operation);
-    console.log(message);
     if (message.includes('Success')) {
       alert('Success Added');
-      setLoggedInUser(prevState => ({...prevState, credits: prevState.credits - shopItem.credits}));
+      forceUpdate();
     } else {
       alert(message);
     }
@@ -64,5 +63,18 @@ function SingleProduct({loggedInUser, setLoggedInUser}) {
     </div>
   );
 }
+
+SingleProduct.propTypes = {
+  loggedInUser: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    job: PropTypes.string,
+    profilePic: PropTypes.string,
+    credits: PropTypes.number,
+    xp: PropTypes.number,
+    role: PropTypes.string
+  }).isRequired,
+  forceUpdate: PropTypes.func.isRequired
+};
 
 export default SingleProduct;

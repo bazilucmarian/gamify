@@ -1,5 +1,3 @@
-import {getTotalXpAndCredits} from '../utils';
-
 import {challengesList, shopItems, statusDictionary, userChallengesData, users, userShopData} from './fixtures';
 
 const getStatus = (challenges, id) => {
@@ -59,7 +57,6 @@ export const updateUserChallenges = (userIdParam, challengeId, newStatus) => {
   if (!loggedInUserChallenges) {
     return;
   }
-
   const singleChallengeIndex = loggedInUserChallenges?.challenges.findIndex(
     challenge => challenge.challengeId === challengeId
   );
@@ -70,22 +67,14 @@ export const updateUserChallenges = (userIdParam, challengeId, newStatus) => {
     loggedInUserChallenges.challenges.push({challengeId, status: newStatus});
   }
 
-  if (newStatus === 'Validated') {
-    const userChallengesIds = new Set(
-      loggedInUserChallenges.challenges
-        .filter(({status}) => status === 'Validated')
-        .map(({challengeId: challengeWithId}) => challengeWithId)
+  // update user credits and xp if challenge if the challenge is valid
+  if (newStatus === statusDictionary.validated) {
+    const {credits: validatedChallengeCredits, xp: validatedChallengeXp} = challengesList.find(
+      ({id}) => id === challengeId
     );
-
-    const validatedChallenges = challengesList.filter(({id}) => userChallengesIds.has(id));
     const userIndex = users.findIndex(user => user.id === Number(userIdParam));
-
-    const {xpTotal, creditsTotal} = getTotalXpAndCredits(validatedChallenges);
-
-    users[userIndex].credits += creditsTotal;
-    users[userIndex].xp += xpTotal;
-
-    console.log('user from updateUserChallenges', users[userIndex]);
+    users[userIndex].credits += validatedChallengeCredits;
+    users[userIndex].xp += validatedChallengeXp;
   }
 };
 
@@ -188,8 +177,6 @@ export const updateShopItems = (userIdParam, shopItemId) => {
   }
   users[userIndex].credits -= shopItemCredits;
 
-  console.log('user from updateUserChallenges', users[userIndex]);
-
   return {message: 'Success'};
 };
 
@@ -205,6 +192,3 @@ export const getItemsAddedToShoppingList = userIdParam => {
 
 // get user by role
 export const getUser = role => users.find(user => user.role === role);
-
-// get user by id
-export const getUserByUserId = id => users.find(user => user?.id === Number(id));

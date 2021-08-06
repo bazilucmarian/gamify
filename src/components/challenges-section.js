@@ -22,7 +22,7 @@ function ChallengesSection({
     handleUpdateChallenge(challengeId, operation, challenge);
   };
 
-  if (filteredChallenges.length === 0) {
+  if (filteredChallenges?.length === 0) {
     return null;
   }
   return (

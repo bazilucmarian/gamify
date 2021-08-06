@@ -1,5 +1,4 @@
 /* eslint-disable no-alert */
-/* eslint-disable react/prop-types */
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
@@ -7,7 +6,7 @@ import {updateStatePurchasedShopItems} from '../../reducers';
 import {getAllShopItems} from '../../services/services';
 import ShopSection from '../../components/shop-section';
 
-function ShopPage({loggedInUser, setLoggedInUser, forceUpdate}) {
+function ShopPage({loggedInUser, forceUpdate}) {
   const [allShopItems, setAllShopItems] = useState([]);
 
   const handleUpdateShopItems = async (shopItem, operation) => {
@@ -15,8 +14,6 @@ function ShopPage({loggedInUser, setLoggedInUser, forceUpdate}) {
     if (message.includes('Success')) {
       alert('Success Added');
       forceUpdate();
-
-      // setLoggedInUser(prevState => ({...prevState, credits: prevState.credits - shopItem.credits}));
     } else {
       alert(message);
     }
@@ -41,7 +38,8 @@ ShopPage.propTypes = {
     credits: PropTypes.number,
     xp: PropTypes.number,
     role: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  forceUpdate: PropTypes.func.isRequired
 };
 
 export default ShopPage;

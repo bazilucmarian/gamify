@@ -234,8 +234,8 @@ const users = [
     name: 'Daniel Toma',
     job: 'Programmer',
     profilePic: '',
-    credits: 0,
-    xp: 100,
+    credits: 20,
+    xp: 25,
     role: 'user'
   },
   {

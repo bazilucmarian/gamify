@@ -1,5 +1,28 @@
 import '../mocks/fake-mocks';
 
+/* Authentication */
+
+export const getUserService = async role => {
+  let data;
+  try {
+    const statusResponse = await fetch(`/user/${role}`);
+    data = await statusResponse.json();
+  } catch (error) {
+    console.error(error.message);
+  }
+  console.log('user- from service', data);
+  return data;
+};
+
+export const getUserServiceById = async userId => {
+  try {
+    const statusResponse = await fetch(`/user-data/${userId}`);
+    return await statusResponse.json();
+  } catch (error) {
+    return error.message;
+  }
+};
+
 /* USER PAGES SERVICES */
 
 export const getAvailableChallenges = async (userId, status) => {

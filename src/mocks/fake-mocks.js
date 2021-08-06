@@ -14,8 +14,34 @@ import {
   getNewUpdatedShopItem,
   getShopItemById,
   updateShopItems,
-  updateUserChallenges
+  updateUserChallenges,
+  getUser,
+  getUserByUserId
 } from './helpers';
+
+// get user by role
+fetchMock.get({
+  matcher: 'express:/user/:role',
+  response: url => {
+    const [, role] = url.split('/').filter(Boolean);
+
+    console.log('fetch-mock', role);
+    console.log('fetch-mock', getUser(role).credits);
+    return {
+      status: 200,
+      body: getUser(role)
+    };
+  }
+});
+
+fetchMock.get({
+  matcher: 'express:/user-data/:userId',
+  response: url => {
+    const [, userId] = url.split('/').filter(Boolean);
+    console.log(userId);
+    return {status: 400, body: getUserByUserId(userId)};
+  }
+});
 
 /* GET USER-CHALLENGES DEPENDING ON STATUS */
 fetchMock.get({
@@ -175,13 +201,12 @@ fetchMock.post({
   response: (url, opts) => {
     const userId = url.split('/').filter(Boolean)[2];
     const shopItem = opts.body;
-
-    updateShopItems(userId, shopItem.id);
+    const message = updateShopItems(userId, shopItem.id);
 
     if (shopItem) {
       return {
         status: 200,
-        body: {message: 'Success Added'}
+        body: message
       };
     }
     throw new Error('Problems  !!');

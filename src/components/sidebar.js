@@ -8,6 +8,7 @@ import ProgressCard from './progress-card';
 
 function Sidebar({routes, loggedInUser, onSwitchUser}) {
   const {profilePic, name, job, xp: xpTotal, credits: creditsTotal} = loggedInUser;
+  // console.log('sidebar user,', loggedInUser);
 
   return (
     <div className="sidebar">

@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable react/prop-types */
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
@@ -5,17 +7,18 @@ import {getAllShopItems} from '../../services/services';
 import ShopSection from '../../components/shop-section';
 import {updateStatePurchasedShopItems} from '../../reducers';
 
-function ShopPage({loggedInUser}) {
+function ShopPage({loggedInUser, setLoggedInUser, forceUpdate}) {
   const [allShopItems, setAllShopItems] = useState([]);
-  const [userCredits, setUserCredits] = useState(loggedInUser.credits || 0);
 
   const handleUpdateShopItems = async (shopItem, operation) => {
-    if (userCredits < shopItem.credits) {
-      // eslint-disable-next-line no-alert
-      alert(`You need more ${shopItem.credits - userCredits} credits to buy this product`);
+    const {message} = await updateStatePurchasedShopItems(shopItem, loggedInUser.id, operation);
+    if (message.includes('Success')) {
+      alert('Success Added');
+      forceUpdate();
+
+      // setLoggedInUser(prevState => ({...prevState, credits: prevState.credits - shopItem.credits}));
     } else {
-      setUserCredits(prevState => prevState - shopItem.credits);
-      await updateStatePurchasedShopItems(shopItem, loggedInUser.id, operation);
+      alert(message);
     }
   };
 

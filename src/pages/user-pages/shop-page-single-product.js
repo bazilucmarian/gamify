@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-alert */
 import React, {useEffect, useState} from 'react';
 import {useParams, useHistory} from 'react-router-dom';
 
@@ -5,8 +7,9 @@ import CloseIcon from '../../icons/close-icon';
 import Slider from '../../components/slider/slider';
 import Button from '../../components/button';
 import {getSingleShopItem} from '../../services/services';
+import {updateStatePurchasedShopItems} from '../../reducers';
 
-function SingleProduct() {
+function SingleProduct({loggedInUser, setLoggedInUser}) {
   const [shopItem, setShopItem] = useState({});
   const {images, title, description, credits} = shopItem;
 
@@ -15,6 +18,17 @@ function SingleProduct() {
 
   const handleClose = () => {
     history.push('/shop');
+  };
+
+  const handleAddToShoppingList = async operation => {
+    const {message} = await updateStatePurchasedShopItems(shopItem, loggedInUser?.id, operation);
+    console.log(message);
+    if (message.includes('Success')) {
+      alert('Success Added');
+      setLoggedInUser(prevState => ({...prevState, credits: prevState.credits - shopItem.credits}));
+    } else {
+      alert(message);
+    }
   };
 
   useEffect(() => {
@@ -41,7 +55,7 @@ function SingleProduct() {
             color="secondary"
             variant="contained-secondary"
             size="lg"
-            // onClick={() => handleUpdateShopItems('ADD_TO_SHOPPING_LIST')}
+            onClick={() => handleAddToShoppingList('ADD_TO_SHOPPING_LIST')}
           >
             {`Buy - ${credits} Credits`}
           </Button>

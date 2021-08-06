@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,11 +7,14 @@ import ChallengesSection from '../../components/challenges-section';
 import {getInProgressOrCompletedChallenges, getItemsAddedToShoppingList} from '../../services/services';
 import {changeStatusRequest} from '../../services/services-utils';
 import ShopSection from '../../components/shop-section';
+// import {getTotalXpAndCredits} from '../../utils';
 
-function OverviewPage({loggedInUserId}) {
+function OverviewPage({loggedInUserId, setLoggedInUser}) {
   const [inProgressOrPendingChallenges, setInProgressOrPendingChallenges] = useState([]);
   const [completedChallenges, setCompletedChallenges] = useState([]);
   const [shoppingList, setShoppingList] = useState([]);
+
+  // const {xpTotal, creditsTotal} = getTotalXpAndCredits(completedChallenges);
 
   const handleChangeStatus = async (challengeId, newStatus, userId = loggedInUserId, operation) => {
     const newUpdatedState = await changeStatusRequest(

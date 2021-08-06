@@ -1,9 +1,10 @@
-import {getTotalXpAndCredits, getUserById} from '../utils';
+import {getTotalXpAndCredits} from '../utils';
 
 import {challengesList, shopItems, statusDictionary, userChallengesData, users, userShopData} from './fixtures';
 
 const getStatus = (challenges, id) => {
   const {status} = challenges.find(({challengeId}) => challengeId === id) || {};
+
   return status;
 };
 
@@ -16,7 +17,7 @@ const filterByStatus = (challenges, statuses) => challenges.filter(({status}) =>
 
 // GET inProgress/denied/pending/validated challenges for user pages
 export const filterChallenges = (usrId, sts) => {
-  const {challenges: userChallenges} = userChallengesData.find(({userId}) => userId === usrId);
+  const {challenges: userChallenges} = userChallengesData?.find(({userId}) => userId === usrId);
   const userChallengesIds = userChallenges?.filter(({status}) => status !== sts).map(({challengeId}) => challengeId);
 
   if (sts === statusDictionary.available) {
@@ -44,13 +45,6 @@ export const filterChallenges = (usrId, sts) => {
     statusDictionary.denied
   ]);
 
-  // update userXp and credits with challenges validated
-  const userLoggedIn = getUserById(usrId);
-  const validatedChallenges = filterByStatus(filteredChallengesWithStatus, [statusDictionary.validated]);
-  const {xpTotal, creditsTotal} = getTotalXpAndCredits(validatedChallenges, userLoggedIn.xp, userLoggedIn.credits);
-  userLoggedIn.xp = xpTotal;
-  userLoggedIn.credits = creditsTotal;
-
   return {
     inProgressChallenges,
     completedChallenges
@@ -61,7 +55,7 @@ export const filterChallenges = (usrId, sts) => {
 // otherwise, only the status will be updated
 
 export const updateUserChallenges = (userIdParam, challengeId, newStatus) => {
-  const loggedInUserChallenges = userChallengesData.find(({userId}) => userId === Number(userIdParam));
+  const loggedInUserChallenges = userChallengesData?.find(({userId}) => userId === Number(userIdParam));
   if (!loggedInUserChallenges) {
     return;
   }
@@ -74,6 +68,24 @@ export const updateUserChallenges = (userIdParam, challengeId, newStatus) => {
     loggedInUserChallenges.challenges[singleChallengeIndex].status = newStatus;
   } else {
     loggedInUserChallenges.challenges.push({challengeId, status: newStatus});
+  }
+
+  if (newStatus === 'Validated') {
+    const userChallengesIds = new Set(
+      loggedInUserChallenges.challenges
+        .filter(({status}) => status === 'Validated')
+        .map(({challengeId: challengeWithId}) => challengeWithId)
+    );
+
+    const validatedChallenges = challengesList.filter(({id}) => userChallengesIds.has(id));
+    const userIndex = users.findIndex(user => user.id === Number(userIdParam));
+
+    const {xpTotal, creditsTotal} = getTotalXpAndCredits(validatedChallenges);
+
+    users[userIndex].credits += creditsTotal;
+    users[userIndex].xp += xpTotal;
+
+    console.log('user from updateUserChallenges', users[userIndex]);
   }
 };
 
@@ -154,13 +166,25 @@ export const getNewUpdatedShopItem = (shopItem, shopItemId) => {
 
 export const updateShopItems = (userIdParam, shopItemId) => {
   const loggedInShopItems = userShopData.find(({userId}) => userId === Number(userIdParam));
+  const userData = users.find(user => user?.id === Number(userIdParam));
+  const {credits: shopItemCredits} = shopItems.find(item => item.id === Number(shopItemId));
 
   const singleShopItemIndex = loggedInShopItems?.shopItems.findIndex(item => item.shopItemId === shopItemId);
+  const userIndex = users.findIndex(user => user.id === Number(userIdParam));
+
+  if (userData.credits < shopItemCredits) {
+    return {message: `You need more ${shopItemCredits - userData.credits} credits to buy this product`};
+  }
   if (singleShopItemIndex !== -1) {
     loggedInShopItems.shopItems[singleShopItemIndex].quantity += 1;
   } else {
     loggedInShopItems.shopItems.push({shopItemId, quantity: 1});
   }
+  users[userIndex].credits -= shopItemCredits;
+
+  console.log('user from updateUserChallenges', users[userIndex]);
+
+  return {message: 'Success'};
 };
 
 // SHOP:USER
@@ -172,3 +196,9 @@ export const getItemsAddedToShoppingList = userIdParam => {
     .filter(shopItem => userShopIds.has(shopItem.id))
     .map(shopItem => ({...shopItem, userId: userIdParam, quantity: getQuantity(userShop, shopItem.id)}));
 };
+
+// get user by role
+export const getUser = role => users.find(user => user.role === role);
+
+// get user by id
+export const getUserByUserId = id => users.find(user => user?.id === Number(id));

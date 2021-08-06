@@ -7,7 +7,6 @@ import {getInProgressOrCompletedChallenges, getItemsAddedToShoppingList} from '.
 import {changeStatusRequest} from '../../services/services-utils';
 import ShopSection from '../../components/shop-section';
 
-const userFromLocalStorage = JSON.parse(localStorage.getItem('userInfo'));
 function OverviewPage({loggedInUserId}) {
   const [inProgressOrPendingChallenges, setInProgressOrPendingChallenges] = useState([]);
   const [completedChallenges, setCompletedChallenges] = useState([]);
@@ -68,6 +67,6 @@ OverviewPage.propTypes = {
 };
 
 OverviewPage.defaultProps = {
-  loggedInUserId: userFromLocalStorage.id
+  loggedInUserId: 123
 };
 export default OverviewPage;

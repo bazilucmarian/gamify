@@ -5,9 +5,9 @@ import {useHistory} from 'react-router-dom';
 
 import Placeholder from '../assets/imgs/placeholder.png';
 
-import Button from './button';
-import ButtonContainerAdmin from './button-container-admin';
 import Badge from './badge';
+import ButtonContainerShopUser from './button-container-shop-user';
+import ButtonContainerAdmin from './button-container-admin';
 
 const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
   const history = useHistory();
@@ -37,21 +37,13 @@ const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
           <p className="shop-card__title">{title}</p>
           <p className="shop-card__description">{description}</p>
         </div>
+        {quantity && <Badge quantity={quantity} />}
 
         <div className="shop-card__bottom">
           {isAdmin ? (
             <ButtonContainerAdmin onClick={onUpdateShopItems} />
-          ) : !isAdmin && quantity ? (
-            <Badge quantity={quantity} />
           ) : (
-            <Button
-              color="secondary"
-              size="lg"
-              variant="contained-secondary"
-              onClick={() => onUpdateShopItems('ADD_TO_SHOPPING_LIST')}
-            >
-              {`Buy - ${credits} Credits`}
-            </Button>
+            <ButtonContainerShopUser onUpdateShopItems={onUpdateShopItems} credits={credits} quantity={quantity} />
           )}
         </div>
       </div>

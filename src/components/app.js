@@ -37,7 +37,6 @@ function App() {
     (async () => {
       const userData = await getUserService('user');
       setLoggedInUser(userData);
-      localStorage.setItem('userInfo', JSON.stringify(userData));
     })();
   }, []);
 

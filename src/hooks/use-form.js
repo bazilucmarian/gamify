@@ -14,6 +14,7 @@ export const useForm = (initialState, currentState, onSubmitCallback, validate) 
       onSubmitCallback(fields);
       resetForm();
       setIsSubmitting(false);
+      resetForm();
     }
   }, [errors, fields, isSubmitting, onSubmitCallback, resetForm]);
 

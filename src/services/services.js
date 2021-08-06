@@ -1,16 +1,27 @@
 import '../mocks/fake-mocks';
 
-/* USER PAGES SERVICES */
+/* Authentication */
 
-export const getAvailableChallenges = async (userId, status) => {
+export const getUserService = async role => {
   let data;
   try {
-    const statusResponse = await fetch(`/user-challenges/${userId}/${status}`);
+    const statusResponse = await fetch(`/user/${role}`);
     data = await statusResponse.json();
   } catch (error) {
     console.error(error.message);
   }
   return data;
+};
+
+/* USER PAGES SERVICES */
+
+export const getAvailableChallenges = async (userId, status) => {
+  try {
+    const statusResponse = await fetch(`/user-challenges/${userId}/${status}`);
+    return await statusResponse.json();
+  } catch (error) {
+    return error.message;
+  }
 };
 
 export const getInProgressOrCompletedChallenges = async userId => {
@@ -148,6 +159,33 @@ export const editShopItem = async shopItem => {
     const response = await fetch(`/shop/${shopItem.id}`, {
       method: 'PUT',
       body: shopItem
+    });
+
+    return await response.json();
+  } catch (error) {
+    return error.message;
+  }
+};
+
+// requests for getting items from shopping list or add new one
+
+export const addItemToShoppingList = async (userId, shopItem) => {
+  try {
+    const response = await fetch(`/shop/cart/${userId}`, {
+      method: 'POST',
+      body: shopItem
+    });
+
+    return await response.json();
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const getItemsAddedToShoppingList = async userId => {
+  try {
+    const response = await fetch(`/shop/cart/${userId}`, {
+      method: 'GET'
     });
 
     return await response.json();

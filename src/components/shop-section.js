@@ -15,7 +15,6 @@ const ShopSection = ({title, isScrollable, shopItems, isAdmin, handleUpdateShopI
   return (
     <section className="shop-section">
       <h2 className="shop-section__title">{title}</h2>
-
       <div className={`shop-section__items shop-section__items--${isScrollable && 'scrollable'}`}>
         {shopItems?.map(shopItem => (
           <ShopCard

@@ -1,8 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
-import {getInProgressOrCompletedChallenges} from '../services/services';
-import {getTotalXpAndCredits} from '../utils';
 
 import Navigation from './navigation';
 import UserCard from './user-card';
@@ -10,20 +7,7 @@ import RewardInfo from './reward-info';
 import ProgressCard from './progress-card';
 
 function Sidebar({routes, loggedInUser, onSwitchUser}) {
-  const {profilePic, name, job, id} = loggedInUser;
-
-  const [completedChallenges, setCompletedChallenges] = useState([]);
-
-  const {xpTotal, creditsTotal} = getTotalXpAndCredits(completedChallenges);
-
-  useEffect(() => {
-    const getUserChallenges = async () => {
-      const getFilteredUserChallenges = await getInProgressOrCompletedChallenges(id);
-      setCompletedChallenges(getFilteredUserChallenges.completedChallenges);
-    };
-
-    getUserChallenges();
-  }, [id]);
+  const {profilePic, name, job, xp: xpTotal, credits: creditsTotal} = loggedInUser;
 
   return (
     <div className="sidebar">

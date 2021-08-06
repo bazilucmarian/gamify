@@ -21,6 +21,9 @@ function ChallengesPage({loggedInUserId}) {
     })();
   }, [loggedInUserId]);
 
+  if (availableChallenges?.length === 0) {
+    return null;
+  }
   return (
     <ChallengesSection
       title="Available Challenges"
@@ -31,7 +34,10 @@ function ChallengesPage({loggedInUserId}) {
 }
 
 ChallengesPage.propTypes = {
-  loggedInUserId: PropTypes.number.isRequired
+  loggedInUserId: PropTypes.number
+};
+ChallengesPage.defaultProps = {
+  loggedInUserId: 123
 };
 
 export default ChallengesPage;

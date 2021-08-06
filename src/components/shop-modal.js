@@ -48,10 +48,15 @@ ShopModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   currentShopItem: PropTypes.shape({
     title: PropTypes.string,
-    xp: PropTypes.number,
     credits: PropTypes.number,
     description: PropTypes.string,
     imageURL: PropTypes.string,
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        imageURL: PropTypes.string,
+        name: PropTypes.string
+      })
+    ),
     id: PropTypes.number
   })
 };

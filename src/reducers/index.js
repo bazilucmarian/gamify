@@ -1,4 +1,5 @@
 import {
+  addItemToShoppingList,
   addNewChallenge,
   addNewShopItem,
   deleteChallenge,
@@ -72,6 +73,25 @@ export const updateStateShopAdmin = async (allShopItems, shopItem, operation) =>
     case 'CREATE': {
       const newShopItem = await addNewShopItem({...shopItem, id: Date.now()});
       return [newShopItem, ...allShopItems];
+    }
+
+    default:
+      break;
+  }
+
+  return [];
+};
+
+// state for purchased products
+export const updateStatePurchasedShopItems = async (shopItem, loggedInUserId, operation) => {
+  switch (operation) {
+    case 'ADD_TO_SHOPPING_LIST': {
+      // eslint-disable-next-line no-return-await
+      return await addItemToShoppingList(loggedInUserId, shopItem);
+    }
+
+    case 'REMOVE_FROM_SHOPPING_LIST': {
+      break;
     }
 
     default:

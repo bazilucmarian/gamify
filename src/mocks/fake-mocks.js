@@ -8,13 +8,29 @@ import {
   getAllChallengesList,
   getAllShopItems,
   getChallengesByStatus,
+  getItemsAddedToShoppingList,
   getNewChallengeAdded,
   getNewShopItemAdded,
   getNewUpdatedChallenge,
   getNewUpdatedShopItem,
   getShopItemById,
-  updateUserChallenges
+  updateShopItems,
+  updateUserChallenges,
+  getUser
 } from './helpers';
+
+// get user by role
+fetchMock.get({
+  matcher: 'express:/user/:role',
+  response: url => {
+    const [, role] = url.split('/').filter(Boolean);
+
+    return {
+      status: 200,
+      body: getUser(role)
+    };
+  }
+});
 
 /* GET USER-CHALLENGES DEPENDING ON STATUS */
 fetchMock.get({
@@ -170,10 +186,8 @@ fetchMock.put({
 /* ADMIN : CREATE new shopItem by admin */
 fetchMock.post({
   matcher: url => url === '/shop',
-
   response: (_, opts) => {
     const shopItem = opts.body;
-
     if (shopItem) {
       return {
         status: 200,
@@ -181,5 +195,37 @@ fetchMock.post({
       };
     }
     throw new Error('Problems put mock !!');
+  }
+});
+
+/* USER : add new shop item to shopping list */
+fetchMock.post({
+  matcher: 'express:/shop/cart/:userId',
+
+  response: (url, opts) => {
+    const userId = url.split('/').filter(Boolean)[2];
+    const shopItem = opts.body;
+    const message = updateShopItems(userId, shopItem.id);
+
+    if (shopItem) {
+      return {
+        status: 200,
+        body: message
+      };
+    }
+    throw new Error('Problems  !!');
+  }
+});
+
+fetchMock.get({
+  matcher: 'express:/shop/cart/:userId',
+
+  response: (url, opts) => {
+    const userId = url.split('/').filter(Boolean)[2];
+
+    return {
+      status: 200,
+      body: getItemsAddedToShoppingList(userId)
+    };
   }
 });

@@ -13,7 +13,7 @@ import Toast from '../../components/toast/toast';
 function SingleProduct({loggedInUser, forceUpdate}) {
   const [shopItem, setShopItem] = useState({});
   const {images, title, description, credits} = shopItem;
-  const {openToast, closeToast, isActive, message} = useToast();
+  const {openToast, closeToast, isVisible, message} = useToast();
 
   const {id: idParam} = useParams();
   const history = useHistory();
@@ -25,10 +25,10 @@ function SingleProduct({loggedInUser, forceUpdate}) {
   const handleAddToShoppingList = async operation => {
     const {message: messageResponse} = await updateStatePurchasedShopItems(shopItem, loggedInUser?.id, operation);
     if (messageResponse.includes('Success')) {
-      openToast(`${messageResponse} ✅🛒`);
+      openToast(messageResponse);
       forceUpdate();
     } else {
-      openToast(`⛔⛔${messageResponse}`);
+      openToast(messageResponse);
     }
   };
 
@@ -65,9 +65,9 @@ function SingleProduct({loggedInUser, forceUpdate}) {
         </div>
       </div>
 
-      <Toast isActive={isActive}>
+      <Toast isVisible={isVisible}>
         <Toast.Header>
-          <span>Notification</span>
+          <span> {message.includes('Success') ? '✅' : '⛔'} Notification</span>
           <CloseIcon onClick={closeToast} />
         </Toast.Header>
         <Toast.Body>{message}</Toast.Body>

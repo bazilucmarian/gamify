@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import ToastHeader from './toast-header';
 import ToastBody from './toast-body';
 
-const Toast = ({isActive, children}) => (
+const Toast = ({isVisible, children}) => (
   <div className="toast-container">
-    <div className={`toast toast--${isActive ? 'fadeIn' : 'fadeOut'}`}>{children}</div>
+    <div className={`toast toast--${isVisible ? 'fadeIn' : 'fadeOut'}`}>{children}</div>
   </div>
 );
 
@@ -14,7 +14,7 @@ Toast.Header = ToastHeader;
 Toast.Body = ToastBody;
 
 Toast.propTypes = {
-  isActive: PropTypes.bool.isRequired,
+  isVisible: PropTypes.bool.isRequired,
   children: PropTypes.node
 };
 Toast.defaultProps = {

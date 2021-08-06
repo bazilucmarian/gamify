@@ -20,7 +20,7 @@ function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEdi
       ]);
     } else {
       // eslint-disable-next-line no-alert
-      alert('url is incorrect');
+      alert('Url is incorrect.');
     }
   };
 

@@ -39,7 +39,7 @@ function OverviewPage({loggedInUserId}) {
     getShopItems();
   }, [loggedInUserId]);
 
-  if (inProgressOrPendingChallenges?.length === 0 && completedChallenges?.length === 0) {
+  if (!inProgressOrPendingChallenges.length && !completedChallenges.length) {
     return <EmptyPlaceholder message="Sorry... You have no challenge in progress or completed 😔" />;
   }
   return (

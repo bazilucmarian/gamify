@@ -11,15 +11,15 @@ import CloseIcon from '../../icons/close-icon';
 function ShopPage({loggedInUser, forceUpdate}) {
   const [allShopItems, setAllShopItems] = useState([]);
 
-  const {openToast, closeToast, isActive, message} = useToast();
+  const {openToast, closeToast, isVisible, message} = useToast();
 
   const handleUpdateShopItems = async (shopItem, operation) => {
     const {message: messageResponse} = await updateStatePurchasedShopItems(shopItem, loggedInUser.id, operation);
     if (messageResponse.includes('Success')) {
-      openToast(`${messageResponse} ✅🛒`);
+      openToast(messageResponse);
       forceUpdate();
     } else {
-      openToast(`⛔⛔${messageResponse}`);
+      openToast(`⚠ ${messageResponse}`);
     }
   };
 
@@ -33,9 +33,9 @@ function ShopPage({loggedInUser, forceUpdate}) {
   return (
     <>
       <ShopSection title="Shop" shopItems={allShopItems} handleUpdateShopItems={handleUpdateShopItems} />
-      <Toast isActive={isActive}>
+      <Toast isVisible={isVisible}>
         <Toast.Header>
-          <span>Notification</span>
+          <span> {message.includes('Success') ? '✅' : '⛔'} Notification</span>
           <CloseIcon onClick={closeToast} />
         </Toast.Header>
         <Toast.Body>{message}</Toast.Body>

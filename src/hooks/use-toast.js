@@ -1,29 +1,29 @@
 import {useEffect, useState} from 'react';
 
 const useToast = () => {
-  const [isActive, setIsActive] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    if (isActive === true) {
+    if (isVisible) {
       const timer = setTimeout(() => {
-        setIsActive(false);
+        setIsVisible(false);
       }, 5000);
       return () => clearTimeout(timer);
     }
     return '';
-  }, [isActive]);
+  }, [isVisible]);
 
   const openToast = msg => {
     setMessage(msg);
-    setIsActive(true);
+    setIsVisible(true);
   };
 
   const closeToast = () => {
-    setIsActive(false);
+    setIsVisible(false);
   };
 
-  return {isActive, message, openToast, closeToast};
+  return {isVisible, message, openToast, closeToast};
 };
 
 export default useToast;

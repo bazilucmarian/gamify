@@ -19,7 +19,7 @@ function ShopPage({loggedInUser, forceUpdate}) {
       openToast(messageResponse);
       forceUpdate();
     } else {
-      openToast(`⚠ ${messageResponse}`);
+      openToast(messageResponse);
     }
   };
 

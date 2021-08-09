@@ -52,7 +52,11 @@ function App() {
             exact
             render={props => <ShopPage {...props} loggedInUser={loggedInUser} forceUpdate={forceUpdate} />}
           />
-          <Route path="/shop/:id" exact render={props => <SingleProduct {...props} loggedInUser={loggedInUser} />} />
+          <Route
+            path="/shop/:id"
+            exact
+            render={props => <SingleProduct {...props} loggedInUser={loggedInUser} forceUpdate={forceUpdate} />}
+          />
 
           <Route path="/admin/challenges" render={props => <ChallengesPageAdmin {...props} />} />
           <Route

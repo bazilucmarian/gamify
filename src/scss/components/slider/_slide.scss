@@ -1,11 +1,15 @@
+@import '../../variables';
 .slide {
   position: relative;
   height: 100%;
   width: 100%;
+  background-color: $color-white;
 
   img {
-    width: 50vw;
     height: 100vh;
-    // object-fit: cover;
+
+    @media screen and (min-width: 1600px) {
+      margin-left: 5rem;
+    }
   }
 }

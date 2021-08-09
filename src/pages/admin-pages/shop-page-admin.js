@@ -55,6 +55,7 @@ function ShopPageAdmin() {
           Add new
         </Button>
       </div>
+
       <ShopModal
         isOpen={isOpen}
         hide={hideModal}

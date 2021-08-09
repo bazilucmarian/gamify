@@ -16,6 +16,7 @@ const filterByStatus = (challenges, statuses) => challenges.filter(({status}) =>
 // GET inProgress/denied/pending/validated challenges for user pages
 export const filterChallenges = (usrId, sts) => {
   const {challenges: userChallenges} = userChallengesData?.find(({userId}) => userId === usrId);
+
   const userChallengesIds = userChallenges?.filter(({status}) => status !== sts).map(({challengeId}) => challengeId);
 
   if (sts === statusDictionary.available) {

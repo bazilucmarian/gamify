@@ -168,7 +168,7 @@ export const updateShopItems = (userIdParam, shopItemId) => {
   const userIndex = users.findIndex(user => user.id === Number(userIdParam));
 
   if (userData.credits < shopItemCredits) {
-    return {message: `You need more ${shopItemCredits - userData.credits} credits to buy this product`};
+    return {message: `You need another ${shopItemCredits - userData.credits} credits to buy this product`};
   }
   if (singleShopItemIndex !== -1) {
     loggedInShopItems.shopItems[singleShopItemIndex].quantity += 1;
@@ -177,7 +177,7 @@ export const updateShopItems = (userIdParam, shopItemId) => {
   }
   users[userIndex].credits -= shopItemCredits;
 
-  return {message: 'Success'};
+  return {message: 'Successfully added to shopping list ✅'};
 };
 
 // SHOP:USER

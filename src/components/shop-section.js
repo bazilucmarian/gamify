@@ -8,10 +8,9 @@ const ShopSection = ({title, isScrollable, shopItems, isAdmin, handleUpdateShopI
     handleUpdateShopItems(shopItem, operation);
   };
 
-  if (shopItems.length === 0) {
+  if (!shopItems.length) {
     return null;
   }
-
   return (
     <section className="shop-section">
       <h2 className="shop-section__title">{title}</h2>

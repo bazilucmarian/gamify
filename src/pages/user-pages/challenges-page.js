@@ -21,7 +21,7 @@ function ChallengesPage({loggedInUserId}) {
     })();
   }, [loggedInUserId]);
 
-  if (availableChallenges?.length === 0) {
+  if (!availableChallenges.length) {
     return null;
   }
   return (

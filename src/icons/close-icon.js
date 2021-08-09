@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CloseIcon = ({onClick}) => (
+const CloseIcon = ({onClick, size}) => (
   <svg
     onClick={onClick}
     cursor="pointer"
-    width="32"
-    height="32"
+    className={`close-icon close-icon--${size}`}
     viewBox="0 0 32 32"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +16,12 @@ const CloseIcon = ({onClick}) => (
 );
 
 CloseIcon.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  size: PropTypes.oneOf(['SM', 'XL'])
+};
+
+CloseIcon.defaultProps = {
+  size: 'SM'
 };
 
 export default CloseIcon;

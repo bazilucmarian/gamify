@@ -1,0 +1,29 @@
+@import '../../variables';
+
+.toast-container {
+  width: 100%;
+}
+.toast {
+  visibility: hidden;
+  min-width: 30rem;
+  border-radius: 0.5rem;
+  position: fixed;
+  z-index: 105;
+  font-size: 2rem;
+  top: 3rem;
+  right: 3rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0.25rem 0.75rem $color-grey-dark-1;
+
+  &--fadeIn {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
+  }
+  &--fadeOut {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+  }
+}

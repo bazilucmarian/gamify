@@ -1,0 +1,10 @@
+@import '../../variables';
+
+.toast-body {
+  width: 100%;
+  background-color: $color-white;
+  padding: 1.2rem;
+  color: $color-black;
+  font-size: 1.6rem;
+  text-align: center;
+}

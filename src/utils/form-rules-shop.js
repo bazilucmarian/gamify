@@ -11,10 +11,6 @@ export default function validateShopForm(fields) {
     errors.title = 'Remove special characters from the title.';
   }
 
-  if (fields.imageURL.length) {
-    errors.imageURL = 'Please change the image format (JPEG, JPG, GIF, PNG) and press the plus icon';
-  }
-
   if (!(fields.credits >= minCredits && fields.credits <= maxCredits)) {
     errors.credits = `Credits must be between ${minCredits} and ${maxCredits}`;
   }

@@ -6,11 +6,11 @@ import Empty from '../assets/imgs/Empty.svg';
 
 import Button from './button';
 
-function EmptyPlaceholder({message}) {
+function EmptyPlaceholder({message, pathRedirect}) {
   const history = useHistory();
 
   const handleRedirect = () => {
-    history.push('/challenges');
+    history.push(pathRedirect);
   };
 
   if (!message) {
@@ -27,19 +27,23 @@ function EmptyPlaceholder({message}) {
       <div className="empty-placeholder__content">
         <img className="empty-placeholder__image" src={Empty} alt="placeholder-img" />
         <p className="empty-placeholder__message">{message}</p>
-        <Button color="secondary" variant="outlined-secondary" size="lg" onClick={handleRedirect}>
-          Go to available challenges ➡
-        </Button>
+        {pathRedirect && (
+          <Button color="secondary" variant="outlined-secondary" size="lg" onClick={handleRedirect}>
+            Go to available challenges ➡
+          </Button>
+        )}
       </div>
     </div>
   );
 }
 
 EmptyPlaceholder.propTypes = {
-  message: PropTypes.string
+  message: PropTypes.string,
+  pathRedirect: PropTypes.string
 };
 EmptyPlaceholder.defaultProps = {
-  message: ''
+  message: '',
+  pathRedirect: ''
 };
 
 export default EmptyPlaceholder;

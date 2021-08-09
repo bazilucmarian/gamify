@@ -6,6 +6,7 @@ import Button from '../../components/button';
 import useModal from '../../hooks/use-modal';
 import {updateStateShopAdmin} from '../../reducers';
 import ShopModal from '../../components/shop-modal';
+import EmptyPlaceholder from '../../components/empty-placeholder';
 
 function ShopPageAdmin() {
   const [allShopItems, setAllShopItems] = useState([]);
@@ -47,15 +48,21 @@ function ShopPageAdmin() {
     })();
   }, []);
 
+  if (!allShopItems.length) {
+    return (
+      <>
+        <EmptyPlaceholder message="Oups...you have to add some products, for that press add new button" />;
+        <div className="add-button">
+          <Button color="secondary" variant="contained-secondary" size="sm-1" onClick={handleOnCreate}>
+            Add new
+          </Button>
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <ShopSection title="Shop" shopItems={allShopItems} isAdmin handleUpdateShopItems={handleUpdateShopItems} />
-      <div className="add-button">
-        <Button color="secondary" variant="contained-secondary" size="sm" onClick={handleOnCreate}>
-          Add new
-        </Button>
-      </div>
-
       <ShopModal
         isOpen={isOpen}
         hide={hideModal}
@@ -63,6 +70,11 @@ function ShopPageAdmin() {
         handleEditShopItem={handleEditShopItem}
         handleAddNewShopItem={handleAddNewShopItem}
       />
+      <div className="add-button">
+        <Button color="secondary" variant="contained-secondary" size="sm-1" onClick={handleOnCreate}>
+          Add new
+        </Button>
+      </div>
     </>
   );
 }

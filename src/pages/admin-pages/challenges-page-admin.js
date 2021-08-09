@@ -6,6 +6,7 @@ import {updateStateForAdminChallenges} from '../../reducers';
 import {getAllChallenges} from '../../services/services';
 import useModal from '../../hooks/use-modal';
 import ChallengesModal from '../../components/challenges-modal';
+import EmptyPlaceholder from '../../components/empty-placeholder';
 
 function ChallengesPageAdmin() {
   const [allChallenges, setAllChallenges] = useState([]);
@@ -57,6 +58,20 @@ function ChallengesPageAdmin() {
     showModal();
     setCurrentChallenge(null);
   };
+
+  if (!allChallenges.length) {
+    return (
+      <>
+        <EmptyPlaceholder message="Oups...you have to add some challenges, for that press add new button" />
+        <div className="add-button">
+          <Button color="secondary" variant="contained-secondary" size="sm-1" onClick={handleOnCreate}>
+            Add new
+          </Button>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <ChallengesSection
@@ -65,11 +80,7 @@ function ChallengesPageAdmin() {
         isAdmin
         handleUpdateChallenge={handleUpdateChallenge}
       />
-      <div className="add-button">
-        <Button color="secondary" variant="contained-secondary" size="sm" onClick={handleOnCreate}>
-          Add new
-        </Button>
-      </div>
+
       <ChallengesModal
         isOpen={isOpen}
         hide={hideModal}
@@ -77,7 +88,11 @@ function ChallengesPageAdmin() {
         handleAddNewChallenge={handleAddNewChallenge}
         handleEditChallenge={handleEditChallenge}
       />
-      )
+      <div className="add-button">
+        <Button color="secondary" variant="contained-secondary" size="sm-1" onClick={handleOnCreate}>
+          Add new
+        </Button>
+      </div>
     </>
   );
 }

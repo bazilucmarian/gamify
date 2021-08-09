@@ -27,11 +27,11 @@ function ButtonContainerAdmin({status, onClick}) {
     </>
   ) : (
     <>
-      <Button color="secondary" variant="outlined-secondary" size="sm" onClick={() => onClick('EDIT')}>
-        Edit
-      </Button>
-      <Button color="secondary" variant="contained-secondary" size="md" onClick={() => onClick('DELETE')}>
+      <Button color="secondary" variant="outlined-secondary" size="sm" onClick={() => onClick('DELETE')}>
         Delete
+      </Button>
+      <Button color="secondary" variant="contained-secondary" size="md" onClick={() => onClick('EDIT')}>
+        Edit
       </Button>
     </>
   );

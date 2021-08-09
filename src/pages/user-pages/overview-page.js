@@ -6,6 +6,7 @@ import EmptyPlaceholder from '../../components/empty-placeholder';
 import {getInProgressOrCompletedChallenges, getItemsAddedToShoppingList} from '../../services/services';
 import {changeStatusRequest} from '../../services/services-utils';
 import ShopSection from '../../components/shop-section';
+import {USER_CHALLENGES_PAGE_ROUTE_LINK} from '../../constants/routes';
 
 function OverviewPage({loggedInUserId}) {
   const [inProgressOrPendingChallenges, setInProgressOrPendingChallenges] = useState([]);
@@ -40,7 +41,12 @@ function OverviewPage({loggedInUserId}) {
   }, [loggedInUserId]);
 
   if (!inProgressOrPendingChallenges.length && !completedChallenges.length) {
-    return <EmptyPlaceholder message="Sorry... You have no challenge in progress or completed 😔" />;
+    return (
+      <EmptyPlaceholder
+        message="Sorry... You have no challenge in progress or completed 😔"
+        pathRedirect={USER_CHALLENGES_PAGE_ROUTE_LINK}
+      />
+    );
   }
   return (
     <div className="home-page">

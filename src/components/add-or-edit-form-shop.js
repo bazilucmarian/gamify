@@ -63,17 +63,16 @@ function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEdi
               <Plus onClick={handleAddURL} />
             </div>
           </div>
-          {fields?.images &&
-            fields.images.map(({imageUrl}, index) => (
-              <Fragment key={Date.now() * Math.random()}>
-                <div className="url-container">
-                  <p className="url">{imageUrl}</p>
-                  <div className="url-icon">
-                    <Close onClick={() => handleRemoveURL(index)} />
-                  </div>
+          {fields?.images?.map(({imageUrl}, index) => (
+            <Fragment key={Date.now() * Math.random()}>
+              <div className="url-container">
+                <p className="url">{imageUrl}</p>
+                <div className="url-icon">
+                  <Close onClick={() => handleRemoveURL(index)} />
                 </div>
-              </Fragment>
-            ))}
+              </div>
+            </Fragment>
+          ))}
 
           <Input
             inputLabel="Credits cost (number)"
@@ -105,7 +104,7 @@ function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEdi
       </form>
       <Toast isVisible={isVisible}>
         <Toast.Header>
-          <span> {message.includes('Success') ? '✅' : '⛔'} Notification</span>
+          <span> {`${message.includes('Success') ? '✅' : '⛔'} Notification`}</span>
           <CloseIcon onClick={closeToast} />
         </Toast.Header>
         <Toast.Body>{message}</Toast.Body>

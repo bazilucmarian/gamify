@@ -5,13 +5,13 @@ const useToast = () => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
+    let timer;
     if (isVisible) {
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setIsVisible(false);
       }, 5000);
-      return () => clearTimeout(timer);
     }
-    return '';
+    return () => clearTimeout(timer);
   }, [isVisible]);
 
   const openToast = msg => {

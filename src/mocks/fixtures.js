@@ -231,7 +231,7 @@ const shopItems = [
 const users = [
   {
     id: 123,
-    name: 'Daniel Toma',
+    name: 'Baziluc Marian',
     job: 'Programmer',
     profilePic: '',
     credits: 0,
@@ -240,8 +240,8 @@ const users = [
   },
   {
     id: 9232,
-    name: 'Baziluc Marian',
-    job: 'Designer',
+    name: 'Catalin Gheorghiu',
+    job: 'System Admin',
     profilePic: '',
     credits: 0,
     xp: 0,

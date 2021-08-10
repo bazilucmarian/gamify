@@ -86,8 +86,11 @@ export const updateStateShopAdmin = async (allShopItems, shopItem, operation) =>
 export const updateStatePurchasedShopItems = async (shopItem, loggedInUserId, operation) => {
   switch (operation) {
     case 'ADD_TO_SHOPPING_LIST': {
-      // eslint-disable-next-line no-return-await
-      return await addItemToShoppingList(loggedInUserId, shopItem);
+      try {
+        return await addItemToShoppingList(loggedInUserId, shopItem);
+      } catch (error) {
+        return error;
+      }
     }
 
     case 'REMOVE_FROM_SHOPPING_LIST': {

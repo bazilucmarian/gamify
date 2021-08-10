@@ -5,6 +5,7 @@ import ChallengesSection from '../../components/challenges-section';
 import {getAvailableChallenges} from '../../services/services';
 import {statusDictionary} from '../../mocks/fixtures';
 import {changeStatusRequest} from '../../services/services-utils';
+import EmptyPlaceholder from '../../components/empty-placeholder';
 
 function ChallengesPage({loggedInUserId}) {
   const [availableChallenges, setAvailableChallenges] = useState([]);
@@ -22,7 +23,7 @@ function ChallengesPage({loggedInUserId}) {
   }, [loggedInUserId]);
 
   if (!availableChallenges.length) {
-    return null;
+    return <EmptyPlaceholder message="Sorry... You have no challenge available 😔" />;
   }
   return (
     <ChallengesSection

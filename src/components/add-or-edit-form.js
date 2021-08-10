@@ -64,8 +64,8 @@ Form.propTypes = {
   isEditing: PropTypes.bool.isRequired,
   errors: PropTypes.shape({
     title: PropTypes.string,
-    xp: PropTypes.string,
-    credits: PropTypes.string,
+    xp: PropTypes.number,
+    credits: PropTypes.number,
     description: PropTypes.string
   }),
   fields: PropTypes.shape({

@@ -15,7 +15,7 @@ function ChallengeCard({isAdmin, challenge, onChangeStatus, onUpdateChallenge}) 
   return (
     <div
       className={`challenge-card challenge-card--${camelCaseToKebabCase(status)} challenge-card--${
-        isAdmin && status === 'inPending' && 'validation'
+        isAdmin && status === statusDictionary.inPending && 'validation'
       }`}
     >
       <div

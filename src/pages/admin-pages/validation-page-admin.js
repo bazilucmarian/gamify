@@ -5,6 +5,7 @@ import ChallengesSection from '../../components/challenges-section';
 import {changeStatusRequest} from '../../services/services-utils';
 import {statusDictionary} from '../../utils';
 import {getAllUsersChallengesByStatus} from '../../services/services';
+import EmptyPlaceholder from '../../components/empty-placeholder';
 
 function ValidationPageAdmin({loggedInUserId}) {
   const [inPendingChallenges, setInPendingChallenges] = useState([]);
@@ -21,6 +22,10 @@ function ValidationPageAdmin({loggedInUserId}) {
     };
     getInPendingChallenges();
   }, []);
+
+  if (!inPendingChallenges.length) {
+    return <EmptyPlaceholder message="Oups... you have no challenge to validate." />;
+  }
 
   return (
     <ChallengesSection

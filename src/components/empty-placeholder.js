@@ -3,43 +3,44 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 
 import Empty from '../assets/imgs/Empty.svg';
+import NoImage from '../assets/imgs/no-image.png';
 
 import Button from './button';
 
-function EmptyPlaceholder({message}) {
+function EmptyPlaceholder({message, pathRedirect, image}) {
   const history = useHistory();
 
   const handleRedirect = () => {
-    history.push('/challenges');
+    history.push(pathRedirect);
   };
 
   if (!message) {
-    return (
-      <img
-        style={{width: '100%', height: '100%'}}
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/488px-No-Image-Placeholder.svg.png"
-        alt="placeholder"
-      />
-    );
+    return <img className="empty-placeholder__not-available" src={NoImage} alt="placeholder" />;
   }
   return (
     <div className="empty-placeholder">
       <div className="empty-placeholder__content">
-        <img className="empty-placeholder__image" src={Empty} alt="placeholder-img" />
+        <img className="empty-placeholder__image" src={image} alt="placeholder-img" />
         <p className="empty-placeholder__message">{message}</p>
-        <Button color="secondary" variant="outlined-secondary" size="lg" onClick={handleRedirect}>
-          Go to available challenges ➡
-        </Button>
+        {pathRedirect && (
+          <Button color="secondary" variant="outlined-secondary" size="lg" onClick={handleRedirect}>
+            Go to available challenges ➡
+          </Button>
+        )}
       </div>
     </div>
   );
 }
 
 EmptyPlaceholder.propTypes = {
-  message: PropTypes.string
+  message: PropTypes.string,
+  pathRedirect: PropTypes.string,
+  image: PropTypes.string
 };
 EmptyPlaceholder.defaultProps = {
-  message: ''
+  message: '',
+  pathRedirect: '',
+  image: Empty
 };
 
 export default EmptyPlaceholder;

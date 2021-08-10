@@ -11,8 +11,8 @@ import Form from './add-or-edit-form';
 
 const emptyState = {
   title: '',
-  xp: '',
-  credits: '',
+  xp: 0,
+  credits: 0,
   description: ''
 };
 

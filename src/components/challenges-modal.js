@@ -1,5 +1,3 @@
-/* eslint-disable no-use-before-define */
-
 import PropTypes from 'prop-types';
 
 import {useForm} from '../hooks/use-form';

@@ -24,7 +24,7 @@ function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEdi
         {imageUrl: imageURLField, name: `${fields.title}-${Math.random()}`}
       ]);
     } else {
-      openToast('Url is incorrect');
+      openToast('Invalid image format -  | jpg | jpeg | gif | png | tiff | bmp ');
     }
   };
 

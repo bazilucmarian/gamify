@@ -1,44 +1,57 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import {useLocation} from 'react-router-dom';
 
 import ChallengesSection from '../../components/challenges-section';
-import {getAvailableChallenges} from '../../services/services';
-import {statusDictionary} from '../../mocks/fixtures';
-import {changeStatusRequest} from '../../services/services-utils';
+import useAvailableChallenges from '../../hooks/queries/use-available-challenges';
+import useStatusChangeMutation from '../../hooks/mutations/use-status-change-mutation';
 import EmptyPlaceholder from '../../components/empty-placeholder';
+import Pagination from '../../components/pagination';
+import ChallengeCard from '../../components/challenge-card';
+import {emptyMessage} from '../../constants/messages';
 
-function ChallengesPage({loggedInUserId}) {
-  const [availableChallenges, setAvailableChallenges] = useState([]);
+function ChallengesPage({user}) {
+  const location = useLocation();
+  const currentPage = Number(new URLSearchParams(location.search).get('page'));
 
-  const handleChangeStatus = async (challengeId, newStatus, userId = loggedInUserId, operation) => {
-    const newUpdatedState = await changeStatusRequest(availableChallenges, challengeId, newStatus, userId, operation);
-    setAvailableChallenges(newUpdatedState);
+  // mutation
+  const {mutate: handleChangeStatus} = useStatusChangeMutation(user);
+  const changeStatusHandler = challenge => newStatus => {
+    handleChangeStatus({challengeId: challenge.id, userId: challenge.userId, newStatus});
   };
 
-  useEffect(() => {
-    (async () => {
-      const challenges = await getAvailableChallenges(loggedInUserId, statusDictionary.available);
-      setAvailableChallenges(challenges);
-    })();
-  }, [loggedInUserId]);
+  // query
+  const {
+    data: availableChallengesData,
+    isLoading: loadingGetAvailableChallenges,
+    isError: isErrorGetAvailableChallenges,
+    error
+  } = useAvailableChallenges(user, currentPage);
 
-  if (!availableChallenges.length) {
-    return <EmptyPlaceholder message="Sorry... You have no challenge available 😔" />;
+  if (loadingGetAvailableChallenges) {
+    return null;
+  }
+
+  if (isErrorGetAvailableChallenges) {
+    return <EmptyPlaceholder message={error.response.data.message} />;
+  }
+  if (!availableChallengesData.challenges.length) {
+    return <EmptyPlaceholder message={emptyMessage.challengesPage} />;
   }
   return (
-    <ChallengesSection
-      title="Available Challenges"
-      filteredChallenges={availableChallenges}
-      handleChangeStatus={handleChangeStatus}
-    />
+    <>
+      <ChallengesSection title="Available Challenges" hasData={Boolean(availableChallengesData.challenges.length)}>
+        {availableChallengesData.challenges.map(challenge => (
+          <ChallengeCard key={challenge.id} challenge={challenge} onChangeStatus={changeStatusHandler(challenge)} />
+        ))}
+      </ChallengesSection>
+      <Pagination page={Number(currentPage)} itemsLength={availableChallengesData.totalAvailable} path="/challenges" />
+    </>
   );
 }
 
 ChallengesPage.propTypes = {
-  loggedInUserId: PropTypes.number
-};
-ChallengesPage.defaultProps = {
-  loggedInUserId: 123
+  user: PropTypes.object.isRequired
 };
 
 export default ChallengesPage;

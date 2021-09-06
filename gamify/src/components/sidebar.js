@@ -6,19 +6,24 @@ import UserCard from './user-card';
 import RewardInfo from './reward-info';
 import ProgressCard from './progress-card';
 
-function Sidebar({routes, loggedInUser, onSwitchUser}) {
-  const {profilePic, name, job, xp: xpTotal, credits: creditsTotal} = loggedInUser;
+function Sidebar({routes, loggedInUser}) {
+  const {profilePicture, username, job, xp: xpTotal, credits: creditsTotal, role} = loggedInUser;
+  const isAdmin = role === 'Admin';
 
   return (
     <div className="sidebar">
       <div className="sidebar__content">
-        <div className="sidebar__user-details">
-          <UserCard avatar={profilePic} userName={name} jobTitle={job} />
-          <RewardInfo xp={xpTotal} credits={creditsTotal} />
-          <ProgressCard userXp={xpTotal} />
+        <div className={isAdmin ? 'sidebar__user-details--admin' : 'sidebar__user-details'}>
+          <UserCard avatar={profilePicture} userName={username} jobTitle={job} />
+          {!isAdmin && (
+            <>
+              <RewardInfo xp={xpTotal} credits={creditsTotal} />
+              <ProgressCard userXp={xpTotal} />
+            </>
+          )}
         </div>
         <div className="sidebar__navigation">
-          <Navigation routes={routes} onSwitchUser={onSwitchUser} />
+          <Navigation routes={routes} />
         </div>
       </div>
     </div>
@@ -26,12 +31,11 @@ function Sidebar({routes, loggedInUser, onSwitchUser}) {
 }
 
 Sidebar.propTypes = {
-  onSwitchUser: PropTypes.func.isRequired,
   loggedInUser: PropTypes.shape({
     id: PropTypes.number,
-    name: PropTypes.string,
+    username: PropTypes.string,
     job: PropTypes.string,
-    profilePic: PropTypes.string,
+    profilePicture: PropTypes.string,
     credits: PropTypes.number,
     xp: PropTypes.number,
     role: PropTypes.string

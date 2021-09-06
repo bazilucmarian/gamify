@@ -1,73 +1,121 @@
 import React, {useEffect, useState} from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {ReactQueryDevtools} from 'react-query/devtools';
+import {Switch, Route, Redirect} from 'react-router-dom';
 
 import OverviewPage from '../pages/user-pages/overview-page';
 import ChallengesPage from '../pages/user-pages/challenges-page';
 import ShopPage from '../pages/user-pages/shop-page';
 import ValidationPageAdmin from '../pages/admin-pages/validation-page-admin';
 import ChallengesPageAdmin from '../pages/admin-pages/challenges-page-admin';
+import RegisterPage from '../pages/user-pages/register-page';
+import LoginPage from '../pages/user-pages/login-page';
 import ShopPageAdmin from '../pages/admin-pages/shop-page-admin';
 import NotFoundPage from '../pages/not-found-page';
 import SingleProduct from '../pages/user-pages/shop-page-single-product';
 import {navLinksUser, navLinksAdmin} from '../utils';
-import {getUserService} from '../services/services';
+import {useUser} from '../hooks/use-user';
+import ProtectedRoute from '../utils/protected-route';
 
 import Sidebar from './sidebar';
+import RoleBasedRouting from './role-based-routing';
+import Loading from './loader';
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
   const [routes, setRoutes] = useState(navLinksUser);
-  const isAdmin = loggedInUser.role === 'admin';
+  const {user: loggedInUser} = useUser();
 
-  const handleSwitchUser = async () => {
-    const userData = await getUserService(isAdmin ? 'user' : 'admin');
-    setLoggedInUser(userData);
-  };
-
-  const forceUpdate = async () => {
-    const userData = await getUserService('user');
-    setLoggedInUser(userData);
-  };
+  const isAdmin = loggedInUser?.role === 'Admin';
 
   useEffect(() => {
     setRoutes(isAdmin ? navLinksAdmin : navLinksUser);
   }, [isAdmin]);
 
-  useEffect(() => {
-    (async () => {
-      const userData = await getUserService('user');
-      setLoggedInUser(userData);
-    })();
-  }, []);
-
   return (
-    <div className="app-wrapper">
-      <Sidebar routes={routes} loggedInUser={loggedInUser} onSwitchUser={handleSwitchUser} />
-      <div className="app-wrapper__screens">
-        <Switch>
-          <Route path="/" exact render={props => <OverviewPage {...props} loggedInUserId={loggedInUser?.id} />} />
-          <Route path="/challenges" render={props => <ChallengesPage {...props} loggedInUserId={loggedInUser?.id} />} />
-          <Route
-            path="/shop"
-            exact
-            render={props => <ShopPage {...props} loggedInUser={loggedInUser} forceUpdate={forceUpdate} />}
-          />
-          <Route
-            path="/shop/:id"
-            exact
-            render={props => <SingleProduct {...props} loggedInUser={loggedInUser} forceUpdate={forceUpdate} />}
-          />
+    <>
+      <div className={loggedInUser && 'app-wrapper'}>
+        {loggedInUser && <Sidebar routes={routes} loggedInUser={loggedInUser} />}
+        <div className={loggedInUser && 'app-wrapper__screens'}>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              component={() => <Redirect to={isAdmin ? '/admin/challenges?page=1' : '/overview'} />}
+            />
+            <ProtectedRoute
+              path="/login"
+              redirectPath={isAdmin ? '/admin/challenges?page=1' : '/overview'}
+              user={loggedInUser}
+              component={LoginPage}
+            />
+            <ProtectedRoute
+              path="/register"
+              redirectPath={isAdmin ? '/admin/challenges?page=1' : '/overview'}
+              user={loggedInUser}
+              component={RegisterPage}
+            />
 
-          <Route path="/admin/challenges" render={props => <ChallengesPageAdmin {...props} />} />
-          <Route
-            path="/admin/validation"
-            render={props => <ValidationPageAdmin {...props} loggedInUserId={loggedInUser.id} />}
-          />
-          <Route path="/admin/shop" render={props => <ShopPageAdmin {...props} />} />
-          <Route component={NotFoundPage} />
-        </Switch>
+            <RoleBasedRouting
+              path="/overview"
+              redirectPath="/login"
+              component={OverviewPage}
+              roles={['USER']}
+              user={loggedInUser}
+            />
+
+            <RoleBasedRouting
+              path="/challenges"
+              redirectPath="/login"
+              component={ChallengesPage}
+              roles={['USER']}
+              user={loggedInUser}
+            />
+
+            <RoleBasedRouting
+              path="/shop"
+              redirectPath="/login"
+              component={ShopPage}
+              roles={['USER']}
+              user={loggedInUser}
+              exact
+            />
+
+            <RoleBasedRouting
+              path="/shop/:productId"
+              redirectPath="/login"
+              component={SingleProduct}
+              roles={['USER', 'ADMIN']}
+              user={loggedInUser}
+            />
+
+            <RoleBasedRouting
+              path="/admin/challenges"
+              redirectPath="/login"
+              component={ChallengesPageAdmin}
+              roles={['ADMIN']}
+              user={loggedInUser}
+            />
+            <RoleBasedRouting
+              path="/admin/validation"
+              redirectPath="/login"
+              component={ValidationPageAdmin}
+              roles={['ADMIN']}
+              user={loggedInUser}
+            />
+            <RoleBasedRouting
+              path="/admin/shop"
+              redirectPath="/login"
+              component={ShopPageAdmin}
+              roles={['ADMIN']}
+              user={loggedInUser}
+            />
+
+            <Route component={NotFoundPage} />
+          </Switch>
+        </div>
       </div>
-    </div>
+      <Loading />
+      <ReactQueryDevtools />
+    </>
   );
 }
 

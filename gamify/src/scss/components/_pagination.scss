@@ -1,0 +1,39 @@
+@import '../variables';
+
+.pagination {
+  width: 80%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 auto;
+  border: 0.1rem solid $color-grey-medium;
+  border-radius: 1rem;
+
+  & > * {
+    margin: 0;
+    padding: 1.5rem 3rem;
+    border-right: 0.1rem solid $color-grey-medium;
+    font-size: 1.4rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: $color-orange;
+
+    &.link-disabled {
+      pointer-events: none;
+      color: $color-grey-medium;
+    }
+  }
+
+  // a[aria-disabled='true'] {
+  //   color: grey;
+  // }
+}

@@ -33,10 +33,23 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
+.Toastify__toast--success {
+  font-size: 1.4rem;
+}
+
+.Toastify__toast--error {
+  font-size: 1.4rem;
+}
+
+.Toastify__toast--warning {
+  font-size: 1.4rem;
+}
+
 button:disabled,
 button[disabled] {
   cursor: default;
   text-transform: uppercase;
+  opacity: 0.5;
 }
 
 .btn {
@@ -549,6 +562,36 @@ button[disabled] {
   font-size: 2rem;
 }
 
+.label-input-file {
+  background: linear-gradient(to right, #0e9260, #fc5d27);
+  color: #ffffff;
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  display: flex;
+  height: 4rem;
+  width: 100%;
+  z-index: 0;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.label-input-file__file {
+  color: #171717;
+  text-align: center;
+}
+
+input[type='file'] {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 4rem;
+  cursor: pointer;
+  z-index: 2;
+}
+
 .form-group {
   width: 100%;
   position: relative;
@@ -647,7 +690,6 @@ button[disabled] {
   left: 50%;
   transform: translateX(-50%);
   width: 50rem;
-  min-height: 33.7rem;
   max-height: 70vh;
   z-index: 103;
   padding: 3rem;
@@ -659,6 +701,21 @@ button[disabled] {
 .modal__title h1 {
   text-align: center;
   font-weight: normal;
+  font-size: 2rem;
+  line-height: 2.3rem;
+  overflow-y: hidden;
+}
+
+.modal__confirm {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-top: 0.1rem solid #c4c4c4;
+  border-bottom: 0.1rem solid #c4c4c4;
+}
+
+.modal__confirm h1 {
+  text-align: center;
+  font-weight: 500;
   font-size: 2rem;
   line-height: 2.3rem;
   overflow-y: hidden;
@@ -690,7 +747,11 @@ button[disabled] {
 }
 
 .modal-footer {
-  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  padding: 2rem 0 0 0;
+  margin: 0 auto;
 }
 
 .form {
@@ -1042,6 +1103,67 @@ button[disabled] {
   height: 1.6rem;
 }
 
+#outline {
+  stroke-dasharray: 2.42777px, 242.77666px;
+  stroke-dashoffset: 0;
+  animation: anim 1.6s linear infinite;
+}
+
+@keyframes anim {
+  12.5% {
+    stroke-dasharray: 33.98873px, 242.77666px;
+    stroke-dashoffset: -26.70543px;
+  }
+  43.75% {
+    stroke-dasharray: 84.97183px, 242.77666px;
+    stroke-dashoffset: -84.97183px;
+  }
+  100% {
+    stroke-dasharray: 2.42777px, 242.77666px;
+    stroke-dashoffset: -240.34889px;
+  }
+}
+
+.pagination {
+  width: 80%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 auto;
+  border: 0.1rem solid #868686;
+  border-radius: 1rem;
+}
+
+.pagination > * {
+  margin: 0;
+  padding: 1.5rem 3rem;
+  border-right: 0.1rem solid #868686;
+  font-size: 1.4rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination > *:last-child {
+  border-right: 0;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #fc5d27;
+}
+
+.pagination a.link-disabled {
+  pointer-events: none;
+  color: #868686;
+}
+
+.load-more {
+  width: 100%;
+  text-align: center;
+}
+
 .sidebar {
   position: fixed;
   width: 30rem;
@@ -1063,6 +1185,11 @@ button[disabled] {
   flex-direction: column;
   justify-content: space-evenly;
   min-height: 20rem;
+}
+
+.sidebar__user-details--admin {
+  padding: 2rem 4rem;
+  min-height: 10rem;
 }
 
 .sidebar__navigation {
@@ -1100,6 +1227,7 @@ button[disabled] {
   height: 100%;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .navigation__link a.active {
@@ -1154,6 +1282,45 @@ button[disabled] {
   position: absolute;
   top: 3rem;
   right: 3rem;
+}
+
+.register-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background-image: linear-gradient(90deg, #ffffff 50%, #184fc4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.register-page__left {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.register-page__right {
+  width: 50%;
+}
+
+@keyframes loading {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+.fieldset {
+  border: 0.1rem solid #c4c4c4;
+  border-radius: 1rem;
+  padding: 7rem;
+}
+
+.fieldset[disabled] {
+  opacity: 0.5;
 }
 
 .not-found-page {

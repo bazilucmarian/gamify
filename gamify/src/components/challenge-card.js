@@ -25,7 +25,7 @@ function ChallengeCard({isAdmin, challenge, onChangeStatus, onUpdateChallenge}) 
       >
         {isAdmin && status === statusDictionary.inPending && (
           <div>
-            <UserCard userName={challenge.userName} jobTitle={challenge.jobTitle} image={challenge.jobTitle} />
+            <UserCard userName={challenge.userName} jobTitle={challenge.jobTitle} image={challenge.profilePicture} />
           </div>
         )}
 
@@ -39,7 +39,7 @@ function ChallengeCard({isAdmin, challenge, onChangeStatus, onUpdateChallenge}) 
 
         <div className="challenge-card__bottom">
           {isAdmin ? (
-            <ButtonContainerAdmin status={status} onClick={onUpdateChallenge} />
+            <ButtonContainerAdmin status={status} onValidate={onChangeStatus} onUpdateItem={onUpdateChallenge} />
           ) : (
             <ButtonsContainerUser status={status} onClick={onChangeStatus} />
           )}
@@ -51,7 +51,7 @@ function ChallengeCard({isAdmin, challenge, onChangeStatus, onUpdateChallenge}) 
 
 ChallengeCard.propTypes = {
   onChangeStatus: PropTypes.func,
-  onUpdateChallenge: PropTypes.func.isRequired,
+  onUpdateChallenge: PropTypes.func,
   challenge: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -59,15 +59,15 @@ ChallengeCard.propTypes = {
     status: PropTypes.string,
     jobTitle: PropTypes.string,
     userName: PropTypes.string,
-    image: PropTypes.string,
-    id: PropTypes.number,
+    profilePicture: PropTypes.string,
+    id: PropTypes.string,
     xp: PropTypes.number
   }).isRequired,
   isAdmin: PropTypes.bool
 };
 ChallengeCard.defaultProps = {
   onChangeStatus: () => {},
-
+  onUpdateChallenge: () => {},
   isAdmin: false
 };
 export default ChallengeCard;

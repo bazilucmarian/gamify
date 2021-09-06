@@ -24,6 +24,7 @@ function ChallengesModal({isOpen, hide, currentChallenge, handleAddNewChallenge,
     handler,
     validateChallengesForm
   );
+
   return (
     <Modal isOpen={isOpen} hide={hide}>
       <Modal.Header>

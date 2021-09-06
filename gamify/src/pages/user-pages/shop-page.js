@@ -1,60 +1,51 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import {updateStatePurchasedShopItems} from '../../reducers';
-import {getAllShopItems} from '../../services/services';
 import ShopSection from '../../components/shop-section';
-import useToast from '../../hooks/use-toast';
-import Toast from '../../components/toast/toast';
-import CloseIcon from '../../icons/close-icon';
+import EmptyPlaceholder from '../../components/empty-placeholder';
+import ShopCard from '../../components/shop-card';
+import LoadMore from '../../components/load-more';
+import useAddToShoppingCartMutation from '../../hooks/mutations/use-add-to-shopping-cart';
+import useInfiniteProducts from '../../hooks/queries/use-all-products';
+import {emptyMessage} from '../../constants/messages';
 
-function ShopPage({loggedInUser, forceUpdate}) {
-  const [allShopItems, setAllShopItems] = useState([]);
+function ShopPage({user}) {
+  // mutation
+  const {mutate: addToShoppingCartHandler} = useAddToShoppingCartMutation(user);
 
-  const {openToast, closeToast, isVisible, message} = useToast();
+  // query
+  const {data, isLoading, isError, error, fetchNextPage, isFetchingNextPage, hasNextPage} = useInfiniteProducts(user);
 
-  const handleUpdateShopItems = async (shopItem, operation) => {
-    const {message: messageResponse} = await updateStatePurchasedShopItems(shopItem, loggedInUser.id, operation);
-    if (messageResponse.includes('Success')) {
-      openToast(messageResponse);
-      forceUpdate();
-    } else {
-      openToast(messageResponse);
-    }
-  };
-
-  useEffect(() => {
-    (async () => {
-      const shopItems = await getAllShopItems();
-      setAllShopItems(shopItems);
-    })();
-  }, [loggedInUser.credits, loggedInUser.id]);
-
+  if (isLoading) {
+    return null;
+  }
+  if (isError) {
+    return <EmptyPlaceholder message={error.response.data.message} />;
+  }
+  if (!data.pages.length) {
+    return <EmptyPlaceholder message={emptyMessage.shopPage} />;
+  }
   return (
     <>
-      <ShopSection title="Shop" shopItems={allShopItems} handleUpdateShopItems={handleUpdateShopItems} />
-      <Toast isVisible={isVisible}>
-        <Toast.Header>
-          <span> {message.includes('Success') ? '✅' : '⛔'} Notification</span>
-          <CloseIcon onClick={closeToast} />
-        </Toast.Header>
-        <Toast.Body>{message}</Toast.Body>
-      </Toast>
+      <ShopSection title="Shop" hasData={data.pages.length}>
+        {data.pages.map(pageData =>
+          pageData.products.map(shopItem => (
+            <ShopCard
+              key={shopItem.title}
+              shopItem={shopItem}
+              isAdmin={user.role === 'Admin'}
+              onAddToShoppingCart={() => addToShoppingCartHandler(shopItem.id)}
+            />
+          ))
+        )}
+      </ShopSection>
+      <LoadMore hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} onFetchNextPage={fetchNextPage} />
     </>
   );
 }
 
 ShopPage.propTypes = {
-  loggedInUser: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    job: PropTypes.string,
-    profilePic: PropTypes.string,
-    credits: PropTypes.number,
-    xp: PropTypes.number,
-    role: PropTypes.string
-  }).isRequired,
-  forceUpdate: PropTypes.func.isRequired
+  user: PropTypes.object.isRequired
 };
 
 export default ShopPage;

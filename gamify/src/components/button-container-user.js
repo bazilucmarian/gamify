@@ -14,7 +14,7 @@ function ButtonsContainerUser({status, onClick}) {
             color="secondary"
             variant="outlined-secondary"
             size="sm"
-            onClick={() => onClick(statusDictionary.available, 'DELETE')}
+            onClick={() => onClick(statusDictionary.available)}
           >
             Quit
           </Button>
@@ -22,7 +22,7 @@ function ButtonsContainerUser({status, onClick}) {
             color="secondary"
             variant="contained-secondary"
             size="md"
-            onClick={() => onClick(statusDictionary.inPending, 'UPDATE')}
+            onClick={() => onClick(statusDictionary.inPending)}
           >
             Complete
           </Button>
@@ -56,7 +56,7 @@ function ButtonsContainerUser({status, onClick}) {
           color="secondary"
           variant="contained-secondary"
           size="lg"
-          onClick={() => onClick(statusDictionary.inProgress, 'DELETE')}
+          onClick={() => onClick(statusDictionary.inProgress)}
         >
           Enroll
         </Button>

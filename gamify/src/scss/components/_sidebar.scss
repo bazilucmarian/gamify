@@ -20,6 +20,10 @@
     flex-direction: column;
     justify-content: space-evenly;
     min-height: 20rem;
+    &--admin {
+      padding: 2rem 4rem;
+      min-height: 10rem;
+    }
   }
   &__navigation {
     height: 100%;

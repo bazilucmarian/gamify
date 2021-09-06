@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { UserModel as User } from "../models/user-model";
+import { userModel as User } from "../models/user-model";
 
 const verifyToken = async (req, res, next) => {
   let token;
@@ -10,7 +10,8 @@ const verifyToken = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = await User.findById(decoded.id).select("-password");
+
+      req.user = await User.findById(decoded.userId).select("-password");
       next();
     } catch (error) {
       res.status(401);
@@ -19,7 +20,7 @@ const verifyToken = async (req, res, next) => {
   }
   if (!token) {
     res.status(401);
-    throw new Error("No token provided! ⛔⛔");
+    next(new Error("No token provided! ⛔"));
   }
 };
 

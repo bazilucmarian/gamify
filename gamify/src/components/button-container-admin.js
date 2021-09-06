@@ -5,32 +5,27 @@ import {statusDictionary} from '../utils';
 
 import Button from './button';
 
-function ButtonContainerAdmin({status, onClick}) {
+function ButtonContainerAdmin({status, onValidate, onUpdateItem}) {
   return status === 'inPending' ? (
     <>
-      <Button
-        color="fourth"
-        variant="outlined-fourth"
-        size="sm"
-        onClick={() => onClick('DELETE', statusDictionary.denied)}
-      >
+      <Button color="fourth" variant="outlined-fourth" size="sm" onClick={() => onValidate(statusDictionary.denied)}>
         Deny
       </Button>
       <Button
         color="tertiary"
         variant="contained-tertiary"
         size="md"
-        onClick={() => onClick('DELETE', statusDictionary.validated)}
+        onClick={() => onValidate(statusDictionary.validated)}
       >
         Validate
       </Button>
     </>
   ) : (
     <>
-      <Button color="secondary" variant="outlined-secondary" size="sm" onClick={() => onClick('DELETE')}>
+      <Button color="secondary" variant="outlined-secondary" size="sm" onClick={() => onUpdateItem('DELETE')}>
         Delete
       </Button>
-      <Button color="secondary" variant="contained-secondary" size="md" onClick={() => onClick('EDIT')}>
+      <Button color="secondary" variant="contained-secondary" size="md" onClick={() => onUpdateItem('EDIT')}>
         Edit
       </Button>
     </>
@@ -39,10 +34,13 @@ function ButtonContainerAdmin({status, onClick}) {
 
 ButtonContainerAdmin.propTypes = {
   status: PropTypes.string,
-  onClick: PropTypes.func.isRequired
+  onValidate: PropTypes.func,
+  onUpdateItem: PropTypes.func
 };
 
 ButtonContainerAdmin.defaultProps = {
+  onValidate: PropTypes.func,
+  onUpdateItem: PropTypes.func,
   status: ''
 };
 export default ButtonContainerAdmin;

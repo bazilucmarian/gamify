@@ -1,5 +1,34 @@
 @import '../variables';
 
+.label-input-file {
+  background: linear-gradient(to right, $color-green, $color-orange);
+  color: $color-white;
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  display: flex;
+  height: 4rem;
+  width: 100%;
+  z-index: 0;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  &__file {
+    color: $color-black;
+    text-align: center;
+  }
+}
+
+input[type='file'] {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 4rem;
+  cursor: pointer;
+  z-index: 2;
+}
+
 .form-group {
   width: 100%;
   position: relative;

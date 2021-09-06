@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
@@ -9,15 +8,15 @@ import Badge from './badge';
 import ButtonContainerShopUser from './button-container-shop-user';
 import ButtonContainerAdmin from './button-container-admin';
 
-const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
+const ShopCard = ({shopItem, isAdmin, onAddToShoppingCart, onRemoveFromShoppingCart, onUpdateShopItem}) => {
   const history = useHistory();
 
   const {
     title,
-    id,
     description,
     credits,
     quantity,
+    id,
     images: [{imageUrl} = {}]
   } = shopItem || {};
 
@@ -41,9 +40,13 @@ const ShopCard = ({shopItem, isAdmin, onUpdateShopItems}) => {
 
         <div className="shop-card__bottom">
           {isAdmin ? (
-            <ButtonContainerAdmin onClick={onUpdateShopItems} />
+            <ButtonContainerAdmin onClick={onUpdateShopItem} onUpdateItem={onUpdateShopItem} />
           ) : (
-            <ButtonContainerShopUser onUpdateShopItems={onUpdateShopItems} credits={credits} quantity={quantity} />
+            <ButtonContainerShopUser
+              onClick={quantity ? onRemoveFromShoppingCart : onAddToShoppingCart}
+              credits={credits}
+              quantity={quantity}
+            />
           )}
         </div>
       </div>
@@ -62,14 +65,18 @@ ShopCard.propTypes = {
         name: PropTypes.string
       })
     ),
-    id: PropTypes.number
+    _id: PropTypes.string
   }).isRequired,
-  onUpdateShopItems: PropTypes.func
+  onAddToShoppingCart: PropTypes.func,
+  onRemoveFromShoppingCart: PropTypes.func,
+  onUpdateShopItem: PropTypes.func
 };
 
 ShopCard.defaultProps = {
   isAdmin: false,
-  onUpdateShopItems: () => {}
+  onAddToShoppingCart: () => {},
+  onUpdateShopItem: () => {},
+  onRemoveFromShoppingCart: () => {}
 };
 
 export default ShopCard;

@@ -1,78 +1,83 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import ChallengesSection from '../../components/challenges-section';
 import EmptyPlaceholder from '../../components/empty-placeholder';
-import {getInProgressOrCompletedChallenges, getItemsAddedToShoppingList} from '../../services/services';
-import {changeStatusRequest} from '../../services/services-utils';
-import ShopSection from '../../components/shop-section';
+import useStatusChangeMutation from '../../hooks/mutations/use-status-change-mutation';
 import {USER_CHALLENGES_PAGE_ROUTE_LINK} from '../../constants/routes';
+import useInProgressOrCompletedChallenges from '../../hooks/queries/use-in-progress-or-completed-challenges';
+import ChallengeCard from '../../components/challenge-card';
+import useShoppingCart from '../../hooks/queries/use-shopping-cart';
+import ShopCard from '../../components/shop-card';
+import ShopSection from '../../components/shop-section';
+import useRemoveFromShoppingCartMutation from '../../hooks/mutations/use-remove-from-shopping-cart';
+import {emptyMessage} from '../../constants/messages';
 
-function OverviewPage({loggedInUserId}) {
-  const [inProgressOrPendingChallenges, setInProgressOrPendingChallenges] = useState([]);
-  const [completedChallenges, setCompletedChallenges] = useState([]);
-  const [shoppingList, setShoppingList] = useState([]);
+function OverviewPage({user}) {
+  // mutation
+  const {mutate: handleChangeStatus} = useStatusChangeMutation(user);
 
-  const handleChangeStatus = async (challengeId, newStatus, userId = loggedInUserId, operation) => {
-    const newUpdatedState = await changeStatusRequest(
-      inProgressOrPendingChallenges,
-      challengeId,
-      newStatus,
-      userId,
-      operation
-    );
-    setInProgressOrPendingChallenges(newUpdatedState);
+  const changeStatusHandler = challenge => newStatus => {
+    handleChangeStatus({challengeId: challenge.id, userId: challenge.userId, newStatus});
   };
 
-  useEffect(() => {
-    const getUserChallenges = async () => {
-      const getFilteredUserChallenges = await getInProgressOrCompletedChallenges(loggedInUserId);
-      setInProgressOrPendingChallenges(getFilteredUserChallenges.inProgressChallenges);
-      setCompletedChallenges(getFilteredUserChallenges.completedChallenges);
-    };
+  // mutation
+  const {mutate: removeFromShoppingCartHandler} = useRemoveFromShoppingCartMutation(user);
 
-    getUserChallenges();
+  // query
+  const {
+    data,
+    isLoading: getChallengesLoading,
+    isError: isErrorGetChallenges,
+    error
+  } = useInProgressOrCompletedChallenges(user);
+  const {data: shopData, isLoading: shopDataLoading} = useShoppingCart(user);
 
-    const getShopItems = async () => {
-      const shopItems = await getItemsAddedToShoppingList(loggedInUserId);
-      setShoppingList(shopItems);
-    };
-    getShopItems();
-  }, [loggedInUserId]);
-
-  if (!inProgressOrPendingChallenges.length && !completedChallenges.length) {
-    return (
-      <EmptyPlaceholder
-        message="Sorry... You have no challenge in progress or completed 😔"
-        pathRedirect={USER_CHALLENGES_PAGE_ROUTE_LINK}
-      />
-    );
+  if (getChallengesLoading || shopDataLoading) {
+    return null;
+  }
+  if (isErrorGetChallenges) {
+    return <EmptyPlaceholder message={error.response.data.message} />;
+  }
+  if (!data.inProgressOrPendingChallenges.length && !data.completedChallenges.length) {
+    return <EmptyPlaceholder message={emptyMessage.overviewPage} pathRedirect={USER_CHALLENGES_PAGE_ROUTE_LINK} />;
   }
   return (
     <div className="home-page">
+      {/* in progress challenges section */}
       <ChallengesSection
         title="In progress Challenges"
-        filteredChallenges={inProgressOrPendingChallenges}
-        handleChangeStatus={handleChangeStatus}
+        hasData={data.inProgressOrPendingChallenges.length}
         isScrollable
-      />
-      <ChallengesSection
-        title="Completed Challenges"
-        filteredChallenges={completedChallenges}
-        handleChangeStatus={handleChangeStatus}
-        isScrollable
-      />
+      >
+        {data.inProgressOrPendingChallenges.map(challenge => (
+          <ChallengeCard key={challenge.id} challenge={challenge} onChangeStatus={changeStatusHandler(challenge)} />
+        ))}
+      </ChallengesSection>
+      {/* completed challenges section (validated/denied) */}
+      <ChallengesSection title="Completed Challenges" hasData={data.completedChallenges.length} isScrollable>
+        {data.completedChallenges.map(challenge => (
+          <ChallengeCard key={challenge.id} challenge={challenge} onChangeStatus={changeStatusHandler(challenge)} />
+        ))}
+      </ChallengesSection>
+      {/* shop section (user can see the products he bought ) */}
 
-      <ShopSection title="Purchased products" shopItems={shoppingList} />
+      <ShopSection title="Purchased Products" hasData={shopData.shoppingCart.length}>
+        {shopData.shoppingCart.map(shopItem => (
+          <ShopCard
+            key={shopItem.title}
+            shopItem={shopItem}
+            isAdmin={user.role === 'Admin'}
+            onRemoveFromShoppingCart={() => removeFromShoppingCartHandler(shopItem.id)}
+          />
+        ))}
+      </ShopSection>
     </div>
   );
 }
 
 OverviewPage.propTypes = {
-  loggedInUserId: PropTypes.number
+  user: PropTypes.object.isRequired
 };
 
-OverviewPage.defaultProps = {
-  loggedInUserId: 123
-};
 export default OverviewPage;

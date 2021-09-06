@@ -5,6 +5,7 @@ button:disabled,
 button[disabled] {
   cursor: default;
   text-transform: uppercase;
+  opacity: 0.5;
 }
 
 .btn {

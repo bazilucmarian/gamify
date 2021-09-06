@@ -1,56 +1,51 @@
 import React, {useEffect, useState} from 'react';
+import {useLocation} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Button from '../../components/button';
 import ChallengesSection from '../../components/challenges-section';
-import {updateStateForAdminChallenges} from '../../reducers';
-import {getAllChallenges} from '../../services/services';
 import useModal from '../../hooks/use-modal';
 import ChallengesModal from '../../components/challenges-modal';
 import EmptyPlaceholder from '../../components/empty-placeholder';
+import useAllChallenges from '../../hooks/queries/use-all-challenges';
+import Pagination from '../../components/pagination';
+import ChallengeCard from '../../components/challenge-card';
+import useCreateChallengeMutation from '../../hooks/mutations/use-create-challenge-mutation';
+import useEditChallengeMutation from '../../hooks/mutations/use-edit-challenge-mutation';
+import useDeleteChallengeMutation from '../../hooks/mutations/use-delete-challenge-mutation';
+import {emptyMessage} from '../../constants/messages';
 
-function ChallengesPageAdmin() {
-  const [allChallenges, setAllChallenges] = useState([]);
-  const [currentChallenge, setCurrentChallenge] = useState(null);
-
+function ChallengesPageAdmin({user}) {
   const {isOpen, hideModal, showModal} = useModal();
 
-  useEffect(() => {
-    const fetchAllChallengesList = async () => {
-      const challenges = await getAllChallenges();
-      setAllChallenges(challenges);
-    };
-    fetchAllChallengesList();
-  }, []);
+  const [currentChallenge, setCurrentChallenge] = useState(null);
 
-  const handleAddNewChallenge = async challenge => {
-    const newChallenges = await updateStateForAdminChallenges(allChallenges, null, challenge, 'CREATE');
-    hideModal();
-    setAllChallenges(newChallenges);
-  };
+  const location = useLocation();
+  const currentPage = Number(new URLSearchParams(location.search).get('page'));
 
-  const handleEditChallenge = async newUpdatedChallenge => {
-    const newChallengesUpdated = await updateStateForAdminChallenges(
-      allChallenges,
-      newUpdatedChallenge.id,
-      newUpdatedChallenge,
-      'EDIT'
-    );
-    hideModal();
-    setAllChallenges(newChallengesUpdated);
-  };
+  // query: get all challenges paginated
+  const {
+    data,
+    isLoading: isLoadingGetChallenges,
+    isError: isErrorGetChallenges,
+    error
+  } = useAllChallenges(user, currentPage);
 
-  const handleUpdateChallenge = async (challengeId, operation, challenge) => {
+  // create new challenge mutation
+  const {mutate: handleAddNewChallenge, isLoading: isLoadingCreateChallenge} = useCreateChallengeMutation(user);
+
+  // edit  challenge mutation
+  const {mutate: handleEditChallenge, isLoading: isLoadingEditChallenge} = useEditChallengeMutation(user);
+
+  // delete challenge mutation
+  const {mutate: handleDeleteChallenge} = useDeleteChallengeMutation(user);
+
+  const handleUpdateChallenge = challenge => operation => {
     if (challenge && operation === 'EDIT') {
       setCurrentChallenge(challenge);
       showModal();
-    } else {
-      const newChallengesUpdated = await updateStateForAdminChallenges(
-        allChallenges,
-        challengeId,
-        challenge,
-        operation
-      );
-      setAllChallenges(newChallengesUpdated);
+    } else if (challenge && operation === 'DELETE') {
+      handleDeleteChallenge(challenge);
     }
   };
 
@@ -59,27 +54,34 @@ function ChallengesPageAdmin() {
     setCurrentChallenge(null);
   };
 
-  if (!allChallenges.length) {
-    return (
-      <>
-        <EmptyPlaceholder message="Oups...you have to add some challenges, for that press add new button" />
-        <div className="add-button">
-          <Button color="secondary" variant="contained-secondary" size="sm-1" onClick={handleOnCreate}>
-            Add new
-          </Button>
-        </div>
-      </>
-    );
-  }
+  useEffect(() => {
+    if (isLoadingCreateChallenge || isLoadingEditChallenge) {
+      hideModal();
+    }
+  }, [hideModal, isLoadingCreateChallenge, isLoadingEditChallenge]);
 
+  if (isLoadingGetChallenges) {
+    return null;
+  }
+  if (isErrorGetChallenges) {
+    return <EmptyPlaceholder message={error.response.data.message} />;
+  }
+  if (!data.totalAvailable) {
+    return <EmptyPlaceholder message={emptyMessage.challengesPage} />;
+  }
   return (
     <>
-      <ChallengesSection
-        title="Challenges"
-        filteredChallenges={allChallenges}
-        isAdmin
-        handleUpdateChallenge={handleUpdateChallenge}
-      />
+      <ChallengesSection title="Challenges" hasData={data.allChallenges.length}>
+        {data.allChallenges.map(challenge => (
+          <ChallengeCard
+            key={challenge.id}
+            challenge={challenge}
+            isAdmin
+            onUpdateChallenge={handleUpdateChallenge(challenge)}
+          />
+        ))}
+      </ChallengesSection>
+      <Pagination page={currentPage} itemsLength={data.totalAvailable} path="/admin/challenges" />
 
       <ChallengesModal
         isOpen={isOpen}
@@ -88,6 +90,7 @@ function ChallengesPageAdmin() {
         handleAddNewChallenge={handleAddNewChallenge}
         handleEditChallenge={handleEditChallenge}
       />
+
       <div className="add-button">
         <Button color="secondary" variant="contained-secondary" size="sm-1" onClick={handleOnCreate}>
           Add new
@@ -97,4 +100,7 @@ function ChallengesPageAdmin() {
   );
 }
 
+ChallengesPageAdmin.propTypes = {
+  user: PropTypes.object.isRequired
+};
 export default ChallengesPageAdmin;

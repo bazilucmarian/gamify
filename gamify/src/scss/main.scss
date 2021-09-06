@@ -28,6 +28,9 @@
 @import './components/toast/toast-body';
 @import './components/toast/toast-header';
 @import './components/icons/close-icon';
+@import './components/loader';
+@import './components/pagination';
+@import './components/load-more';
 
 @import './components/sidebar';
 @import './components/navigation';
@@ -37,4 +40,5 @@
 @import './pages/challenges-page';
 @import './pages/shop-page';
 @import './pages/admin-page';
+@import './pages/register-page';
 @import './pages/not-found-page';

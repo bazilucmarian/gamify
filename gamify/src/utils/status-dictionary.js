@@ -1,7 +1,7 @@
 export const statusDictionary = {
-  available: 'Available',
+  available: 'available',
   inProgress: 'inProgress',
   inPending: 'inPending',
-  validated: 'Validated',
-  denied: 'Denied'
+  validated: 'validated',
+  denied: 'denied'
 };

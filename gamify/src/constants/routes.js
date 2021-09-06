@@ -1,12 +1,12 @@
 // LINKS -USER
-export const USER_HOME_PAGE_ROUTE_LINK = '/';
-export const USER_CHALLENGES_PAGE_ROUTE_LINK = '/challenges';
+export const USER_HOME_PAGE_ROUTE_LINK = '/overview';
+export const USER_CHALLENGES_PAGE_ROUTE_LINK = '/challenges?page=1';
 export const USER_SHOP_PAGE_ROUTE_LINK = '/shop';
 export const USER_SWITCH_ADMIN_PAGE_ROUTE_LINK = '/admin/challenges';
 
 // LINKS -ADMIN
 
-export const ADMIN_HOME_PAGE_ROUTE_LINK = '/admin/challenges';
+export const ADMIN_HOME_PAGE_ROUTE_LINK = '/admin/challenges?page=1';
 export const ADMIN_CHALLENGES_PAGE_ROUTE_LINK = '/admin/validation';
 export const ADMIN_SHOP_PAGE_ROUTE_LINK = '/admin/shop';
 export const ADMIN_SWITCH_USER_PAGE_ROUTE_LINK = '/';

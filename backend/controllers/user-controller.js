@@ -1,73 +1,122 @@
-import jwt from "jsonwebtoken";
-import { UserModel as User } from "../models/user-model";
-import bcrypt, { genSalt } from "bcryptjs";
+import { userModel as User } from "../models/user-model";
 import { generateToken } from "../utils/genereate-token";
 
-async function hashPassword(password) {
-  const salt = await bcrypt.genSalt(10);
-  return await bcrypt.hash(password, salt);
-}
+/*
+Description:  get user profile
+Route:   POST  /api/auth/profile
+Access:  ADMIN
+*/
 
-async function matchPassword(plainPassword, hashedPassword) {
-  return await bcrypt.compare(plainPassword, hashedPassword);
-}
-
-// desc:  Auth user & get token
-// route:   POST  /api/auth/login
-// access:  PUBLIC
-
-const loginUser = async (req, res) => {
-  const { email, password } = req.body;
-  const { _id, username, email, role, profilePicture, job, xp, credits } =
-    await User.findOne({ email });
-  if (user && (await user.matchPassword(password))) {
-    res.status(200).json({
-      userId: _id,
-      username,
-      email,
-      role,
-      profilePicture,
-      job,
-      xp,
-      credits,
-      token: generateToken(_id),
-    });
-  } else if (!(await user.matchPassword(password))) {
-    res.status(401);
-    throw new Error("Password is incorrect ! ⛔⛔");
-  } else {
-    res.status(401);
-    throw new Error("Email doesn't exist ! ⛔⛔");
+const getUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      res.status(200).json({
+        userId: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        xp: user.xp,
+        credits: user.credits,
+        profilePicture: user.profilePicture,
+        job: user.job,
+      });
+    } else {
+      res.status(404).json({ message: "User not found! ⛔⛔⛔" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
-const registerUser = async (req, res) => {
-  const { username, email, password, profilePicture, job } = req.body;
+/*
+Description:  update user profile
+Route:   PUT  /api/auth/profile
+Access:  ADMIN
+*/
 
-  const userExist = await User.findOne({ email });
-  if (userExist) {
-    res.status(400);
-    throw new Error("User already exists! ❗❗❗");
-  } else {
-    const newUser = await User.create({
-      username,
-      email,
-      password: hashPassword(password),
-      profileicture,
-      job,
+const updateUserProfile = async (req, res) => {
+  const userFromDatabase = await User.findById(req.user._id);
+  if (userFromDatabase) {
+    user.username = req.body.username || userFromDatabase.username;
+    (user.email = req.body.email || userFromDatabase.email),
+      (user.password = req.body.password || userFromDatabase.password);
+    user.profilePicture =
+      req.body.profilePicture || userFromDatabase.profilePicture;
+
+    const updatedUser = await userFromDatabase.save();
+    res.status(200).json({
+      userId: updatedUser._id,
+      username: updatedUser.username,
+      email: updatedUser.email,
+      role: updatedUser.role,
+      token: generateToken(updatedUser._id),
     });
-
-    if (newUser) {
-      res.status(201).json({
-        userId: _id,
-        username,
-        email,
-        role,
-        profilePicture,
-      });
-    } else {
-      res.status(400);
-      throw new Error("Registration Failed ❗❗❗");
-    }
+  } else {
+    res.status(404).json({ message: "User not found ❗⛔" });
   }
+};
+
+/*
+Description:  update user profile
+Route:   GET  /api/auth
+Access:  ADMIN
+*/
+
+const getAllUsers = async (_, res) => {
+  try {
+    const users = await User.find({});
+    users && res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+/*
+Description:  delete a user
+Route:   GET  /api/auth.:id
+Access:  ADMIN
+*/
+
+const deleteUser = async (req, res) => {
+  try {
+    const userFromDatabase = await User.findById(req.params.id);
+    if (userFromDatabase) {
+      await userFromDatabase.remove();
+      res
+        .status(200)
+        .json({ message: "User has been successfully deleted ! ✅✅" });
+    } else {
+      res.status(404).json({ message: "User not found ! ⛔⛔" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+/*
+Description:  get user by id
+Route:   GET  /api/auth/:id
+Access:  ADMIN
+*/
+
+const getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select("-password");
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: "User not found ! ⛔ " });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export {
+  getUserProfile,
+  updateUserProfile,
+  getAllUsers,
+  deleteUser,
+  getUserById,
 };

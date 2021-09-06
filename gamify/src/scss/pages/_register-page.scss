@@ -1,0 +1,49 @@
+@import '../variables';
+
+.register-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background-image: linear-gradient(90deg, $color-white 50%, $color-blue);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__left {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+  &__right {
+    width: 50%;
+  }
+}
+
+@keyframes loading {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+.fieldset {
+  border: 0.1rem solid $color-grey-medium-2;
+  border-radius: 1rem;
+  padding: 7rem;
+  &[disabled] {
+    opacity: 0.5;
+  }
+  // &::after {
+  //   height: 10px;
+  //   margin: 1rem;
+  //   content: '';
+  //   display: block;
+  //   background-image: linear-gradient(to right, $color-white 0, $color-orange 50%);
+  // }
+  // &[aria-busy='true']::after {
+  //   background-size: 50% auto;
+  //   animation: loading 0.5s linear infinite;
+  // }
+}

@@ -1,59 +1,65 @@
 import React, {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
 
-import {getAllShopItems} from '../../services/services';
 import ShopSection from '../../components/shop-section';
 import Button from '../../components/button';
 import useModal from '../../hooks/use-modal';
-import {updateStateShopAdmin} from '../../reducers';
 import ShopModal from '../../components/shop-modal';
 import EmptyPlaceholder from '../../components/empty-placeholder';
+import ShopCard from '../../components/shop-card';
+import LoadMore from '../../components/load-more';
+import useInfiniteProducts from '../../hooks/queries/use-all-products';
+import useCreteShopItemMutation from '../../hooks/mutations/use-create-shop-item-mutation';
+import useEditShopItemMutation from '../../hooks/mutations/use-edit-shop-item-mutation';
+import useDeleteShopItemMutation from '../../hooks/mutations/use-delete-shop-item-mutation';
+import {emptyMessage} from '../../constants/messages';
 
-function ShopPageAdmin() {
-  const [allShopItems, setAllShopItems] = useState([]);
+function ShopPageAdmin({user}) {
   const [currentShopItem, setCurrentShopItem] = useState();
 
   const {isOpen, hideModal, showModal} = useModal();
 
-  const handleUpdateShopItems = async (shopItem, operation) => {
+  // query for get all products using infiniteQuery
+  const {data, isLoading, isError, error, isFetchingNextPage, hasNextPage, fetchNextPage} = useInfiniteProducts(user);
+
+  // create new shop item mutation
+  const {mutate: handleAddNewShopItem, isLoading: isLoadingCreateShopItem} = useCreteShopItemMutation(user);
+
+  // edit shop item mutation
+  const {mutate: handleEditShopItem, isLoading: isLoadingEditShopItem} = useEditShopItemMutation(user);
+
+  // delete shop item mutation
+  const {mutate: handleDeleteShopItem} = useDeleteShopItemMutation(user);
+
+  // actions for modal
+  const handleUpdateShopItem = shopItem => operation => {
     if (shopItem && operation === 'EDIT') {
       setCurrentShopItem(shopItem);
       showModal();
-    } else {
-      const newShopItems = await updateStateShopAdmin(allShopItems, shopItem, operation);
-      setAllShopItems(newShopItems);
+    } else if (shopItem && operation === 'DELETE') {
+      handleDeleteShopItem(shopItem);
     }
   };
 
-  const handleAddNewShopItem = async newShopItem => {
-    const newShopItems = await updateStateShopAdmin(allShopItems, newShopItem, 'CREATE');
-    setAllShopItems(newShopItems);
-    hideModal();
-  };
-
-  const handleEditShopItem = async newUpdatedShopItem => {
-    const newShopItems = await updateStateShopAdmin(allShopItems, newUpdatedShopItem, 'EDIT');
-    setAllShopItems(newShopItems);
-    hideModal();
-  };
-
-  const handleOnCreate = () => {
-    showModal();
-    setCurrentShopItem();
-  };
-
   useEffect(() => {
-    (async () => {
-      const shopItems = await getAllShopItems();
-      setAllShopItems(shopItems);
-    })();
-  }, []);
+    if (isLoadingCreateShopItem || isLoadingEditShopItem) {
+      hideModal();
+    }
+  }, [hideModal, isLoadingCreateShopItem, isLoadingEditShopItem]);
 
-  if (!allShopItems.length) {
+  if (isLoading) {
+    return null;
+  }
+  if (isError) {
+    return <EmptyPlaceholder message={error.response.data.message} />;
+  }
+
+  if (!data.pages.length) {
     return (
       <>
-        <EmptyPlaceholder message="Oups...you have to add some products, for that press add new button" />;
+        <EmptyPlaceholder message={emptyMessage.shopPageAdmin} />;
         <div className="add-button">
-          <Button color="secondary" variant="contained-secondary" size="sm-1" onClick={handleOnCreate}>
+          <Button color="secondary" variant="contained-secondary" size="sm-1" onClick={showModal}>
             Add new
           </Button>
         </div>
@@ -62,7 +68,20 @@ function ShopPageAdmin() {
   }
   return (
     <>
-      <ShopSection title="Shop" shopItems={allShopItems} isAdmin handleUpdateShopItems={handleUpdateShopItems} />
+      <ShopSection title="Shop">
+        {data.pages.map(pageData =>
+          pageData.products.map(shopItem => (
+            <ShopCard
+              key={shopItem.title}
+              shopItem={shopItem}
+              isAdmin={user.role === 'Admin'}
+              onUpdateShopItem={handleUpdateShopItem(shopItem)}
+            />
+          ))
+        )}
+      </ShopSection>
+      <LoadMore hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} onFetchNextPage={fetchNextPage} />
+
       <ShopModal
         isOpen={isOpen}
         hide={hideModal}
@@ -70,13 +89,17 @@ function ShopPageAdmin() {
         handleEditShopItem={handleEditShopItem}
         handleAddNewShopItem={handleAddNewShopItem}
       />
+
       <div className="add-button">
-        <Button color="secondary" variant="contained-secondary" size="sm-1" onClick={handleOnCreate}>
+        <Button color="secondary" variant="contained-secondary" size="sm-1" onClick={showModal}>
           Add new
         </Button>
       </div>
     </>
   );
 }
+ShopPageAdmin.propTypes = {
+  user: PropTypes.object.isRequired
+};
 
 export default ShopPageAdmin;

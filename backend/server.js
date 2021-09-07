@@ -30,17 +30,23 @@ app.use("/api/user-challenges", userChallengesRoutes);
 app.use("/api/shop", shopRoutes);
 app.use("/api/cart", shoppingCartRoutes);
 
+//options for deploying to heroku
+const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "gamify/build")));
+  app.get("*", (_, res) =>
+    res.sendFile(path.resolve(__dirname, "gamify", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running....");
+  });
+}
+
 // errors for not found routes
 app.use(notFound);
 app.use(errorHandler);
-
-//options for deploying to heroku
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("gamify/build"));
-  app.get("*", (_, res) =>
-    res.sendFile(path.resolve("gamify", "build", "index.html"))
-  );
-}
 
 const PORT = process.env.PORT || 5000;
 app.listen(

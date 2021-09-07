@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import {useLocation} from 'react-router-dom';
 
@@ -40,12 +39,12 @@ function ChallengesPage({user}) {
   }
   return (
     <>
-      <ChallengesSection title="Available Challenges" hasData={Boolean(availableChallengesData.challenges.length)}>
+      <ChallengesSection title="Available Challenges" hasData={availableChallengesData.challenges.length}>
         {availableChallengesData.challenges.map(challenge => (
           <ChallengeCard key={challenge.id} challenge={challenge} onChangeStatus={changeStatusHandler(challenge)} />
         ))}
       </ChallengesSection>
-      <Pagination page={Number(currentPage)} itemsLength={availableChallengesData.totalAvailable} path="/challenges" />
+      <Pagination page={currentPage} itemsLength={availableChallengesData.totalAvailable} path="/challenges" />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
 import colors from "colors";
 import { connectDB } from "./config/db";
 import { errorHandler, notFound } from "./middlewares/error-middleware";
@@ -20,6 +21,14 @@ connectDB();
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+//options for deploying to heroku
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("gamify/build"));
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve("gamify", "build", "index.html"))
+  );
+}
 
 // routes link with router
 app.use("/api/auth", authRoutes);

@@ -1,21 +1,17 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
+import {toast} from 'react-toastify';
 
 import Plus from '../icons/plus';
 import Close from '../icons/close';
 import {checkUrl} from '../utils';
-import useToast from '../hooks/use-toast';
-import CloseIcon from '../icons/close-icon';
 
 import Input from './input';
 import Button from './button';
-import Toast from './toast/toast';
 
 const target = {target: {id: 'imageURL', value: ''}};
 
 function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEditing}) {
-  const {openToast, closeToast, isVisible, message} = useToast();
-
   const handleAddURL = () => {
     const imageURLField = fields?.imageURL;
     if (imageURLField && checkUrl(imageURLField)) {
@@ -24,7 +20,7 @@ function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEdi
         {imageUrl: imageURLField, name: `${fields.title}-${Math.random()}`}
       ]);
     } else {
-      openToast('Invalid image format -  | jpg | jpeg | gif | png | tiff | bmp ');
+      toast.warn('Invalid image format -  | jpg | jpeg | gif | png | tiff | bmp');
     }
   };
 
@@ -37,79 +33,70 @@ function FormShop({closeModal, handleChange, handleSubmit, fields, errors, isEdi
   };
 
   return (
-    <>
-      <form className="form shop-" onSubmit={handleSubmit}>
-        <div>
+    <form className="form shop-" onSubmit={handleSubmit}>
+      <div>
+        <Input
+          inputLabel="Title"
+          inputOnChange={handleChange}
+          inputValue={fields?.title}
+          inputType="text"
+          inputId="title"
+          error={errors.title}
+        />
+        <div className="image-container">
           <Input
-            inputLabel="Title"
+            inputLabel="ImageUrl"
             inputOnChange={handleChange}
-            inputValue={fields?.title}
+            inputValue={fields?.imageURL}
             inputType="text"
-            inputId="title"
-            error={errors.title}
+            inputId="imageURL"
+            error={errors?.imageURL}
+            isRequired={false}
           />
-          <div className="image-container">
-            <Input
-              inputLabel="ImageUrl"
-              inputOnChange={handleChange}
-              inputValue={fields?.imageURL}
-              inputType="text"
-              inputId="imageURL"
-              error={errors?.imageURL}
-              isRequired={false}
-            />
 
-            <div className="input-arrow">
-              <Plus onClick={handleAddURL} />
-            </div>
+          <div className="input-arrow">
+            <Plus onClick={handleAddURL} />
           </div>
-          {fields?.images?.map(({imageUrl}, index) => (
-            <Fragment key={Date.now() * Math.random()}>
-              <div className="url-container">
-                <p className="url">{imageUrl}</p>
-                <div className="url-icon">
-                  <Close onClick={() => handleRemoveURL(index)} />
-                </div>
+        </div>
+        {fields?.images?.map(({imageUrl}, index) => (
+          <Fragment key={Date.now() * Math.random()}>
+            <div className="url-container">
+              <p className="url">{imageUrl}</p>
+              <div className="url-icon">
+                <Close onClick={() => handleRemoveURL(index)} />
               </div>
-            </Fragment>
-          ))}
+            </div>
+          </Fragment>
+        ))}
 
-          <Input
-            inputLabel="Credits cost (number)"
-            inputOnChange={handleChange}
-            inputValue={fields?.credits}
-            inputType="number"
-            inputId="credits"
-            error={errors.credits}
-          />
-          <Input
-            inputLabel="Description"
-            inputOnChange={handleChange}
-            inputValue={fields?.description}
-            inputType="text"
-            inputId="description"
-            error={errors.description}
-          />
+        <Input
+          inputLabel="Credits cost (number)"
+          inputOnChange={handleChange}
+          inputValue={fields?.credits}
+          inputType="number"
+          inputId="credits"
+          error={errors.credits}
+        />
+        <Input
+          inputLabel="Description"
+          inputOnChange={handleChange}
+          inputValue={fields?.description}
+          inputType="text"
+          inputId="description"
+          error={errors.description}
+        />
+      </div>
+      <div className="buttons-container">
+        <div className="buttons-container__wrapper">
+          <Button variant="outlined-secondary" color="secondary" size="sm" onClick={closeModal}>
+            Cancel
+          </Button>
+          <Button variant="contained-secondary" color="secondary" size="sm-1" type="submit">
+            {isEditing ? 'Edit' : 'Add'}
+          </Button>
         </div>
-        <div className="buttons-container">
-          <div className="buttons-container__wrapper">
-            <Button variant="outlined-secondary" color="secondary" size="sm" onClick={closeModal}>
-              Cancel
-            </Button>
-            <Button variant="contained-secondary" color="secondary" size="sm-1" type="submit">
-              {isEditing ? 'Edit' : 'Add'}
-            </Button>
-          </div>
-        </div>
-      </form>
-      <Toast isVisible={isVisible}>
-        <Toast.Header>
-          <span> {`${message.includes('Success') ? '✅' : '⛔'} Notification`}</span>
-          <CloseIcon onClick={closeToast} />
-        </Toast.Header>
-        <Toast.Body>{message}</Toast.Body>
-      </Toast>
-    </>
+      </div>
+    </form>
   );
 }
 

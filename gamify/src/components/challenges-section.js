@@ -18,12 +18,11 @@ ChallengesSection.propTypes = {
   title: PropTypes.string.isRequired,
   isScrollable: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  hasData: PropTypes.number
+  hasData: PropTypes.number.isRequired
 };
 
 ChallengesSection.defaultProps = {
-  isScrollable: false,
-  hasData: false
+  isScrollable: false
 };
 
 export default ChallengesSection;

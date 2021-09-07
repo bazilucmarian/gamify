@@ -68,7 +68,7 @@ function ShopPageAdmin({user}) {
   }
   return (
     <>
-      <ShopSection title="Shop">
+      <ShopSection title="Shop" hasData={data.pages.length}>
         {data.pages.map(pageData =>
           pageData.products.map(shopItem => (
             <ShopCard

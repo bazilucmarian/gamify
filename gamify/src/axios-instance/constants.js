@@ -1,1 +1,1 @@
-export const baseUrl = 'https://gamify-application.herokuapp.com';
+export const baseUrl = 'https://gamify-application.herokuapp.com/api';

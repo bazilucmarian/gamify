@@ -24,7 +24,7 @@ app.use(cors());
 
 //options for deploying to heroku
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("gamify"));
+  app.use(express.static("gamify/build"));
   app.get("*", (req, res) =>
     res.sendFile(path.resolve("gamify", "build", "index.html"))
   );

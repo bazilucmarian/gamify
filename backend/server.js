@@ -30,14 +30,6 @@ app.use("/api/user-challenges", userChallengesRoutes);
 app.use("/api/shop", shopRoutes);
 app.use("/api/cart", shoppingCartRoutes);
 
-//options for deploying to heroku
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("gamify/build"));
-  app.get("*", (_, res) =>
-    res.sendFile(path.resolve("gamify", "build", "index.html"))
-  );
-}
-
 //test route
 app.get("/", (_, res) => {
   res.send("API IS RUNNING");
@@ -53,3 +45,11 @@ app.listen(
     `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
   )
 );
+
+//options for deploying to heroku
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("gamify/build"));
+  app.get("*", (_, res) =>
+    res.sendFile(path.resolve("gamify", "build", "index.html"))
+  );
+}

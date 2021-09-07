@@ -1,1 +1,1 @@
-web: node  backend/server
+web: node --experimental-modules --es-module-specifier-resolution=node backend/server

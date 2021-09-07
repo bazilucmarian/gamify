@@ -22,14 +22,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-//options for deploying to heroku
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("gamify/build"));
-  app.get("*", (_, res) =>
-    res.sendFile(path.resolve("gamify", "build", "index.html"))
-  );
-}
-
 // routes link with router
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -37,6 +29,14 @@ app.use("/api/challenges", challengesRoutes);
 app.use("/api/user-challenges", userChallengesRoutes);
 app.use("/api/shop", shopRoutes);
 app.use("/api/cart", shoppingCartRoutes);
+
+//options for deploying to heroku
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("gamify/build"));
+  app.get("*", (_, res) =>
+    res.sendFile(path.resolve("gamify", "build", "index.html"))
+  );
+}
 
 //test route
 app.get("/", (_, res) => {

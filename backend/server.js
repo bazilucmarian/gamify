@@ -29,13 +29,13 @@ app.use("/api/shop", shopRoutes);
 app.use("/api/cart", shoppingCartRoutes);
 
 //options for deploying to heroku
-// const __dirname = path.resolve();
+const __dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("gamify/build"));
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve("gamify", "build", "index.html"))
-  );
+  app.use(express.static(path.join(__dirname, "gamify", "build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "gamify", "build", "index.html"));
+  });
 } else {
   app.get("/", (req, res) => {
     res.send("API is running....");

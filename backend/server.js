@@ -34,7 +34,7 @@ app.use("/api/cart", shoppingCartRoutes);
 const __dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
-  app.use("*", express.static(path.join(__dirname, "gamify/build")));
+  app.use(xpress.static(path.join(__dirname, "gamify/build")));
   app.get("*", (_, res) =>
     res.sendFile(path.resolve(__dirname, "gamify", "build", "index.html"))
   );

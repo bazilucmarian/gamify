@@ -8,7 +8,7 @@ import {queryKeys} from '../../react-query/constants';
 
 function useSingleProduct(user, productId) {
   async function getSingleProduct() {
-    return await api.get(`/shop/${productId}`, getJWTHeader(user));
+    return await api.get(`/api/shop/${productId}`, getJWTHeader(user));
   }
 
   return useQuery([queryKeys.allProducts, productId], getSingleProduct, {

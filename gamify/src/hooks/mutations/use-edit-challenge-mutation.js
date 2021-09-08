@@ -10,7 +10,7 @@ const useEditChallengeMutation = user => {
 
   async function editChallenge(challengeData) {
     try {
-      return await api.put(`/challenges/${challengeData.id}`, challengeData, getJWTHeader(user));
+      return await api.put(`/api/challenges/${challengeData.id}`, challengeData, getJWTHeader(user));
     } catch (error) {
       return error;
     }

@@ -10,7 +10,7 @@ const useEditShopItemMutation = user => {
 
   async function editShopItem(shopItemData) {
     try {
-      return await api.put(`/shop/${shopItemData.id}`, shopItemData, getJWTHeader(user));
+      return await api.put(`/api/shop/${shopItemData.id}`, shopItemData, getJWTHeader(user));
     } catch (error) {
       return error;
     }

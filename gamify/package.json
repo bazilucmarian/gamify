@@ -2,6 +2,7 @@
   "name": "react-project",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:5000",
   "dependencies": {
     "axios": "^0.21.1",
     "node-sass": "4.14.1",

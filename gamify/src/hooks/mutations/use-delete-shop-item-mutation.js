@@ -10,7 +10,7 @@ const useDeleteShopItemMutation = user => {
 
   async function deleteShopItem(shopItem) {
     try {
-      return await api.delete(`/shop/${shopItem.id}`, getJWTHeader(user));
+      return await api.delete(`/api/shop/${shopItem.id}`, getJWTHeader(user));
     } catch (error) {
       return error;
     }

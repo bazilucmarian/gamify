@@ -7,7 +7,7 @@ import {queryKeys} from '../../react-query/constants';
 
 export default function useValidationChallenges(user) {
   async function getChallengesToValidate() {
-    return await api.get('/user-challenges/validation', getJWTHeader(user));
+    return await api.get('/api/user-challenges/validation', getJWTHeader(user));
   }
 
   return useQuery(queryKeys.validationChallenges, getChallengesToValidate);

@@ -9,7 +9,7 @@ const limit = 6;
 
 export default function useAllChallenges(user, currentPage) {
   async function getAllChallenges() {
-    return await api.get(`/challenges/?_page=${currentPage}&_limit=${limit}`, getJWTHeader(user));
+    return await api.get(`/api/challenges/?_page=${currentPage}&_limit=${limit}`, getJWTHeader(user));
   }
 
   return useQuery([queryKeys.allChallenges, currentPage], getAllChallenges, {

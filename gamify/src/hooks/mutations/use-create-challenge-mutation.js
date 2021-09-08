@@ -10,7 +10,7 @@ const useCreateChallengeMutation = user => {
 
   async function createChallenge(challengeData) {
     try {
-      return await api.post(`/challenges`, challengeData, getJWTHeader(user));
+      return await api.post(`/api/challenges`, challengeData, getJWTHeader(user));
     } catch (error) {
       return error;
     }

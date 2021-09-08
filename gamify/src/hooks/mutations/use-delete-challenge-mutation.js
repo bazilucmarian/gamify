@@ -10,7 +10,7 @@ const useDeleteChallengeMutation = user => {
 
   async function deleteChallenge(challengeData) {
     try {
-      return await api.delete(`/challenges/${challengeData.id}`, getJWTHeader(user));
+      return await api.delete(`/api/challenges/${challengeData.id}`, getJWTHeader(user));
     } catch (error) {
       return error;
     }

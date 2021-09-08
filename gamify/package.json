@@ -2,7 +2,7 @@
   "name": "react-project",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000/api",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@babel/preset-env": "^7.12.7",
     "axios": "^0.21.1",

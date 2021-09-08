@@ -31,7 +31,7 @@ app.use("/api/shop", shopRoutes);
 app.use("/api/cart", shoppingCartRoutes);
 
 //options for deploying to heroku
-// const __dirname = path.resolve();
+const __dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("gamify/build"));

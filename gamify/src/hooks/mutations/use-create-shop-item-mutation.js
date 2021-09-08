@@ -10,7 +10,7 @@ const useCreteShopItemMutation = user => {
 
   async function createNewShopItem(shopItemData) {
     try {
-      return await api.post(`/api/shop`, shopItemData, getJWTHeader(user));
+      return await api.post(`/shop`, shopItemData, getJWTHeader(user));
     } catch (error) {
       return error;
     }

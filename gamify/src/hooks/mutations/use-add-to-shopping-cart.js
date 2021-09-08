@@ -14,7 +14,7 @@ const useAddToShoppingCartMutation = user => {
 
   async function handleAddToShoppingCart(shopItemId) {
     try {
-      return await api.post(`/api/cart/${shopItemId}`, null, getJWTHeader(user));
+      return await api.post(`/cart/${shopItemId}`, null, getJWTHeader(user));
     } catch (error) {
       return error;
     }

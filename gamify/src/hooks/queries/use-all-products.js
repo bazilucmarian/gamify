@@ -8,7 +8,7 @@ import {queryKeys} from '../../react-query/constants';
 export default function useInfiniteProducts(user) {
   async function getAllProducts({pageParam}) {
     return await api.get(
-      `/api/shop?_page=${pageParam?.nextPage || 1}&_limit=${pageParam?.pageLimit || 6}`,
+      `/shop?_page=${pageParam?.nextPage || 1}&_limit=${pageParam?.pageLimit || 6}`,
       getJWTHeader(user)
     );
   }

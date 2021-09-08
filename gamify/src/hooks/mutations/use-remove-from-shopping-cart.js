@@ -14,7 +14,7 @@ const useRemoveFromShoppingCartMutation = user => {
 
   async function handleRemoveFromShoppingCart(shopItemId) {
     try {
-      return await api.delete(`/api/cart/${shopItemId}`, getJWTHeader(user));
+      return await api.delete(`/cart/${shopItemId}`, getJWTHeader(user));
     } catch (error) {
       return error;
     }

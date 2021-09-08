@@ -11,7 +11,7 @@ const useStatusChangeMutation = user => {
   async function handleChangeStatusCall({challengeId, userId, newStatus}) {
     try {
       return await api.put(
-        `/api/user-challenges/${challengeId}/${userId}?newStatus=${newStatus}`,
+        `/user-challenges/${challengeId}/${userId}?newStatus=${newStatus}`,
         null,
         getJWTHeader(user)
       );

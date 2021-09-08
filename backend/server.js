@@ -19,7 +19,6 @@ connectDB();
 //initialize express app
 const app = express();
 app.use(express.json());
-app.use(enforce.HTTPS());
 
 // routes link with router
 app.use("/api/auth", authRoutes);

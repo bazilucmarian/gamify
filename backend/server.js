@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import path from "path";
 import colors from "colors";
+import enforce from "express-sslify";
 import { connectDB } from "./config/db";
 import { errorHandler, notFound } from "./middlewares/error-middleware";
 import userRoutes from "./routes/user-routes";
@@ -19,6 +20,7 @@ connectDB();
 //initialize express app
 const app = express();
 app.use(express.json());
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 // routes link with router
 app.use("/api/auth", authRoutes);

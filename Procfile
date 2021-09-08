@@ -1,1 +1,1 @@
-web: npm run server
+web: node --experimental-modules --es-module-specifier-resolution=node backend/server.js

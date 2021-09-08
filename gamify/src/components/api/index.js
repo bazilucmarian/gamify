@@ -1,7 +1,8 @@
-import {axiosInstance} from '../../axios-instance';
+// import {axiosInstance} from '../../axios-instance';
+import axios from 'axios';
 
 const apiCall = async (url, method = 'GET', body = null, headers = null) => {
-  const response = await axiosInstance({
+  const response = await axios({
     url,
     method,
     ...(body && {data: body}),

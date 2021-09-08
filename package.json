@@ -15,7 +15,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node --experimental-modules --es-module-specifier-resolution=node backend/seeder",
     "data:destroy": "node  --experimental-modules --es-module-specifier-resolution=node  backend/seeder -d",
-    "heroku-postbuild": "npm install --prefix gamify && npm run build --prefix gamify",
+    "heroku-postbuild": "cd gamify && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

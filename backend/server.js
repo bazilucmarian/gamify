@@ -34,10 +34,15 @@ app.use("/api/cart", shoppingCartRoutes);
 const __dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../gamify/build")));
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "../gamify", "build", "index.html"))
-  );
+  // app.use(express.static(path.join(__dirname, "../gamify/build")));
+  // app.get("*", (req, res) =>
+  //   res.sendFile(path.resolve(__dirname, "../gamify", "build", "index.html"))
+  // );
+  const root = path.join(__dirname, "gamify", "build");
+  app.use(express.static(root));
+  app.get("*", (req, res) => {
+    res.sendFile("index.html", { root });
+  });
 } else {
   app.get("/", (req, res) => {
     res.send("API is running....");
